@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Portal de finanças e investimentos: site estático, coleta de dados abertos e motor de cálculo.",
   "scripts": {
-    "test": "node --test testes/",
+    "test": "node --test \"testes/*.test.mjs\"",
     "e2e": "node testes/e2e.mjs",
     "coletar": "node coleta/bcb.mjs && node coleta/tesouro.mjs && node coleta/cvm.mjs && node coleta/investidores.mjs",
     "conteudo": "node coleta/conteudo.mjs",

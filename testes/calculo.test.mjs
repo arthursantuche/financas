@@ -1,4 +1,4 @@
-// Testes do motor de cálculo. Rodar: node --test testes/
+// Testes do motor de cálculo. Rodar: node --test "testes/*.test.mjs"
 // Os valores de referência vêm de fórmulas fechadas ou de exemplos clássicos da literatura.
 import test from 'node:test';
 import assert from 'node:assert/strict';

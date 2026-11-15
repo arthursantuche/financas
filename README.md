@@ -31,7 +31,7 @@ Abra http://127.0.0.1:4184/. Com `?amostra` (por exemplo http://127.0.0.1:4184/?
 
 ## Testar
 ```bash
-node --test testes/
+node --test "testes/*.test.mjs"
 ```
 ```bash
 node testes/e2e.mjs

@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: 22
       - name: Testar o motor de cálculo
-        run: node --test testes/
+        run: node --test "testes/*.test.mjs"
       - name: Coletar dados abertos
         if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.coletar)
         id: coleta
