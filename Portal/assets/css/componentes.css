@@ -1,0 +1,196 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--spacing-40) + var(--spacing-4));
+  padding: 0 var(--spacing-16);
+  border-radius: var(--radius-buttons);
+  font-size: var(--text-compact-control);
+  line-height: var(--leading-compact-control);
+  letter-spacing: var(--tracking-compact-control);
+  color: var(--cor-texto);
+  box-shadow: var(--contorno-forte);
+  background: transparent;
+}
+button.pill { -webkit-appearance: none; appearance: none; border: 0; cursor: pointer; font: inherit; font-size: var(--text-compact-control); }
+.pill--azul { background: var(--cor-acao); color: var(--cor-sobre-acao); box-shadow: none; }
+.pill:hover { text-decoration: none; }
+.pill { transition: transform var(--dur-curta) var(--ease-apple), background-color var(--dur-curta) var(--ease-apple), box-shadow var(--dur-curta) var(--ease-apple); -webkit-tap-highlight-color: transparent; }
+.pill:active { transform: scale(0.97); }
+@media (hover: hover) {
+  .pill:not(.pill--azul):not(:disabled):hover { background: var(--cor-faixa); }
+  .secao--mist .pill:not(.pill--azul):not(:disabled):hover { background: var(--cor-cartao); }
+  .pill--azul:hover { filter: brightness(1.08); }
+}
+
+/* Hero */
+.hero { text-align: center; padding-top: var(--spacing-64); }
+.hero .kicker { margin-bottom: var(--spacing-16); }
+.hero .display + .copy { margin-top: var(--spacing-16); }
+.destaques .titulo { margin-top: var(--spacing-8); }
+/* Números-chave da abertura: contagem regressiva, noites e cidades em tipografia grande,
+   sem cartão, alinhados à coluna de conteúdo (como as faixas de números das páginas da Apple). */
+.numeros {
+  margin: var(--spacing-48) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+}
+/* column-reverse põe o número acima da legenda; flex-end (o início visual nessa direção)
+   alinha os três números pelo topo, mesmo quando uma legenda tem menos linhas. */
+.numeros__item { display: flex; flex-direction: column-reverse; justify-content: flex-end; align-items: center; gap: var(--spacing-8); padding: 0 var(--spacing-8); }
+.numeros__item + .numeros__item { border-left: 1px solid var(--cor-divisoria); }
+.numeros__valor {
+  margin: 0;
+  font-family: var(--font-sf-pro-display);
+  font-size: clamp(var(--text-feature-heading), 7vw, var(--text-hero-display));
+  line-height: var(--leading-hero-display);
+  letter-spacing: var(--tracking-hero-display);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Próximo compromisso: "Floating Pricing Callout" da referência, com o texto e a pílula
+   dentro do mesmo cartão. No computador, a pílula fica à direita. */
+.proximo {
+  margin-top: var(--spacing-40);
+  text-align: left;
+  padding: var(--card-padding);
+  border-radius: var(--radius-cards);
+  box-shadow: var(--contorno-sutil);
+  display: grid;
+  gap: var(--spacing-20);
+  justify-items: start;
+}
+.proximo__texto { display: grid; gap: var(--spacing-8); }
+/* O compromisso é uma frase longa, que sempre quebra: com a altura de linha 1,0 do kicker as linhas
+   se encostavam. Usa a altura de linha do título da barra (1,21), também da identidade. */
+.proximo__texto .kicker { line-height: var(--leading-product-nav-title); text-wrap: balance; }
+@media (min-width: 834px) {
+  .proximo { grid-template-columns: 1fr auto; align-items: center; gap: var(--spacing-32); }
+}
+
+/* Destaques: cabeçalho com título e link ("Highlights Stage") */
+.destaques__cabecalho {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--element-gap);
+  margin-bottom: var(--spacing-32);
+}
+.destaques__cabecalho a { white-space: nowrap; color: var(--cor-link); }
+/* Telas estreitas: o link vai para baixo do título em vez de espremê-lo. */
+@media (max-width: 389px) {
+  .destaques__cabecalho { flex-direction: column; align-items: flex-start; gap: var(--spacing-12); }
+}
+.card {
+  scroll-snap-align: start;
+  background: var(--cor-cartao);
+  border-radius: var(--radius-cards);
+  padding: var(--card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  min-height: 420px;
+}
+a.card { transition: box-shadow var(--dur-curta) var(--ease-apple), transform var(--dur-curta) var(--ease-apple); -webkit-tap-highlight-color: transparent; }
+a.card:active { transform: scale(0.985); }
+@media (hover: hover) { a.card:hover { box-shadow: var(--contorno-forte); } }
+.card__numero {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-feature-heading);
+  line-height: var(--leading-feature-heading);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+.card__grafico { position: relative; flex: 1; min-height: 220px; }
+.legenda-grafico { display: flex; flex-wrap: wrap; gap: var(--spacing-12); }
+.legenda-grafico span::before {
+  content: ''; display: inline-block; width: 10px; height: 10px; margin-right: var(--spacing-4);
+  border-radius: var(--radius-buttons); background: currentColor; vertical-align: middle;
+}
+
+/* Barra de progresso do checklist */
+.progresso { height: var(--spacing-8); border-radius: var(--radius-buttons); background: var(--cor-trilho); overflow: hidden; }
+.progresso__barra { height: 100%; background: var(--cor-link); border-radius: inherit; }
+
+/* Cidades: carrossel horizontal ("Highlights Stage") sobre a faixa, na ordem do roteiro.
+   O trilho ocupa a largura da tela e alinha o primeiro cartão à coluna de conteúdo. */
+.faixa-carrossel { padding-left: 0; padding-right: 0; }
+.faixa-carrossel > .conteudo { padding: 0 var(--gutter-d) 0 var(--gutter-e); box-sizing: content-box; }
+.carrossel { --margem: max(var(--gutter-e), calc((100% - var(--largura-faixa, 980px)) / 2)); }
+.carrossel__trilho {
+  display: flex; gap: var(--element-gap);
+  overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+  padding: 0 var(--margem) var(--spacing-8); scroll-padding-inline: var(--margem);
+  scrollbar-width: none;
+}
+.carrossel__trilho::-webkit-scrollbar { display: none; }
+/* Cartões do Resumo da viagem dentro do carrossel. */
+.carrossel__trilho > .card { flex: 0 0 min(84vw, 400px); }
+
+.carrossel__controles { display: flex; justify-content: center; align-items: center; gap: var(--spacing-12); margin-top: var(--spacing-24); }
+/* "Carousel Playback Control": pontos agrupados numa cápsula translúcida. */
+/* Cada ponto é um alvo de 24 × 44px (ponto de 8px + folga), como os 24px por ponto da Apple. */
+.carrossel__pontos {
+  display: flex; align-items: center; padding: 0 var(--spacing-8);
+  border-radius: var(--radius-pills); background: var(--cor-controle);
+}
+.carrossel__pontos button {
+  -webkit-appearance: none; appearance: none; border: 0; background: none; cursor: pointer;
+  display: grid; place-items: center; min-height: calc(var(--spacing-40) + var(--spacing-4));
+  padding: 0 var(--spacing-8); border-radius: var(--radius-buttons);
+}
+.carrossel__pontos button::before {
+  content: ''; display: block; width: var(--spacing-8); height: var(--spacing-8);
+  border-radius: var(--radius-buttons); background: var(--cor-glifo);
+  transition: width var(--dur-link) var(--ease-apple), background-color var(--dur-link) var(--ease-apple);
+}
+.carrossel__pontos button[aria-current="true"]::before { width: var(--spacing-24); background: var(--cor-texto); }
+.carrossel__setas { display: none; gap: var(--spacing-12); }
+/* Gota, como nas páginas de referência: um círculo nasce no centro e cresce com um leve
+   excesso; a cápsula alarga até a largura real; por último entram os pontos e as setas.
+   Só usa transform, scale, clip-path e opacity: nada muda de lugar nem empurra o layout.
+   O estado inicial só vale com .movimento (sem preferência por movimento reduzido), e a
+   transição só com .aberto: o estado inicial é aplicado na hora, sem animar. */
+.movimento .carrossel__controles.aberto .carrossel__pontos {
+  clip-path: inset(0 0 round var(--radius-pills));
+  transition: transform 460ms var(--ease-gota), clip-path 640ms var(--ease-alarga) 180ms, opacity 120ms linear;
+}
+.movimento .carrossel__controles.aberto .carrossel__pontos button { transition: opacity 180ms linear 560ms, scale 280ms var(--ease-entrada) 560ms; }
+.movimento .carrossel__controles.aberto .carrossel__seta { transition: opacity 180ms linear 700ms, scale 420ms var(--ease-gota) 700ms; }
+.movimento .carrossel__controles:not(.aberto) .carrossel__pontos {
+  opacity: 0; transform: scale(0.01); clip-path: inset(0.5px calc(50% - 21.5px) round var(--radius-pills));
+}
+.movimento .carrossel__controles:not(.aberto) .carrossel__pontos button { opacity: 0; scale: 0.5; }
+.movimento .carrossel__controles:not(.aberto) .carrossel__seta { opacity: 0; scale: 0.01; }
+/* A cápsula nasce em escala mínima: com will-change, ela é desenhada no tamanho final e só reduzida, sem
+   perder definição na borda. O círculo inicial tem 0,5 px de folga: encostado no topo e na base da caixa,
+   seria cortado por elas e ficaria achatado ao rolar. */
+.movimento .carrossel__controles:not(.pronta) .carrossel__pontos { will-change: transform, clip-path; }
+.movimento .carrossel__controles:not(.pronta) .carrossel__seta { will-change: scale; }
+.carrossel__seta {
+  -webkit-appearance: none; appearance: none; border: 0; cursor: pointer;
+  width: calc(var(--spacing-40) + var(--spacing-4)); height: calc(var(--spacing-40) + var(--spacing-4));
+  border-radius: var(--radius-buttons); background: var(--cor-controle);
+  display: grid; place-items: center;
+}
+.carrossel__seta::before {
+  content: ''; width: var(--spacing-12); height: var(--spacing-8); background: var(--cor-texto);
+  transform: rotate(90deg);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.carrossel__seta--proxima::before { transform: rotate(-90deg); }
+.carrossel__seta:disabled { cursor: default; opacity: 0.4; }
+.esqueleto { content: ''; display: inline-block; vertical-align: top; height: 1em; border-radius: var(--radius-links); background: var(--cor-faixa); }
+.secao--mist .esqueleto { background: var(--cor-cartao); }
+/* Página interna aberta direto pelo endereço (esqueletoPagina, em app.js): nome, título, texto e mídia. */
+.esqueleto { display: block; }
+.esqueleto--kicker { width: 9em; font-size: var(--text-product-kicker); }
+.esqueleto--titulo { width: min(70%, 420px); margin-top: var(--spacing-12); font-size: var(--text-feature-heading); }
+.esqueleto--linha { max-width: 560px; margin-top: var(--spacing-16); }
+.esqueleto--curta { width: 45%; margin-top: var(--spacing-8); }
+.esqueleto--midia { width: 100%; height: auto; max-height: 56svh; aspect-ratio: 3 / 2; margin-top: var(--spacing-40); border-radius: var(--radius-images); }
+
+.rodape { padding: var(--spacing-40) var(--gutter-d) var(--spacing-40) var(--gutter-e); background: var(--cor-faixa); }
+
+@media (min-width: 834px) {
+  .carrossel__setas { display: flex; }
+  .carrossel__trilho > .card { flex-basis: min(60vw, 560px); }
+}

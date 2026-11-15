@@ -1,0 +1,455 @@
+{
+ "versao": 1,
+ "ativos": [
+  {
+   "id": "a-demo-1",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "acao",
+   "codigo": "PETR4",
+   "nome": "Petrobras PN"
+  },
+  {
+   "id": "a-demo-2",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "acao",
+   "codigo": "VALE3",
+   "nome": "Vale ON"
+  },
+  {
+   "id": "a-demo-3",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "acao",
+   "codigo": "ITUB4",
+   "nome": "Itaú Unibanco PN"
+  },
+  {
+   "id": "a-demo-4",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "acao",
+   "codigo": "WEGE3",
+   "nome": "WEG ON"
+  },
+  {
+   "id": "a-demo-5",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "etf",
+   "codigo": "BOVA11",
+   "nome": "iShares Ibovespa"
+  },
+  {
+   "id": "a-demo-6",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "etf",
+   "codigo": "IVVB11",
+   "nome": "iShares S&P 500"
+  },
+  {
+   "id": "a-demo-7",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "fii",
+   "codigo": "HGLG11",
+   "nome": "CSHG Logística"
+  },
+  {
+   "id": "a-demo-8",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "fii",
+   "codigo": "KNRI11",
+   "nome": "Kinea Renda Imobiliária"
+  },
+  {
+   "id": "a-demo-9",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "tesouro",
+   "titulo": "tesouro-selic-2029",
+   "nome": "Tesouro Selic 2029"
+  },
+  {
+   "id": "a-demo-10",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "tesouro",
+   "titulo": "tesouro-ipcamais-2035",
+   "nome": "Tesouro IPCA+ 2035"
+  },
+  {
+   "id": "a-demo-11",
+   "instituicao": "Banco Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "rendafixa",
+   "tipo": "CDB",
+   "emissor": "Banco Exemplo",
+   "indexador": "cdi",
+   "percentual": 1.1,
+   "taxa": 0,
+   "vencimento": "2028-02-10",
+   "isento": false,
+   "nome": "CDB Banco Exemplo 110% do CDI"
+  },
+  {
+   "id": "a-demo-12",
+   "instituicao": "Banco Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "rendafixa",
+   "tipo": "LCA",
+   "emissor": "Banco Exemplo",
+   "indexador": "cdi",
+   "percentual": 0.92,
+   "taxa": 0,
+   "vencimento": "2027-06-15",
+   "isento": true,
+   "nome": "LCA Banco Exemplo 92% do CDI"
+  },
+  {
+   "id": "a-demo-13",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "rendafixa",
+   "tipo": "Debênture incentivada",
+   "emissor": "Energia Exemplo",
+   "indexador": "ipca",
+   "percentual": 1,
+   "taxa": 0.068,
+   "vencimento": "2031-05-15",
+   "isento": true,
+   "nome": "Debênture incentivada Energia Exemplo IPCA + 6,80%"
+  },
+  {
+   "id": "a-demo-14",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "fundo",
+   "nome": "Fundo Demonstração Multimercado",
+   "cnpj": "11111111000111"
+  },
+  {
+   "id": "a-demo-15",
+   "instituicao": "Corretora Exemplo",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "classe": "opcao",
+   "codigo": "PETRL460",
+   "nome": "Call de PETR4 a 46",
+   "tipoOpcao": "call",
+   "ativoBase": "PETR4",
+   "strike": 46,
+   "vencimento": "2026-12-18"
+  }
+ ],
+ "lancamentos": [
+  {
+   "id": "l-demo-1",
+   "ativoId": "a-demo-1",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2024-06-28",
+   "quantidade": 400,
+   "preco": 36.23
+  },
+  {
+   "id": "l-demo-2",
+   "ativoId": "a-demo-1",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-09-19",
+   "quantidade": 200,
+   "preco": 35.21
+  },
+  {
+   "id": "l-demo-3",
+   "ativoId": "a-demo-1",
+   "tipo": "venda",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2026-07-13",
+   "quantidade": 100,
+   "preco": 39.88
+  },
+  {
+   "id": "l-demo-4",
+   "ativoId": "a-demo-2",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2024-12-13",
+   "quantidade": 150,
+   "preco": 69.58
+  },
+  {
+   "id": "l-demo-5",
+   "ativoId": "a-demo-3",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2024-05-17",
+   "quantidade": 500,
+   "preco": 31.45
+  },
+  {
+   "id": "l-demo-6",
+   "ativoId": "a-demo-3",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2026-04-17",
+   "quantidade": 200,
+   "preco": 43.51
+  },
+  {
+   "id": "l-demo-7",
+   "ativoId": "a-demo-3",
+   "tipo": "provento",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2026-08-24",
+   "valor": 412.3
+  },
+  {
+   "id": "l-demo-8",
+   "ativoId": "a-demo-4",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-04-04",
+   "quantidade": 300,
+   "preco": 39.76
+  },
+  {
+   "id": "l-demo-9",
+   "ativoId": "a-demo-5",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2024-09-20",
+   "quantidade": 60,
+   "preco": 84.06
+  },
+  {
+   "id": "l-demo-10",
+   "ativoId": "a-demo-6",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-05-30",
+   "quantidade": 25,
+   "preco": 277.97
+  },
+  {
+   "id": "l-demo-11",
+   "ativoId": "a-demo-7",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-01-10",
+   "quantidade": 40,
+   "preco": 159.55
+  },
+  {
+   "id": "l-demo-12",
+   "ativoId": "a-demo-7",
+   "tipo": "provento",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2026-10-19",
+   "valor": 44
+  },
+  {
+   "id": "l-demo-13",
+   "ativoId": "a-demo-7",
+   "tipo": "provento",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2026-09-18",
+   "valor": 44
+  },
+  {
+   "id": "l-demo-14",
+   "ativoId": "a-demo-7",
+   "tipo": "provento",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2026-08-20",
+   "valor": 44
+  },
+  {
+   "id": "l-demo-15",
+   "ativoId": "a-demo-8",
+   "tipo": "compra",
+   "custos": 4.9,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-11-14",
+   "quantidade": 35,
+   "preco": 144.24
+  },
+  {
+   "id": "l-demo-16",
+   "ativoId": "a-demo-9",
+   "tipo": "compra",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-05-02",
+   "quantidade": 1.5,
+   "preco": 16391.72
+  },
+  {
+   "id": "l-demo-17",
+   "ativoId": "a-demo-10",
+   "tipo": "compra",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2024-11-15",
+   "quantidade": 6,
+   "preco": 2168.89
+  },
+  {
+   "id": "l-demo-18",
+   "ativoId": "a-demo-11",
+   "tipo": "compra",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-03-10",
+   "quantidade": 20000,
+   "preco": 1
+  },
+  {
+   "id": "l-demo-19",
+   "ativoId": "a-demo-11",
+   "tipo": "compra",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2026-02-09",
+   "quantidade": 5000,
+   "preco": 1
+  },
+  {
+   "id": "l-demo-20",
+   "ativoId": "a-demo-12",
+   "tipo": "compra",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-09-22",
+   "quantidade": 15000,
+   "preco": 1
+  },
+  {
+   "id": "l-demo-21",
+   "ativoId": "a-demo-13",
+   "tipo": "compra",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-07-14",
+   "quantidade": 10000,
+   "preco": 1
+  },
+  {
+   "id": "l-demo-22",
+   "ativoId": "a-demo-14",
+   "tipo": "compra",
+   "custos": 0,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2025-06-02",
+   "quantidade": 6000,
+   "preco": 2.29
+  },
+  {
+   "id": "l-demo-23",
+   "ativoId": "a-demo-15",
+   "tipo": "venda",
+   "custos": 3.2,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z",
+   "criadoEm": "2026-01-01T00:00:00.000Z",
+   "data": "2026-11-04",
+   "quantidade": 300,
+   "preco": 2.01
+  }
+ ],
+ "alertas": [
+  {
+   "id": "al-demo-1",
+   "tipo": "acima",
+   "codigo": "WEGE3",
+   "valor": 40,
+   "descricao": "WEG acima de R$ 40",
+   "ativo": true,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "al-demo-2",
+   "tipo": "abaixo",
+   "codigo": "VALE3",
+   "valor": 55,
+   "descricao": "Vale abaixo de R$ 55",
+   "ativo": true,
+   "atualizadoEm": "2026-01-01T00:00:00.000Z"
+  }
+ ],
+ "relatorios": [],
+ "observados": [
+  {
+   "id": "o-demo-1",
+   "codigo": "ABEV3",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z"
+  },
+  {
+   "id": "o-demo-2",
+   "codigo": "BBAS3",
+   "atualizadoEm": "2026-01-01T00:00:00.000Z"
+  }
+ ],
+ "config": {
+  "perfil": "moderado",
+  "horizonteAnos": 5,
+  "tetoPorAtivo": 0.15,
+  "indiceReferencia": "CDI",
+  "llm": null,
+  "enviarCarteiraAoLLM": false,
+  "atualizadoEm": "2026-01-01T00:00:00.000Z"
+ }
+}

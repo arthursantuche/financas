@@ -1,0 +1,229 @@
+.cor-previsto { color: var(--cor-grafico-previsto); }
+.cor-pago { color: var(--cor-texto); }
+.cor-apagar { color: var(--cor-alerta); }
+.cor-link { color: var(--cor-link); }
+.negativo { color: var(--cor-alerta); }
+a.card { color: inherit; }
+a.card:hover { text-decoration: none; }
+
+.espaco-topo { margin-top: var(--spacing-32); }
+.pagina__cabecalho { display: grid; gap: var(--spacing-12); margin-bottom: var(--spacing-40); }
+
+.grade-2 { display: grid; gap: var(--element-gap); grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
+.essencial__itens { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--spacing-8); }
+.essencial__itens li { font-size: var(--text-feature-copy); line-height: var(--leading-feature-copy); }
+/* Quatro cartões (Essenciais) ficam 2 × 2, sem um cartão sozinho na última linha. */
+@media (min-width: 600px) {
+  .grade-2--par { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.grade-2 > .card { min-width: 0; }
+.grade-2--folgada { row-gap: var(--spacing-64); column-gap: var(--spacing-64); }
+.card--auto { min-height: 0; }
+.card--contorno { box-shadow: var(--contorno-sutil); }
+.card__grafico--alto { min-height: 360px; margin-bottom: var(--spacing-40); }
+
+/* Foto com legenda: a moldura recorta a imagem (o parallax nunca sai dela) e a legenda
+   fica abaixo, fora da moldura. */
+.foto { margin: var(--spacing-40) 0 0; }
+.foto__moldura {
+  position: relative; overflow: hidden; aspect-ratio: 3 / 2;
+  border-radius: var(--radius-images); background: var(--cor-faixa);
+}
+.foto__moldura img {
+  position: absolute; left: 0; top: -6%; width: 100%; height: 112%;
+  display: block; object-fit: cover;
+}
+/* Tela estreita: a paralaxe é maior (movimento.js), e a sobra acompanha. */
+@media (max-width: 833px) {
+  .foto__moldura img { top: -10%; height: 120%; }
+}
+.foto figcaption { margin-top: var(--spacing-12); }
+/* Celular deitado: em 3:2 (e até em 2:1) a foto passaria da área visível; fica em 3:1,
+   para caber na tela. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .foto__moldura { aspect-ratio: 3 / 1; }
+}
+
+.lista { list-style: none; margin: 0; padding: 0; }
+.lista > li { padding: var(--spacing-16) 0; border-top: 1px solid var(--cor-divisoria); display: grid; gap: var(--spacing-4); }
+
+/* Hospedagens: uma estadia por cartão, na ordem da viagem */
+.resumo-estadias {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--element-gap);
+  margin: 0 0 var(--spacing-48);
+}
+.resumo-estadias > div { display: grid; gap: var(--spacing-4); align-content: start; }
+.resumo-estadias dd { margin: 0; }
+@media (max-width: 480px) {
+  .resumo-estadias { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .resumo-estadias > div:first-child { grid-column: 1 / -1; }
+}
+
+.tarefa { position: relative; grid-template-columns: var(--spacing-28) 1fr; align-items: start; }
+/* A caixa tem 24 px: o rótulo estende a área de toque a 44 px de largura e à altura da linha, por trás dela. */
+.tarefa label::before { content: ''; position: absolute; top: 0; bottom: 0; left: calc(var(--spacing-8) * -1); width: calc(var(--spacing-40) + var(--spacing-4)); }
+.tarefa input { position: relative; z-index: 1; width: var(--spacing-24); height: var(--spacing-24); margin: 0; accent-color: var(--cor-link); }
+.tarefa label { display: grid; gap: var(--spacing-4); cursor: pointer; }
+.tarefa--feita label > span:first-child { color: var(--cor-texto-2); text-decoration: line-through; }
+
+.tabela { width: 100%; border-collapse: collapse; font-size: var(--text-body-small); letter-spacing: var(--tracking-body-small); }
+.tabela th, .tabela td { text-align: left; padding: var(--spacing-12) var(--spacing-8); border-top: 1px solid var(--cor-divisoria); vertical-align: top; }
+.tabela td { font-variant-numeric: tabular-nums; }
+.tabela thead th { color: var(--cor-texto-2); font-weight: var(--font-weight-regular); border-top: 0; }
+.tabela tfoot th, .tabela tfoot td { font-weight: var(--font-weight-semibold); border-top: 2px solid var(--cor-divisoria); }
+.tabela .bloco { display: block; margin-top: var(--spacing-4); }
+/* No celular, cada linha da tabela vira um bloco: categoria em cima, valores rotulados abaixo. */
+@media (max-width: 599px) {
+  .tabela--empilha thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .tabela--empilha tr { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-8) var(--spacing-16); padding: var(--spacing-16) 0; border-top: 1px solid var(--cor-divisoria); }
+  .tabela--empilha tfoot tr { border-top-width: 2px; }
+  .tabela--empilha th, .tabela--empilha td { padding: 0; border: 0 !important; }
+  .tabela--empilha th[scope="row"] { grid-column: 1 / -1; font-size: var(--text-body); }
+  .tabela--empilha td::before { content: attr(data-rotulo); display: block; color: var(--cor-texto-2); font-weight: var(--font-weight-regular); }
+}
+.glossario { list-style: none; padding: 0; display: grid; gap: var(--spacing-4); }
+.glossario strong { color: var(--cor-texto); font-weight: var(--font-weight-semibold); }
+
+/* Formulários: um só componente de campo ("Rounded Search Input" adaptado).
+   17px em todos os campos: abaixo de 16px o iOS aplica zoom ao tocar. */
+.formulario { display: grid; gap: var(--spacing-20); max-width: 520px; }
+/* Formulário logo depois de uma lista ou do aviso de lista vazia: nada encosta. */
+.lista + .formulario, .legenda + .formulario { margin-top: var(--spacing-32); }
+.rotulo { display: grid; gap: var(--spacing-8); font-size: var(--text-body-small); line-height: var(--leading-body-small); color: var(--cor-texto-2); min-width: 0; }
+.campo {
+  -webkit-appearance: none; appearance: none;
+  font: inherit; font-size: var(--text-body); line-height: var(--leading-feature-copy); letter-spacing: var(--tracking-body);
+  color: var(--cor-texto);
+  min-height: var(--spacing-48); padding: var(--spacing-12) var(--spacing-20);
+  border: 0; border-radius: var(--radius-inputs); box-shadow: var(--contorno-forte);
+  background: var(--cor-campo); width: 100%; min-width: 0; margin: 0;
+}
+.campo:focus { outline: none; box-shadow: var(--cor-link) 0 0 0 2px; }
+.campo[aria-invalid="true"] { box-shadow: var(--cor-alerta) 0 0 0 2px; }
+textarea.campo { border-radius: var(--radius-cards); resize: vertical; padding: var(--spacing-16) var(--spacing-20); }
+/* Data: no iOS o valor vem centralizado e com altura própria. */
+input[type="date"].campo { display: block; text-align: left; }
+input[type="date"].campo::-webkit-date-and-time-value { text-align: left; margin: 0; }
+input[type="date"].campo::-webkit-calendar-picker-indicator { opacity: 0.6; }
+
+/* Lista de seleção com seta própria (a nativa muda de lugar e de recuo em cada sistema). */
+.seletor { position: relative; display: block; min-width: 0; }
+.seletor .campo { padding-right: var(--spacing-48); cursor: pointer; }
+.seletor::after {
+  content: ''; position: absolute; right: var(--spacing-20); top: 50%;
+  width: var(--spacing-12); height: var(--spacing-8); margin-top: calc(var(--spacing-4) * -1);
+  background: var(--cor-texto-2); pointer-events: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Status dentro das listas: mesma altura de toque, largura do conteúdo. */
+.seletor--compacto { display: inline-block; justify-self: start; }
+.seletor--compacto .campo { min-height: calc(var(--spacing-40) + var(--spacing-4)); padding: var(--spacing-8) var(--spacing-40) var(--spacing-8) var(--spacing-16); width: auto; }
+.seletor--compacto::after { right: var(--spacing-16); }
+
+/* A segunda coluna nunca fica menor que o próprio conteúdo: no iPhone, com um terço da largura, o nome
+   do responsável era cortado ("Pesso") e o rótulo "Moeda · obrigatório" quebrava em duas linhas. */
+.linha-campos { display: grid; grid-template-columns: minmax(0, 2fr) minmax(max-content, 1fr); gap: var(--spacing-12); align-items: end; }
+.erro { margin-top: var(--spacing-4); }
+/* Rótulo, campo e mensagem em linhas comuns aos dois campos: a mensagem de erro de um campo não tira o
+   vizinho do alinhamento. Sem suporte a subgrid, vale o alinhamento pela base, acima. */
+@supports (grid-template-rows: subgrid) {
+  .linha-campos { grid-template-rows: auto auto auto; row-gap: 0; }
+  .linha-campos > .rotulo { grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
+  .linha-campos > .rotulo > :first-child { align-self: end; margin-bottom: var(--spacing-8); }
+  .linha-campos > .rotulo > :nth-child(n + 3) { margin-top: var(--spacing-8); }
+}
+.formulario .pill { justify-self: start; padding: 0 var(--spacing-20); }
+
+/* Aviso flutuante e diálogo de acesso */
+.aviso {
+  position: fixed; left: 50%; bottom: calc(var(--spacing-20) + env(safe-area-inset-bottom)); transform: translateX(-50%);
+  margin: 0; padding: var(--spacing-12) var(--spacing-20); border-radius: var(--radius-pills);
+  background: var(--cor-texto); color: var(--cor-fundo); font-size: var(--text-body-small); z-index: 20;
+  max-width: calc(100% - var(--spacing-40));
+  animation: surgir var(--dur-curta) var(--ease-entrada);
+}
+.acesso { border: 0; border-radius: var(--radius-cards); padding: var(--card-padding); width: min(92vw, 380px); color: var(--cor-texto); background: var(--cor-cartao); }
+.acesso::backdrop { background: var(--cor-faixa); }
+.acesso .status-pendente:empty { display: none; }
+
+.rodape .conteudo { display: grid; gap: var(--spacing-8); }
+body { padding-bottom: env(safe-area-inset-bottom); }
+
+.orcamento__referencia { margin: 0 0 var(--spacing-40); }
+
+/* ---- Hospedagens: galeria, reserva e detalhes */
+.guardar-vouchers { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--spacing-12); margin: calc(var(--spacing-24) * -1) 0 var(--spacing-32); }
+dialog.ampliada {
+  width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
+  color: var(--cor-texto); background: var(--cor-fundo);
+}
+dialog.ampliada[open] { display: flex; flex-direction: column; }
+.ampliada__topo {
+  display: flex; align-items: center; gap: var(--spacing-12); flex: none;
+  padding: calc(var(--spacing-12) + env(safe-area-inset-top)) var(--gutter-d) var(--spacing-12) var(--gutter-e);
+  border-bottom: 1px solid var(--cor-divisoria);
+}
+.ampliada__topo > div { flex: 1; min-width: 0; }
+.ampliada__topo .kicker { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.ampliada__topo .pill { flex: none; }
+
+.ampliada__trilho { flex: 1; min-height: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior: contain; }
+.ampliada__trilho::-webkit-scrollbar { display: none; }
+.ampliada__slide { flex: 0 0 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--spacing-12); min-width: 0; margin: 0; padding: var(--spacing-16) var(--spacing-20); scroll-snap-align: center; scroll-snap-stop: always; }
+.ampliada__slide img { display: block; min-height: 0; max-width: 100%; max-height: calc(100% - var(--spacing-32)); object-fit: contain; border-radius: var(--spacing-12); }
+.ampliada__setas { display: none; }
+@media (hover: hover) and (min-width: 834px) {
+  .ampliada__setas { display: flex; justify-content: center; gap: var(--spacing-12); flex: none; padding: 0 0 var(--spacing-20); }
+}
+dialog.ampliada::backdrop { background: var(--cor-fundo); }
+.formulario--registrar { max-width: none; gap: var(--spacing-40); }
+.grupo { display: grid; gap: var(--spacing-20); min-width: 0; margin: 0; padding: var(--spacing-24) 0 0; border: 0; border-top: 1px solid var(--cor-divisoria); }
+.grupo__titulo { float: left; width: 100%; padding: 0; margin-bottom: var(--spacing-4); font-size: var(--text-body); font-weight: var(--font-weight-semibold); }
+.grupo__titulo + * { clear: both; }
+/* "opcional" no mesmo tom do rótulo: com 75% de opacidade o contraste caía para 3:1. O azul de "obrigatório" já faz a distinção. */
+.rotulo__opcional { color: var(--cor-texto-2); }
+.rotulo__obrigatorio { color: var(--cor-link); }
+.linha-campos--iguais { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 379px) {
+  .linha-campos--iguais { grid-template-columns: 1fr; }
+  .linha-campos--iguais > .rotulo + .rotulo { margin-top: var(--spacing-12); }
+}
+/* Ação secundária em forma de link (Remover). Sem estas regras o botão aparecia com a moldura cinza
+   padrão do navegador e 21 px de altura; agora tem a área de toque de uma pílula. */
+.link-botao {
+  -webkit-appearance: none; appearance: none; border: 0; background: none; cursor: pointer;
+  display: inline-flex; align-items: center; min-height: calc(var(--spacing-40) + var(--spacing-4)); padding: 0 var(--spacing-8);
+  border-radius: var(--radius-links); color: var(--cor-link); -webkit-tap-highlight-color: transparent;
+  font: inherit; font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small);
+}
+.link-botao:active { transform: scale(0.97); }
+@media (hover: hover) { .link-botao:hover { text-decoration: underline; } }
+.link-botao--alerta { color: var(--cor-alerta); }
+.espaco-abaixo { margin: 0 0 var(--spacing-16); }
+.vazio { padding: var(--spacing-32) var(--spacing-24); border-radius: var(--radius-cards); background: var(--cor-faixa); color: var(--cor-texto-2); text-align: center; }
+.secao--mist .vazio { background: var(--cor-cartao); }
+.estado { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-8); }
+/* Sem texto de estado (antes da primeira leitura), o botão não fica recuado pelo espaço vazio. */
+#estado-texto:empty { display: none; }
+/* No rodapé, o fundo é a faixa: ao passar o cursor, o botão usa a cor de cartão, como em .secao--mist. */
+@media (hover: hover) { .rodape .pill:not(.pill--azul):not(:disabled):hover { background: var(--cor-cartao); } }
+
+/* ---- Estados de carregamento e erro */
+.falha { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--spacing-12); max-width: 980px; margin: var(--spacing-16) auto 0; padding: var(--spacing-16) var(--spacing-20); color: var(--cor-alerta); }
+.falha[hidden] { display: none; }
+.falha p { margin: 0; }
+
+/* ---- Acabamento: toque, entradas das telas sobrepostas */
+.link-botao { transition: transform var(--dur-curta) var(--ease-apple), background-color var(--dur-curta) var(--ease-apple), color var(--dur-curta) var(--ease-apple); }
+button.pill:disabled { opacity: 0.5; cursor: default; }
+dialog[open].ampliada { animation: surgir var(--dur-curta) var(--ease-entrada); }
+details[open] > summary ~ * { animation: surgir var(--dur-curta) var(--ease-entrada); }
+@keyframes surgir { from { opacity: 0; } }
+@keyframes surgir-subindo { from { opacity: 0; transform: translateY(12px); } }
+@keyframes girar { to { transform: rotate(360deg); } }
+@keyframes carregando { 0% { transform: scaleX(0); } 60% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+
+/* ---- Atalhos internos: o que não ocupa o painel superior */
+.atalhos { display: flex; flex-wrap: wrap; gap: var(--spacing-12); margin: calc(var(--spacing-16) * -1) 0 var(--spacing-40); }
+.voltar { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--text-body-small); }

@@ -1,0 +1,15 @@
+{
+  "name": "portal-financas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Portal de finanças e investimentos: site estático, coleta de dados abertos e motor de cálculo.",
+  "scripts": {
+    "test": "node --test testes/",
+    "e2e": "node testes/e2e.mjs",
+    "coletar": "node coleta/bcb.mjs && node coleta/tesouro.mjs && node coleta/cvm.mjs && node coleta/investidores.mjs",
+    "conteudo": "node coleta/conteudo.mjs",
+    "amostra": "node coleta/amostra.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

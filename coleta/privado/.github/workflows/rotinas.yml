@@ -1,0 +1,75 @@
+# Rotinas do repositório privado de dados: cotações, fechamento da B3, cotas de fundos e alertas.
+# O código vem do repositório público do portal (pasta coleta/); aqui ficam só os dados.
+# Este arquivo é a semente mantida em coleta/privado/ do repositório do portal.
+name: Rotinas
+
+on:
+  schedule:
+    - cron: '7,37 13-21 * * 1-5'  # pregão (10h às 18h30 de Brasília): cotações e alertas
+    - cron: '25 0 * * 2-6'        # 21h25 de Brasília: fechamento oficial da B3, depois de publicado
+    - cron: '50 10 * * 1-6'       # 07h50 de Brasília: nova tentativa do fechamento e cotas de fundos
+  workflow_dispatch:
+    inputs:
+      rotina:
+        description: 'O que rodar'
+        type: choice
+        options: [tudo, cotacoes, fechamento]
+        default: tudo
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: rotinas
+  cancel-in-progress: false
+
+env:
+  PORTAL: __REPOSITORIO_DO_PORTAL__
+
+jobs:
+  rotinas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: dados
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.PORTAL }}
+          path: portal
+          sparse-checkout: |
+            coleta
+            Portal/assets/js/calculo
+            Portal/dados/empresas
+      - name: Fechamento da B3 e cotas de fundos
+        if: github.event.schedule == '25 0 * * 2-6' || github.event.schedule == '50 10 * * 1-6' || (github.event_name == 'workflow_dispatch' && inputs.rotina != 'cotacoes')
+        working-directory: portal
+        env:
+          CI: 'true'
+          COLETA_CACHE: ${{ runner.temp }}/coleta
+        run: |
+          node coleta/b3.mjs --destino "$GITHUB_WORKSPACE/dados" || echo "::warning::fechamento da B3 indisponível"
+          node coleta/fundos.mjs --destino "$GITHUB_WORKSPACE/dados" || echo "::warning::cotas de fundos indisponíveis"
+      - name: Cotações do pregão
+        if: github.event.schedule == '7,37 13-21 * * 1-5' || (github.event_name == 'workflow_dispatch' && inputs.rotina != 'fechamento')
+        working-directory: portal
+        run: node coleta/cotacoes.mjs --destino "$GITHUB_WORKSPACE/dados" || echo "::warning::cotações indisponíveis; o portal usa o fechamento da B3"
+      - name: Alertas
+        working-directory: portal
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: node coleta/alertas.mjs --destino "$GITHUB_WORKSPACE/dados" --issues
+      - name: Gravar
+        working-directory: dados
+        run: |
+          git config user.name "rotinas-automaticas"
+          git config user.email "rotinas@users.noreply.github.com"
+          git add mercado
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Atualiza os dados de mercado"
+          # O portal também grava aqui (cofre e monitor): reaplica por cima e tenta de novo.
+          for i in 1 2 3; do git pull -q --rebase && git push -q && exit 0; sleep 5; done
+          exit 1
