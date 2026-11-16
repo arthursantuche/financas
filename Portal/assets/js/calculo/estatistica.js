@@ -1,5 +1,5 @@
 // Estatística e séries de preços. Funções puras, sem dependências: rodam no navegador e no Node
-// (coleta, agente e testes usam este mesmo arquivo). Metodologia: Vault, "Metodologia de cálculo".
+// (coleta, agente e testes usam este mesmo arquivo). Metodologia: Vault, Metodologia - Portal Finanças.
 // Convenções: séries em ordem cronológica; retornos em fração (0,01 = 1%); ano com 252 pregões.
 
 export const PREGOES_ANO = 252;

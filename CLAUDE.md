@@ -1,6 +1,6 @@
 # Portal Finanças: instruções para IAs
 
-Antes de alterar qualquer coisa, leia no Vault do Obsidian (`~/Documents/Arthur's Ideaverse`, começando pelo `CLAUDE.md` de lá) o Diretório - Portal Finanças, em `Efforts/Finanças/Portal/`. Ele aponta o Guia do Projeto, a Referência técnica, a Metodologia e o Guia de Manutenção. Aqui ficam só as regras que não podem ser esquecidas.
+Antes de alterar qualquer coisa, leia no Vault do Obsidian (`~/Documents/Arthur's Ideaverse`, começando pelo `CLAUDE.md` de lá) o Diretório - Portal Finanças, em `Efforts/Finanças/Portal/`. Ele aponta o Guia de Manutenção (com as orientações de trabalho), a Referência técnica, a Metodologia e o Guia de Ativação. Aqui ficam só as regras que não podem ser esquecidas.
 
 - **Sem build.** HTML, CSS e módulos ES. Nada de framework, empacotador ou dependência de npm no site.
 - **Só tokens de papel** (`--cor-*`) fora de `Portal/assets/css/tokens.css`. Regras de design em `DESIGN.md`.

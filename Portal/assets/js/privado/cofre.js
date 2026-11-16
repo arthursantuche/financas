@@ -9,7 +9,7 @@
 //    nem a chave de recuperação os dados não podem ser lidos por ninguém.
 //  - A chave mestra fica só na memória. "Manter aberto neste aparelho" guarda no IndexedDB uma
 //    cópia não exportável (o navegador usa, mas nenhum código consegue ler os bytes).
-// Detalhes e modelo de ameaças: Vault, "Segurança - Portal Finanças".
+// Detalhes e modelo de ameaças: Vault, Referência técnica - Portal Finanças, seção 7 (Segurança).
 
 const ITERACOES = 600000;
 const NOME_BD = 'financas', LOJA = 'cofre';

@@ -1,6 +1,6 @@
 // Carteira: posições a partir dos lançamentos, avaliação, alocação, risco, série histórica pelo
 // método de cotas, otimização e dimensionamento de compras. Funções puras (navegador e Node).
-// Modelo de dados: Vault, "Modelo de dados". Um lançamento:
+// Modelo de dados: Vault, Referência técnica - Portal Finanças, seção 5. Um lançamento:
 //  { id, data: 'AAAA-MM-DD', tipo, ativo, quantidade, preco, custos, ... }
 // tipos: compra, venda, provento, desdobramento (quantidade = fator), bonificacao.
 import { retornos, volatilidade, matrizCovariancia, matrizCorrelacao, media, PREGOES_ANO } from './estatistica.js';

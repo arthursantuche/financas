@@ -3,7 +3,7 @@
 // quantidades, vendas para financiar, estruturas com opções, cenários, premissas e limites).
 // Não há IA aqui: as mesmas entradas dão sempre o mesmo dossiê. O LLM, quando configurado, só
 // escreve sobre estes números (narrativa.js). Funções puras: rodam no navegador e no Node.
-// Critérios e pesos: Vault, "Metodologia do agente".
+// Critérios e pesos: Vault, Metodologia - Portal Finanças, seção 7.
 import { concentracao, dimensionar, estatisticasConjuntas, riscoCarteira } from '../calculo/carteira.js';
 import { alinhar, retornos, volatilidade, simularCenarios, drawdownMaximo } from '../calculo/estatistica.js';
 import { analisarEstrutura, ESTRUTURAS, gregas, volatilidadeImplicita } from '../calculo/opcoes.js';

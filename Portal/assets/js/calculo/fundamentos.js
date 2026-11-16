@@ -3,7 +3,7 @@
 // coleta/cvm.mjs (ou digitados/extraídos de um PDF), todos em R$ mil:
 //  { fim: 'AAAA-MM-DD', inicio, meses, origem, bp: {...}, fluxo: {...}, acoes: { total, tesouraria } }
 // "fluxo" é sempre acumulado desde o início do exercício (como a CVM publica); trimestres isolados
-// e os últimos 12 meses (UDM) são derivados aqui. Metodologia: Vault, "Metodologia de cálculo".
+// e os últimos 12 meses (UDM) são derivados aqui. Metodologia: Vault, Metodologia - Portal Finanças, seção 6.
 
 export const IR_NOMINAL = 0.34; // IRPJ + CSLL, usado no NOPAT do ROIC
 
