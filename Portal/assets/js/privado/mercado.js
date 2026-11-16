@@ -7,7 +7,7 @@
 //   renda fixa (CDB, LCI, debênture) → curva do título, calculada com CDI e IPCA do Banco Central
 // Todo preço carrega fonte e data, e a tela mostra as duas.
 import { sessao, lista, obter, guardar } from './cofre.js';
-import { lerJSON } from './sincronia.js';
+import { lerJSON, pedirCotacoes } from './sincronia.js';
 import { serieBCB, tesouro as lerTesouro, indiceEmpresas, ler } from '../dados.js';
 import { indiceTitulo, aliquotaIR } from '../calculo/rendafixa.js';
 import { posicoes, avaliar, serieCotas, diasCorridos } from '../calculo/carteira.js';
@@ -47,7 +47,33 @@ let pacoteAmostra = null;
 const amostra = () => (pacoteAmostra ||= ler('dados/amostra/mercado.json'));
 export const limparMemoria = () => memoria.clear();
 
-export const cotacoes = () => daNuvem('mercado/cotacoes.json', 5);
+// Pregão da B3: 10h às 18h de Brasília (13h às 21h UTC; o Brasil não tem horário de verão desde 2019),
+// com meia hora de folga para o fechamento.
+export function emPregao(agora = new Date()) {
+  const dia = agora.getUTCDay(), min = agora.getUTCHours() * 60 + agora.getUTCMinutes();
+  return dia >= 1 && dia <= 5 && min >= 13 * 60 && min <= 21 * 60 + 30;
+}
+// Cotações com mais de 40 minutos no pregão: pede uma rodada da rotina, no máximo a cada 30 minutos.
+export function cotacoesVelhas(cot, agora = new Date()) {
+  if (!emPregao(agora)) return false;
+  const em = Date.parse(cot?.geradoEm || '');
+  return !Number.isFinite(em) || agora - em > 40 * 6e4;
+}
+let pedido = null; // a carteira chama cotacoes() uma vez por ativo: um pedido só
+function renovarSeVelhas(cot) {
+  if (sessao.amostra || !sessao.nuvem || !cotacoesVelhas(cot)) return;
+  pedido ||= (async () => {
+    const ultimo = await obter('pedidoCotacoes');
+    if (ultimo && Date.now() - ultimo < 30 * 6e4) return;
+    await guardar('pedidoCotacoes', Date.now());
+    if (await pedirCotacoes(sessao.nuvem)) console.info('Cotações velhas: rodada da rotina pedida ao repositório privado.');
+  })().catch(() => {}).finally(() => { setTimeout(() => { pedido = null; }, 30 * 6e4); });
+}
+export const cotacoes = async () => {
+  const cot = await daNuvem('mercado/cotacoes.json', 5);
+  renovarSeVelhas(cot);
+  return cot;
+};
 export const fechamento = () => daNuvem('mercado/fechamento.json', 60);
 export const fundos = () => daNuvem('mercado/fundos.json', 240);
 export const cadeiaOpcoes = () => daNuvem('mercado/opcoes.json', 60);

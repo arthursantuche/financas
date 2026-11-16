@@ -11,13 +11,31 @@ export const PROVEDORES = {
 
 export class ErroLLM extends Error { constructor(m, status) { super(m); this.status = status; } }
 
-const cabecalhos = (c) => ({ 'Content-Type': 'application/json', ...(c.chave ? { Authorization: `Bearer ${c.chave}` } : {}) });
+// O Gemini responde 400 ("Please pass a valid API key") a uma chave inválida, e não 401 ou 403.
+async function chaveRecusada(r) {
+  if (r.status === 401 || r.status === 403) return true;
+  if (r.status !== 400) return false;
+  try { return /api[ _-]?key/i.test(await r.clone().text()); } catch { return false; }
+}
+
+const cabecalhos = (c) =>({ 'Content-Type': 'application/json', ...(c.chave ? { Authorization: `Bearer ${c.chave}` } : {}) });
 
 export async function listarModelos(config) {
   const r = await fetch(`${config.base.replace(/\/$/, '')}/models`, { headers: cabecalhos(config) }).catch(() => { throw new ErroLLM('Sem conexão com o provedor.', 0); });
-  if (!r.ok) throw new ErroLLM(r.status === 401 || r.status === 403 ? 'O provedor recusou a chave.' : `O provedor respondeu ${r.status}.`, r.status);
+  if (!r.ok) throw new ErroLLM(await chaveRecusada(r) ? 'O provedor recusou a chave.' : `O provedor respondeu ${r.status}.`, r.status);
   const j = await r.json();
   return (j.data || j.models || []).map((m) => String(m.id || m.name || '').replace(/^models\//, '')).filter(Boolean).sort();
+}
+
+// Só modelos de texto (fora imagem, áudio, vídeo e vetores) e uma sugestão. No Gemini gratuito, os
+// "flash-lite" têm a maior cota diária e os "pro" ficam fora da camada gratuita; um relatório faz
+// um pedido para o resumo e um por empresa recomendada.
+const NAO_TEXTO = /embed|imagen|image|veo|tts|audio|live|aqa|whisper|guard|robotics|computer-use|native|transcribe|translate|decision|banana/i;
+export const modelosDeTexto = (lista) => lista.filter((m) => !NAO_TEXTO.test(m));
+export function modeloSugerido(lista) {
+  const estaveis = lista.filter((m) => !/preview|exp|latest/i.test(m));
+  const achar = (re) => estaveis.filter((m) => re.test(m)).sort().at(-1) || lista.filter((m) => re.test(m)).sort().at(-1);
+  return achar(/flash-lite/i) || achar(/flash/i) || lista[0] || '';
 }
 
 // Devolve o texto da resposta. `json: true` pede resposta em JSON (o texto ainda é validado por quem chama).
@@ -27,7 +45,8 @@ export async function conversar(config, mensagens, { json = false, temperatura =
   try { r = await fetch(`${config.base.replace(/\/$/, '')}/chat/completions`, { method: 'POST', headers: cabecalhos(config), body: JSON.stringify(corpo), signal: AbortSignal.timeout(tempoMs) }); }
   catch (e) { throw new ErroLLM(e.name === 'TimeoutError' ? 'O provedor demorou demais para responder.' : 'Sem conexão com o provedor de IA.', 0); }
   if (r.status === 429) throw new ErroLLM('Limite gratuito do provedor atingido. Tente mais tarde ou use o modo por regras.', 429);
-  if (r.status === 401 || r.status === 403) throw new ErroLLM('O provedor recusou a chave de IA.', r.status);
+  if (await chaveRecusada(r)) throw new ErroLLM('O provedor recusou a chave de IA.', r.status);
+  if (r.status === 404) throw new ErroLLM(`O modelo "${config.modelo}" não existe neste provedor. Use "Listar modelos" em Ajustes.`, 404);
   if (!r.ok) throw new ErroLLM(`O provedor de IA respondeu ${r.status}.`, r.status);
   const j = await r.json();
   const texto = j.choices?.[0]?.message?.content;

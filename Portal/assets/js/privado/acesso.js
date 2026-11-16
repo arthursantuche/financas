@@ -52,7 +52,7 @@ export async function pagina(ctx, [modo]) {
     },
     nuvem: () => {
       const r = campo({ nome: 'repo', rotulo: 'Repositório privado', obrigatorio: true, dica: 'No formato usuario/repositorio.', atributos: { autocapitalize: 'none', spellcheck: 'false', placeholder: 'usuario/financas-dados' } });
-      const t = campo({ nome: 'token', rotulo: 'Token de acesso do GitHub', tipo: 'password', obrigatorio: true, dica: 'Token de escopo fino, restrito a esse repositório, com leitura e escrita em Contents.', atributos: { autocomplete: 'off', autocapitalize: 'none', spellcheck: 'false' } });
+      const t = campo({ nome: 'token', rotulo: 'Token de acesso do GitHub', tipo: 'password', obrigatorio: true, dica: 'Token de escopo fino, restrito a esse repositório, com leitura e escrita em Contents e Actions. Pode ser o mesmo token do outro aparelho.', atributos: { autocomplete: 'off', autocapitalize: 'none', spellcheck: 'false' } });
       const u = campo({ nome: 'usuario', rotulo: 'Usuário do cofre', obrigatorio: true, atributos: USUARIO });
       const s = campo({ nome: 'senha', rotulo: 'Senha do cofre', tipo: 'password', obrigatorio: true, atributos: SENHA });
       palco.replaceChildren(cabecalho('Trazer o cofre da nuvem.', 'Para usar neste aparelho a carteira que já existe em outro. O token fica guardado aqui, cifrado pela sua senha.'),

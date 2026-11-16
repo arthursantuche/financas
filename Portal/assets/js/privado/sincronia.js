@@ -150,5 +150,16 @@ export async function baixarCofre({ repo, token, usuario, senha, api: base }) {
   await definirNuvem(config);
 }
 
+// Pede ao repositório privado uma rodada da rotina de cotações. O agendamento do GitHub atrasa ou
+// pula execuções em horários de pico; com o portal aberto e as cotações velhas, o próprio portal
+// pede a rodada. Exige a permissão Actions (leitura e escrita) no token; sem ela, devolve false e
+// o portal segue com o que tem.
+export async function pedirCotacoes(config) {
+  try {
+    const r = await api(config, 'actions/workflows/rotinas.yml/dispatches', { metodo: 'POST', corpo: { ref: 'main', inputs: { rotina: 'cotacoes' } } });
+    return r.status === 204;
+  } catch { return false; }
+}
+
 export const desconectar = () => definirNuvem(null);
 export const ultimaSincronia = () => obter('ultimaSincronia');

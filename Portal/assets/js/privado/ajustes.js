@@ -2,10 +2,17 @@
 import { el, dataHora, novoId } from '../util.js';
 import { sessao, configurar, trocarSenha, exportarCopia, apagarDoAparelho, bloquear, lista, gravar, remover, avaliarSenha, pendencias } from './cofre.js';
 import { campo, selecao, marcar, formulario } from './formularios.js';
-import { PROVEDORES, listarModelos, conversar } from '../agente/llm.js';
+import { PROVEDORES, listarModelos, conversar, modelosDeTexto, modeloSugerido } from '../agente/llm.js';
 import { PERFIS } from '../agente/dossie.js';
 
 const bloco = (titulo, intro, ...corpo) => el('section', { class: 'secao secao--compacta' }, el('div', { class: 'conteudo conteudo--estreito' }, el('h2', { class: 'titulo' }, titulo), intro && el('p', { class: 'copy introducao' }, intro), el('div', { class: 'empilha empilha--folgada' }, corpo)));
+
+// Endereço de criação do token com os campos preenchidos. `target_name` é o dono do repositório.
+export function linkToken(repo) {
+  const dono = /^([\w.-]+)\//.exec(repo || '')?.[1];
+  const p = new URLSearchParams({ name: 'Portal Finanças', description: 'Cofre e cotações do Portal Finanças (só o repositório privado de dados)', expires_in: '366', contents: 'write', actions: 'write', ...(dono ? { target_name: dono } : {}) });
+  return `https://github.com/settings/personal-access-tokens/new?${p}`;
+}
 
 export async function pagina(ctx) {
   if (sessao.amostra) return { titulo: 'Ajustes', no: el('section', { class: 'secao' }, el('div', { class: 'conteudo conteudo--estreito' }, el('h1', { class: 'titulo' }, 'Ajustes.'), el('p', { class: 'vazio' }, 'Na demonstração nada é gravado. Para usar de verdade, ', el('a', { href: './#entrar' }, 'crie o seu cofre'), '.'))) };
@@ -23,13 +30,18 @@ export async function pagina(ctx) {
   } else {
     const r = campo({ nome: 'repo', rotulo: 'Repositório privado', obrigatorio: true, dica: 'No formato usuario/repositorio.', atributos: { autocapitalize: 'none', spellcheck: 'false', placeholder: 'usuario/financas-dados' } });
     const t = campo({ nome: 'token', rotulo: 'Token de acesso do GitHub', tipo: 'password', obrigatorio: true, atributos: { autocomplete: 'off', autocapitalize: 'none', spellcheck: 'false' } });
+    // A página do GitHub abre com nome, validade e permissões já preenchidos (parâmetros oficiais
+    // de pré-preenchimento de tokens de escopo fino). Só a escolha do repositório fica para a pessoa.
+    const abrirGitHub = el('a', { class: 'pill', href: linkToken(''), target: '_blank', rel: 'noopener' }, 'Criar o token no GitHub');
+    r.input.addEventListener('input', () => { abrirGitHub.href = linkToken(r.ler()); });
     nuvem = [
       el('p', { class: 'estado-nuvem', dataset: { estado: 'desligada' } }, 'Desligada: a carteira está só neste aparelho.'),
       el('div', { class: 'natureza' }, el('strong', {}, 'Como criar o token'), el('ol', { class: 'legenda frases' },
-        el('li', {}, 'No GitHub, abra Settings, Developer settings, Personal access tokens, Fine-grained tokens e escolha Generate new token.'),
+        el('li', {}, 'Informe o repositório abaixo e toque em "Criar o token no GitHub". A página abre com o nome, a validade de um ano e as permissões preenchidos.'),
         el('li', {}, 'Em Repository access, marque Only select repositories e escolha só o repositório privado de dados.'),
-        el('li', {}, 'Em Permissions, dê Read and write a Contents. Nenhuma outra permissão é necessária.'),
-        el('li', {}, 'Gere, copie o token e cole abaixo. Ele fica neste aparelho, cifrado pela sua senha.'))),
+        el('li', {}, 'Confira as permissões: Contents e Actions com Read and write. Contents guarda o cofre; Actions deixa o portal pedir cotações novas quando o agendamento do GitHub atrasa.'),
+        el('li', {}, 'Gere, copie o token e cole abaixo. Ele fica neste aparelho, cifrado pela sua senha.')),
+        el('p', {}, abrirGitHub)),
       formulario({ campos: [r, t], rotuloBotao: 'Ligar a nuvem', regras: { repo: (v) => (/^[\w.-]+\/[\w.-]+$/.test(v) ? '' : 'Use o formato usuario/repositorio.') }, acao: async (v) => { const info = await ctx.comProgresso(conectar(v)); ctx.avisar(`Nuvem ligada a ${info.nome}.`); ctx.navegar('ajustes'); } }),
     ];
   }
@@ -48,7 +60,7 @@ export async function pagina(ctx) {
   provedor.input.addEventListener('change', aoMudarProvedor); aoMudarProvedor();
   if (llm.base) base.input.value = llm.base;
   const estadoIA = el('p', { class: 'legenda', role: 'status' });
-  const listar = el('button', { class: 'pill', type: 'button', onclick: async () => { estadoIA.textContent = 'Consultando…'; try { const l = await listarModelos(lerLLM()); modelos.replaceChildren(...l.map((m) => el('option', { value: m }))); estadoIA.textContent = `${l.length} modelos disponíveis. Comece a digitar no campo Modelo para escolher.`; } catch (e) { estadoIA.textContent = e.message; } } }, 'Listar modelos');
+  const listar = el('button', { class: 'pill', type: 'button', onclick: async () => { estadoIA.textContent = 'Consultando…'; try { const l = modelosDeTexto(await listarModelos(lerLLM())); modelos.replaceChildren(...l.map((m) => el('option', { value: m }))); const sugerido = modeloSugerido(l); if (!modelo.ler() && sugerido) modelo.input.value = sugerido; estadoIA.textContent = `${l.length} modelos de texto disponíveis.${sugerido ? ` Sugestão: ${sugerido}, com a maior cota gratuita.` : ''} Toque em Testar e depois em Salvar.`; } catch (e) { estadoIA.textContent = e.message; } } }, 'Listar modelos');
   const testar = el('button', { class: 'pill', type: 'button', onclick: async () => { estadoIA.textContent = 'Testando…'; try { const r = await conversar(lerLLM(), [{ role: 'user', content: 'Responda apenas: ok' }], { maxTokens: 20 }); estadoIA.textContent = `Funcionou: o modelo ${r.modelo} respondeu.`; } catch (e) { estadoIA.textContent = e.message; } } }, 'Testar');
   const formIA = formulario({ campos: [provedor, base, chave, modelo, enviar], rotuloBotao: 'Salvar', acao: async (v) => { await configurar({ llm: v.provedor && v.modelo ? { provedor: v.provedor, base: v.base, chave: v.chave, modelo: v.modelo } : null, enviarCarteiraAoLLM: v.enviar }); ctx.avisar(v.provedor && v.modelo ? 'IA configurada.' : 'IA desligada.'); }, extras: [listar, testar] });
 
