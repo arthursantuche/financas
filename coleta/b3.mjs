@@ -97,14 +97,24 @@ async function principal() {
   const liquidos = Object.entries(ativos).filter(([, a]) => a[5] >= VOLUME_MINIMO).sort((a, b) => b[1][5] - a[1][5]).slice(0, MAX_UNIVERSO).map(([c]) => c);
   const universo = [...new Set([...[...acompanhados].filter((c) => ativos[c]), ...liquidos])];
   const existentes = {}, faltam = new Set();
-  for (const c of universo) { const h = await lerJSON(join(DESTINO, 'mercado', 'historico', `${c}.json`)); if (h?.pontos?.length > 200 || (h?.pontos?.length && h.semMaisHistorico)) existentes[c] = h; else faltam.add(c); }
+  // Um histórico serve se tem mais de 200 pontos sem buraco (ou se a B3 não tem mais que isso para
+  // o papel). Buraco de mais de 40 dias entre dois pontos indica um arquivo anual que falhou numa
+  // execução anterior: o histórico é refeito.
+  const temBuraco = (p) => p.some((x, i) => i > 0 && Date.parse(x[0]) - Date.parse(p[i - 1][0]) > 40 * 864e5);
+  for (const c of universo) {
+    const h = await lerJSON(join(DESTINO, 'mercado', 'historico', `${c}.json`));
+    // `conferido` marca um histórico montado com todos os arquivos anuais: nele, um buraco é real
+    // (papel suspenso ou sem negócios) e não motivo para refazer.
+    const completo = h?.pontos?.length && !h.incompleto && (h.conferido || !temBuraco(h.pontos)) && (h.pontos.length > 200 || h.semMaisHistorico);
+    if (completo) existentes[c] = h; else faltam.add(c);
+  }
   if (faltam.size) {
     log(`montando histórico de ${faltam.size} papéis a partir dos arquivos anuais da B3`);
-    const series = Object.fromEntries([...faltam].map((c) => [c, []]));
+    const series = Object.fromEntries([...faltam].map((c) => [c, []])), anosFalhos = [];
     const anoFim = Number(dia.data.slice(0, 4));
     for (let ano = anoFim - ANOS; ano <= anoFim; ano++) {
       let zip;
-      try { zip = await baixar(`${URL_BASE}/COTAHIST_A${ano}.ZIP`, `COTAHIST_A${ano}.zip`); } catch (e) { log(`sem arquivo anual de ${ano}: ${e.message}`); continue; }
+      try { zip = await baixar(`${URL_BASE}/COTAHIST_A${ano}.ZIP`, `COTAHIST_A${ano}.zip`); } catch (e) { log(`sem arquivo anual de ${ano}: ${e.message}`); anosFalhos.push(ano); continue; }
       for await (const l of linhasDoZip(zip, `COTAHIST_A${ano}.TXT`)) {
         if (l.slice(0, 2) !== '01' || l.slice(24, 27) !== '010') continue;
         const cod = l.slice(12, 24).trim();
@@ -112,7 +122,9 @@ async function principal() {
       }
       if (process.env.CI) await rm(zip, { force: true }); // libera disco no GitHub Actions
     }
-    for (const [c, pontos] of Object.entries(series)) existentes[c] = { codigo: c, pontos: pontos.sort((a, b) => (a[0] < b[0] ? -1 : 1)), semMaisHistorico: pontos.length <= 200 };
+    // Com algum ano em falta, o histórico é gravado como incompleto e refeito na próxima execução.
+    if (anosFalhos.length) console.log(`::warning::históricos incompletos: faltou o arquivo anual de ${anosFalhos.join(', ')}`);
+    for (const [c, pontos] of Object.entries(series)) existentes[c] = { codigo: c, pontos: pontos.sort((a, b) => (a[0] < b[0] ? -1 : 1)), semMaisHistorico: !anosFalhos.length && pontos.length <= 200, incompleto: anosFalhos.length > 0, conferido: !anosFalhos.length };
   }
   let gravados = 0;
   for (const c of universo) {
@@ -120,7 +132,7 @@ async function principal() {
     const pontos = h.pontos.filter(([d]) => d !== dia.data);
     pontos.push([dia.data, ativos[c][0]]);
     const ajustados = ajustarEventos(pontos.sort((a, b) => (a[0] < b[0] ? -1 : 1)).slice(-ANOS * 260));
-    if (await gravarJSON(join(DESTINO, 'mercado', 'historico', `${c}.json`), { codigo: c, fonte: 'B3, fechamentos oficiais; ajustado por desdobramentos, sem ajuste por proventos', atualizadoEm: agora(), ...(h.semMaisHistorico ? { semMaisHistorico: true } : {}), pontos: ajustados })) gravados++;
+    if (await gravarJSON(join(DESTINO, 'mercado', 'historico', `${c}.json`), { codigo: c, fonte: 'B3, fechamentos oficiais; ajustado por desdobramentos, sem ajuste por proventos', atualizadoEm: agora(), ...(h.semMaisHistorico ? { semMaisHistorico: true } : {}), ...(h.incompleto ? { incompleto: true } : {}), ...(h.conferido ? { conferido: true } : {}), pontos: ajustados })) gravados++;
   }
   log(`${dia.data}: ${Object.keys(ativos).length} ativos, ${Object.keys(bases).length} bases com opções, ${gravados} históricos atualizados (cache em ${CACHE})`);
 }

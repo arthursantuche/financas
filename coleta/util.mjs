@@ -3,7 +3,7 @@
 // indicada por DESTINO_PRIVADO (cotações, no repositório privado).
 import { spawn } from 'node:child_process';
 import { createInterface } from 'node:readline';
-import { mkdir, writeFile, stat, readFile } from 'node:fs/promises';
+import { mkdir, writeFile, stat, readFile, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -19,11 +19,11 @@ export const hoje = () => new Date().toISOString().slice(0, 10);
 export const agora = () => new Date().toISOString();
 export const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 
-export async function buscar(url, { tentativas = 3, espera = 2000, ...opcoes } = {}) {
+export async function buscar(url, { tentativas = 3, espera = 2000, tempoMs = 120000, ...opcoes } = {}) {
   let erro;
   for (let t = 1; t <= tentativas; t++) {
     try {
-      const r = await fetch(url, { ...opcoes, headers: { 'User-Agent': AGENTE, ...(opcoes.headers || {}) }, signal: AbortSignal.timeout(120000) });
+      const r = await fetch(url, { ...opcoes, headers: { 'User-Agent': AGENTE, ...(opcoes.headers || {}) }, signal: AbortSignal.timeout(tempoMs) });
       if (r.ok) return r;
       erro = new Error(`HTTP ${r.status} em ${url}`);
       if (r.status === 404) break;
@@ -44,8 +44,12 @@ export async function baixar(url, nome) {
     const cabeca = await fetch(url, { method: 'HEAD', headers: { 'User-Agent': AGENTE }, signal: AbortSignal.timeout(30000) });
     if (cabeca.ok && Number(cabeca.headers.get('content-length')) === local.size) return destino;
   } catch { /* não existe ou não foi possível conferir: baixa */ }
-  const r = await buscar(url);
-  await pipeline(Readable.fromWeb(r.body), createWriteStream(destino));
+  // Arquivos grandes (os anuais da B3 passam de 90 MB) podem levar minutos: prazo de 20 minutos,
+  // e download para um arquivo temporário, para um corte no meio não deixar um zip pela metade.
+  const r = await buscar(url, { tempoMs: 20 * 60 * 1000 });
+  const parcial = `${destino}.parcial`;
+  try { await pipeline(Readable.fromWeb(r.body), createWriteStream(parcial)); await rename(parcial, destino); }
+  catch (e) { await rm(parcial, { force: true }); throw e; }
   return destino;
 }
 
