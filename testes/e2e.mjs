@@ -86,13 +86,24 @@ async function abrir({ largura = 1280, altura = 800, tema = 'light', toque = fal
   const erros = [];
   pagina.on('console', (m) => { if (m.type() === 'error') erros.push(m.text()); });
   pagina.on('pageerror', (e) => erros.push(String(e)));
+  // DEPURAR=1 mostra na hora erros do console, respostas com erro e pedidos que falharam.
+  if (process.env.DEPURAR) {
+    pagina.on('console', (m) => { if (m.type() === 'error') console.log('    console:', m.text().slice(0, 300)); });
+    pagina.on('pageerror', (e) => console.log('    erro:', String(e).slice(0, 300)));
+    pagina.on('response', (r) => { if (r.status() >= 400) console.log('   ', r.status(), r.url()); });
+    pagina.on('requestfailed', (r) => console.log('    falhou:', r.url(), r.failure()?.errorText));
+  }
   return { contexto, pagina, erros };
 }
 // Abre uma rota e espera o conteúdo dela estar desenhado (o site marca a rota em #pagina).
 const ir = async (pagina, rota, espera = 400) => {
   const alvo = decodeURIComponent(rota.split('#')[1] || 'inicio');
   await pagina.goto(`${BASE}/${rota}`);
-  await pagina.waitForFunction((a) => document.querySelector('#pagina')?.dataset.rota === a && document.querySelector('#pagina h1, #pagina .titulo'), alvo, { timeout: 20000 });
+  await pagina.waitForFunction((a) => document.querySelector('#pagina')?.dataset.rota === a && document.querySelector('#pagina h1, #pagina .titulo'), alvo, { timeout: 20000 })
+    .catch(async () => {
+      const e = await pagina.evaluate(() => ({ marcada: document.querySelector('#pagina')?.dataset.rota, endereco: location.hash, carregando: document.querySelector('#carregamento')?.hasAttribute('data-ativo') }));
+      throw new Error(`a rota ${rota} não terminou de desenhar; rota marcada: ${e.marcada}; endereço: ${e.endereco}; carregando: ${e.carregando}; título: ${await pagina.title()}`);
+    });
   await pagina.waitForTimeout(espera);
 };
 const esperarRota = (pagina, prefixo, tempo = 20000) => pagina.waitForFunction((p) => (document.querySelector('#pagina')?.dataset.rota || '').startsWith(p), prefixo, { timeout: tempo });
