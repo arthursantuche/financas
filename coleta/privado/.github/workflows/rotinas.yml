@@ -13,7 +13,7 @@ on:
       rotina:
         description: 'O que rodar'
         type: choice
-        options: [tudo, cotacoes, fechamento]
+        options: [tudo, cotacoes, fechamento, teste]
         default: tudo
 
 permissions:
@@ -44,7 +44,7 @@ jobs:
             Portal/assets/js/calculo
             Portal/dados/empresas
       - name: Fechamento da B3 e cotas de fundos
-        if: github.event.schedule == '25 0 * * 2-6' || github.event.schedule == '50 10 * * 1-6' || (github.event_name == 'workflow_dispatch' && inputs.rotina != 'cotacoes')
+        if: github.event.schedule == '25 0 * * 2-6' || github.event.schedule == '50 10 * * 1-6' || (github.event_name == 'workflow_dispatch' && (inputs.rotina == 'tudo' || inputs.rotina == 'fechamento'))
         working-directory: portal
         env:
           CI: 'true'
@@ -53,10 +53,18 @@ jobs:
           node coleta/b3.mjs --destino "$GITHUB_WORKSPACE/dados" || echo "::warning::fechamento da B3 indisponível"
           node coleta/fundos.mjs --destino "$GITHUB_WORKSPACE/dados" || echo "::warning::cotas de fundos indisponíveis"
       - name: Cotações do pregão
-        if: github.event.schedule == '7,37 13-21 * * 1-5' || (github.event_name == 'workflow_dispatch' && inputs.rotina != 'fechamento')
+        if: github.event.schedule == '7,37 13-21 * * 1-5' || (github.event_name == 'workflow_dispatch' && (inputs.rotina == 'tudo' || inputs.rotina == 'cotacoes'))
         working-directory: portal
         run: node coleta/cotacoes.mjs --destino "$GITHUB_WORKSPACE/dados" || echo "::warning::cotações indisponíveis; o portal usa o fechamento da B3"
+      - name: Aviso de teste
+        # Pedido pelo portal (Ajustes → Alertas): confirma que as notificações chegam ao celular.
+        if: github.event_name == 'workflow_dispatch' && inputs.rotina == 'teste'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh issue create --title "Teste de aviso do Portal Finanças" --body "Se esta mensagem chegou como notificação no celular, os alertas do portal estão funcionando. Pode fechar esta Issue."
       - name: Alertas
+        if: github.event_name != 'workflow_dispatch' || inputs.rotina != 'teste'
         working-directory: portal
         env:
           GH_TOKEN: ${{ github.token }}

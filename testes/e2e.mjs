@@ -30,13 +30,18 @@ const corpo = (req) => new Promise((ok) => { let t = ''; req.on('data', (d) => {
 
 // GitHub simulado: um repositório privado em memória.
 const repo = new Map(); // caminho → { texto, sha }
+const pedidosRotina = []; // rodadas da rotina pedidas pelo portal
 const TOKEN = 'token-de-teste-local';
 const sha = (t) => createHash('sha1').update(t).digest('hex');
 const github = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') { res.writeHead(204, CORS); return res.end(); }
   const json = (status, o) => { res.writeHead(status, { ...CORS, 'Content-Type': 'application/json' }); res.end(JSON.stringify(o)); };
   if (req.headers.authorization !== `Bearer ${TOKEN}`) return json(401, { message: 'Bad credentials' });
-  const m = /^\/repos\/dono\/dados(?:\/contents\/(.+))?$/.exec(decodeURIComponent(new URL(req.url, 'http://x').pathname));
+  // Pedido de rodada da rotina (workflow_dispatch): registra e responde 204, como o GitHub.
+  if (req.method === 'POST' && /^\/repos\/dono\/dados\/actions\/workflows\/rotinas\.yml\/dispatches$/.test(new URL(req.url, 'http://x').pathname)) {
+    pedidosRotina.push(JSON.parse(await corpo(req)).inputs?.rotina); res.writeHead(204, CORS); return res.end();
+  }
+  const m =/^\/repos\/dono\/dados(?:\/contents\/(.+))?$/.exec(decodeURIComponent(new URL(req.url, 'http://x').pathname));
   if (!m) return json(404, { message: 'Not Found' });
   if (!m[1]) return json(200, { full_name: 'dono/dados', private: true, permissions: { push: true } });
   const atual = repo.get(m[1]);
@@ -256,6 +261,24 @@ async function cofre() {
   const [fa, fb] = [await fim(A.pagina), await fim(B.pagina)];
   conferir(fa.lanc === 3 && fa.alertas === 1 && fb.lanc === 3 && fb.alertas === 1, 'edições simultâneas em dois aparelhos convergem', JSON.stringify({ fa, fb }));
   conferir(JSON.parse(repo.get('monitor.json').texto).alertas.length === 1, 'gatilho do alerta chega ao monitor');
+  // Aviso de teste: o botão de Alertas pede a rodada "teste" à rotina do repositório privado.
+  await ir(A.pagina, '#alertas');
+  await A.pagina.click('button:has-text("Enviar um aviso de teste")');
+  await A.pagina.waitForFunction(() => /Pedido feito/.test(document.querySelector('[role=status]')?.textContent || ''), null, { timeout: 5000 }).catch(() => {});
+  conferir(pedidosRotina.includes('teste'), 'aviso de teste pedido à rotina', JSON.stringify(pedidosRotina));
+  // Cotações velhas no pregão: o portal pede uma rodada de cotações, uma vez só.
+  const pedidas = await A.pagina.evaluate(async () => {
+    const m = await import('/assets/js/privado/mercado.js');
+    return { velhas: m.cotacoesVelhas({ geradoEm: '2000-01-01T00:00:00Z', ativos: { WEGE3: { preco: 40 } } }, new Date('2026-11-16T17:00:00Z')) };
+  });
+  conferir(pedidas.velhas, 'cotações velhas no pregão são reconhecidas');
+  // Ajustes: o link de criação do token sai preenchido com o dono do repositório.
+  await A.pagina.evaluate(async () => (await import('/assets/js/privado/sincronia.js')).desconectar());
+  await ir(A.pagina, '#ajustes');
+  await A.pagina.fill('#c-repo', 'dono/dados');
+  const link = await A.pagina.getAttribute('a:has-text("Criar o token no GitHub")', 'href');
+  conferir(/personal-access-tokens\/new\?/.test(link) && /target_name=dono/.test(link) && /contents=write/.test(link) && /actions=write/.test(link), 'link do token sai preenchido', link);
+  await A.pagina.evaluate(async ([api, token]) => { const s = await import('/assets/js/privado/sincronia.js'); await s.conectar({ repo: 'dono/dados', token, api }); }, [API, TOKEN]);
   // Bloqueio, senha errada, senha certa, recuperação.
   await A.pagina.evaluate(async () => (await import('/assets/js/privado/cofre.js')).bloquear());
   await ir(A.pagina, '#entrar');

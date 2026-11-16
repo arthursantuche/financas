@@ -56,7 +56,9 @@ export function emPregao(agora = new Date()) {
 // Cotações com mais de 40 minutos no pregão: pede uma rodada da rotina, no máximo a cada 30 minutos.
 export function cotacoesVelhas(cot, agora = new Date()) {
   if (!emPregao(agora)) return false;
-  const em = Date.parse(cot?.geradoEm || '');
+  // Arquivo sem nenhum papel: a lista de acompanhamento está vazia, não há o que renovar.
+  if (cot && !Object.keys(cot.ativos || {}).length) return false;
+  const em =Date.parse(cot?.geradoEm || '');
   return !Number.isFinite(em) || agora - em > 40 * 6e4;
 }
 let pedido = null; // a carteira chama cotacoes() uma vez por ativo: um pedido só

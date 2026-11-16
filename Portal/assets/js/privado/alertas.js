@@ -70,5 +70,19 @@ export async function pagina(ctx, [acao, codigoInicial]) {
     el('section', { class: 'secao secao--mist' }, el('div', { class: 'conteudo conteudo--estreito' },
       el('h2', { class: 'titulo' }, 'Avisos da rotina automática.'),
       el('p', { class: 'copy introducao' }, sessao.nuvem || sessao.amostra ? 'O que a rotina do repositório privado registrou. Cada aviso também vira uma Issue no GitHub, que notifica por e-mail e pelo aplicativo.' : 'Com a nuvem ligada, uma rotina confere os alertas no GitHub mesmo com o portal fechado e avisa por e-mail e pelo aplicativo do GitHub.'),
-      servidor.length ? el('ul', { class: 'lista' }, servidor.slice(0, 30).map((d) => el('li', {}, el('span', {}, d.texto), el('span', { class: 'legenda' }, dataHora(d.quando))))) : el('p', { class: 'vazio' }, sessao.nuvem ? 'Nenhum aviso registrado.' : 'Ligue a nuvem em Ajustes para ativar a rotina.')))) };
+      servidor.length ? el('ul', { class: 'lista' }, servidor.slice(0, 30).map((d) => el('li', {}, el('span', {}, d.texto), el('span', { class: 'legenda' }, dataHora(d.quando))))) : el('p', { class: 'vazio' }, sessao.nuvem ? 'Nenhum aviso registrado.' : 'Ligue a nuvem em Ajustes para ativar a rotina.'),
+      sessao.nuvem && !sessao.amostra && botaoTeste(ctx)))) };
+}
+
+// Pede à rotina uma Issue de teste, para conferir se a notificação chega ao celular.
+function botaoTeste(ctx) {
+  const estado = el('p', { class: 'legenda', role: 'status' });
+  const botao = el('button', { class: 'pill', type: 'button', onclick: async () => {
+    botao.disabled = true; estado.textContent = 'Pedindo…';
+    const { pedirRotina } = await import('./sincronia.js');
+    const ok = await pedirRotina(sessao.nuvem, 'teste');
+    estado.textContent = ok ? 'Pedido feito. Em um ou dois minutos, uma Issue de teste deve chegar como notificação do aplicativo do GitHub.' : 'O GitHub recusou o pedido. O token precisa da permissão Actions (leitura e escrita): gere outro em Ajustes.';
+    if (!ok) botao.disabled = false;
+  } }, 'Enviar um aviso de teste');
+  return el('div', { class: 'espaco-topo' }, botao, estado);
 }

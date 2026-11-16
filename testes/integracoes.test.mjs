@@ -23,8 +23,10 @@ test('cotações: pedido de rodada só no pregão e com dados de mais de 40 minu
   assert.equal(emPregao(new Date('2026-11-15T17:00:00Z')), false); // domingo
   assert.equal(emPregao(new Date('2026-11-16T12:59:00Z')), false); // antes das 10h
   assert.equal(emPregao(new Date('2026-11-16T21:31:00Z')), false); // depois do fechamento
-  assert.equal(cotacoesVelhas({ geradoEm: '2026-11-16T16:00:00Z' }, segunda14h), true);
-  assert.equal(cotacoesVelhas({ geradoEm: '2026-11-16T16:30:00Z' }, segunda14h), false);
+  const ativos = { PETR4: { preco: 40 } };
+  assert.equal(cotacoesVelhas({ geradoEm: '2026-11-16T16:00:00Z', ativos }, segunda14h), true);
+  assert.equal(cotacoesVelhas({ geradoEm: '2026-11-16T16:30:00Z', ativos }, segunda14h), false);
+  assert.equal(cotacoesVelhas({ geradoEm: '2026-11-16T10:00:00Z', ativos: {} }, segunda14h), false); // lista vazia
   assert.equal(cotacoesVelhas(null, segunda14h), true);
   assert.equal(cotacoesVelhas(null, new Date('2026-11-15T17:00:00Z')), false);
 });
