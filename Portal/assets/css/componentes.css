@@ -27,7 +27,7 @@ button.pill { -webkit-appearance: none; appearance: none; border: 0; cursor: poi
 .hero { text-align: center; padding-top: var(--spacing-64); }
 .hero .kicker { margin-bottom: var(--spacing-16); }
 .hero .display + .copy { margin-top: var(--spacing-16); }
-.destaques .titulo { margin-top: var(--spacing-8); }
+.destaques .titulo { margin-top: var(--espaco-perto); }
 /* Números-chave da abertura: contagem regressiva, noites e cidades em tipografia grande,
    sem cartão, alinhados à coluna de conteúdo (como as faixas de números das páginas da Apple). */
 .numeros {
@@ -68,15 +68,24 @@ button.pill { -webkit-appearance: none; appearance: none; border: 0; cursor: poi
   .proximo { grid-template-columns: 1fr auto; align-items: center; gap: var(--spacing-32); }
 }
 
+/* Alvo de toque mínimo (Diretório - Identidade Visual - Apple, 7.1, "Medidas"): links soltos com menos
+   de 44px de altura ou de largura ganham uma área invisível de 44 × 44px centrada neles, sem mudar a
+   linha nem o layout. Onde o link já passa de 44px, o min() deixa a área igual à caixa. Links dentro de
+   texto corrido ficam de fora. */
+:is(.barra__titulo, .destaques__cabecalho a, .lista > li > a, .voltar, .rodape a, .artigo__fontes a, a.selo, .tabela th[scope="row"] > a, .formulario__acoes > a) { position: relative; }
+:is(.barra__titulo, .destaques__cabecalho a, .lista > li > a, .voltar, .rodape a, .artigo__fontes a, a.selo, .tabela th[scope="row"] > a, .formulario__acoes > a)::after {
+  content: ''; position: absolute; inset: min(0px, calc(50% - var(--spacing-24) + var(--spacing-2)));
+}
+
 /* Destaques: cabeçalho com título e link ("Highlights Stage") */
 .destaques__cabecalho {
   display: flex; align-items: baseline; justify-content: space-between; gap: var(--element-gap);
-  margin-bottom: var(--spacing-32);
+  margin-bottom: var(--espaco-bloco);
 }
 .destaques__cabecalho a { white-space: nowrap; color: var(--cor-link); }
 /* Telas estreitas: o link vai para baixo do título em vez de espremê-lo. */
 @media (max-width: 389px) {
-  .destaques__cabecalho { flex-direction: column; align-items: flex-start; gap: var(--spacing-12); }
+  .destaques__cabecalho { flex-direction: column; align-items: flex-start; gap: var(--espaco-perto); }
 }
 .card {
   scroll-snap-align: start;
@@ -85,7 +94,7 @@ button.pill { -webkit-appearance: none; appearance: none; border: 0; cursor: poi
   padding: var(--card-padding);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-16);
+  gap: var(--espaco-grupo);
   min-height: 420px;
 }
 a.card { transition: box-shadow var(--dur-curta) var(--ease-apple), transform var(--dur-curta) var(--ease-apple); -webkit-tap-highlight-color: transparent; }
@@ -114,15 +123,22 @@ a.card:active { transform: scale(0.985); }
 .faixa-carrossel { padding-left: 0; padding-right: 0; }
 .faixa-carrossel > .conteudo { padding: 0 var(--gutter-d) 0 var(--gutter-e); box-sizing: content-box; }
 .carrossel { --margem: max(var(--gutter-e), calc((100% - var(--largura-faixa, 980px)) / 2)); }
+/* --cartao: largura de um cartão do trilho, usada pelo cartão e pelo espaço do fim (abaixo). */
+.carrossel__trilho { --cartao: min(84vw, 400px); }
 .carrossel__trilho {
   display: flex; gap: var(--element-gap);
   overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
   padding: 0 var(--margem) var(--spacing-8); scroll-padding-inline: var(--margem);
+  /* Quem rola na horizontal corta também na vertical: sem estes 4px em cima, o contorno do cartão
+     ao passar o cursor e o anel de foco perdiam o lado de cima. A margem negativa devolve os 4px. */
+  padding-top: var(--spacing-4); margin-top: calc(var(--spacing-4) * -1);
+  /* Espaço no fim: o bastante para o último cartão chegar à borda de encaixe, como os outros. Cada
+     ponto tem uma posição própria, como nas galerias da Apple (Diretório, seção 10). */
+  padding-inline-end: max(var(--margem), calc(100% - var(--margem) - var(--cartao)));
   scrollbar-width: none;
 }
 .carrossel__trilho::-webkit-scrollbar { display: none; }
-/* Cartões do Resumo da viagem dentro do carrossel. */
-.carrossel__trilho > .card { flex: 0 0 min(84vw, 400px); }
+.carrossel__trilho > .card { flex: 0 0 var(--cartao); }
 
 .carrossel__controles { display: flex; justify-content: center; align-items: center; gap: var(--spacing-12); margin-top: var(--spacing-24); }
 /* "Carousel Playback Control": pontos agrupados numa cápsula translúcida. */
@@ -153,7 +169,7 @@ a.card:active { transform: scale(0.985); }
   transition: transform 460ms var(--ease-gota), clip-path 640ms var(--ease-alarga) 180ms, opacity 120ms linear;
 }
 .movimento .carrossel__controles.aberto .carrossel__pontos button { transition: opacity 180ms linear 560ms, scale 280ms var(--ease-entrada) 560ms; }
-.movimento .carrossel__controles.aberto .carrossel__seta { transition: opacity 180ms linear 700ms, scale 420ms var(--ease-gota) 700ms; }
+.movimento .carrossel__controles.aberto .carrossel__seta { transition: opacity 180ms linear 700ms, scale 420ms var(--ease-gota) 700ms, background-color var(--dur-seta) linear; }
 .movimento .carrossel__controles:not(.aberto) .carrossel__pontos {
   opacity: 0; transform: scale(0.01); clip-path: inset(0.5px calc(50% - 21.5px) round var(--radius-pills));
 }
@@ -169,6 +185,7 @@ a.card:active { transform: scale(0.985); }
   width: calc(var(--spacing-40) + var(--spacing-4)); height: calc(var(--spacing-40) + var(--spacing-4));
   border-radius: var(--radius-buttons); background: var(--cor-controle);
   display: grid; place-items: center;
+  transition: background-color var(--dur-seta) linear;
 }
 .carrossel__seta::before {
   content: ''; width: var(--spacing-12); height: var(--spacing-8); background: var(--cor-texto);
@@ -178,6 +195,15 @@ a.card:active { transform: scale(0.985); }
 }
 .carrossel__seta--proxima::before { transform: rotate(-90deg); }
 .carrossel__seta:disabled { cursor: default; opacity: 0.4; }
+/* Cursor e toque nos controles, como em apple.com (valores em tokens.css): a seta clareia com o cursor e
+   escurece ao ser pressionada; o ponto que não é o atual escurece com o cursor. Nada muda de tamanho. */
+@media (hover: hover) {
+  .carrossel__seta:not(:disabled):hover { background-color: var(--cor-controle-hover); }
+  .carrossel__pontos button:not([aria-current="true"]):hover::before {
+    background-color: var(--cor-glifo-hover); transition-duration: var(--dur-ponto); transition-timing-function: linear;
+  }
+}
+.carrossel__seta:not(:disabled):active { background-color: var(--cor-controle-ativo); }
 .esqueleto { content: ''; display: inline-block; vertical-align: top; height: 1em; border-radius: var(--radius-links); background: var(--cor-faixa); }
 .secao--mist .esqueleto { background: var(--cor-cartao); }
 /* Página interna aberta direto pelo endereço (esqueletoPagina, em app.js): nome, título, texto e mídia. */
@@ -192,5 +218,5 @@ a.card:active { transform: scale(0.985); }
 
 @media (min-width: 834px) {
   .carrossel__setas { display: flex; }
-  .carrossel__trilho > .card { flex-basis: min(60vw, 560px); }
+  .carrossel__trilho { --cartao: min(60vw, 560px); }
 }

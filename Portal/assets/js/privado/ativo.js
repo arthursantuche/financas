@@ -4,6 +4,7 @@ import { el, brl, brl0, pct, pctSinal, brlSinal, numero, inteiro, classeSinal, d
 import { graficoPreco } from '../graficos.js';
 import { lista } from './cofre.js';
 import { quadro, CLASSES, emBolsa } from './mercado.js';
+import { marca } from '../marca.js';
 import { seletorPeriodo, recortar, variacao } from './carteira.js';
 import { resumoSerie } from '../calculo/estatistica.js';
 import { acharEmpresa, indicadores } from '../dados.js';
@@ -36,6 +37,7 @@ export async function pagina(ctx, [id]) {
 
   const topo = el('section', { class: 'secao' }, el('div', { class: 'conteudo' },
     el('div', { class: 'patrimonio' },
+      marca({ codigo: a.codigo, nome: a.nome, tamanho: 'g' }),
       el('p', { class: 'kicker' }, el('a', { href: '#carteira' }, 'Carteira'), ' · ', CLASSES[a.classe]?.um),
       el('h1', { class: 'titulo' }, titulo), a.codigo && el('p', { class: 'copy introducao' }, a.nome),
       el('p', { class: 'patrimonio__valor' }, p ? (rf ? brl(l?.valor ?? 0) : brl(p.preco)) : 'Sem preço'),

@@ -79,6 +79,21 @@
   --section-gap: 90px;
   --card-padding: 28px;
   --element-gap: 20px;
+  /* Espaçamento por relação (Diretório - Identidade Visual - Apple, 7.1): cada papel aponta para um
+     degrau da escala. Escolha pelo que os dois elementos são um para o outro, não pelo número
+     (DESIGN.md, "Espaçamento"). Do mais junto ao mais separado: */
+  --espaco-junto: var(--spacing-4);      /* linhas de uma mesma unidade: nome e detalhe, valor e variação */
+  --espaco-par: var(--spacing-8);        /* rótulo e campo; link de voltar e cabeçalho; rótulo e número */
+  --espaco-perto: var(--spacing-12);     /* um explica o outro: kicker e título, título e introdução; ações lado a lado */
+  --espaco-grupo: var(--spacing-16);     /* peças de um mesmo componente; subtítulo de bloco e conteúdo; itens de lista */
+  /* --element-gap (20px, acima): componentes irmãos, como cartões de uma grade e campos de um formulário */
+  --espaco-bloco: var(--spacing-32);     /* título de seção e conteúdo; um bloco e o seguinte dentro da seção */
+  --espaco-cabecalho: var(--spacing-40); /* cabeçalho de página e conteúdo; grupos de um formulário */
+  --espaco-secao: var(--spacing-64);     /* seção e seção: 64px no celular, --section-gap (90px) no computador (abaixo) */
+  --card-padding-compacto: var(--spacing-24); /* cartões densos: cotação, escolha, aviso de lista vazia */
+  /* Medidas: coluna de conteúdo e largura máxima de leitura (66ch dá de 75 a 85 caracteres por linha). */
+  --largura-conteudo: 980px;
+  --medida-leitura: 66ch;
   /* Margem lateral: nunca menor que a área segura (entalhe do iPhone deitado). */
   --gutter-e: max(var(--spacing-20), env(safe-area-inset-left));
   --gutter-d: max(var(--spacing-20), env(safe-area-inset-right));
@@ -100,6 +115,10 @@
   /* Controle translúcido do carrossel (componente "Carousel Playback Control") */
   --carousel-track: rgba(210, 210, 215, 0.64);
   --carousel-glyph: rgba(0, 0, 0, 0.56);
+  /* Cursor e toque no controle, medidos em apple.com/iphone-18-pro em 16/11/2026 (Diretório, 10.1). */
+  --carousel-track-hover: rgba(223, 223, 227, 0.6976);
+  --carousel-track-active: rgba(193, 193, 198, 0.6544);
+  --carousel-glyph-hover: rgba(0, 0, 0, 0.68);
   --nav-label: rgba(0, 0, 0, 0.8);
 
   /* Movimento (Identidade Visual - Apple, "Animações e comportamento visual - Apple";
@@ -108,6 +127,9 @@
   --ease-entrada: cubic-bezier(0, 0, 0.2, 1);
   --dur-curta: 240ms;
   --dur-link: 320ms;
+  /* Cursor nos controles do carrossel (apple.com, 16/11/2026): setas em 100 ms e pontos em 120 ms, lineares. */
+  --dur-seta: 100ms;
+  --dur-ponto: 120ms;
   --dur-longa: 500ms;
   /* Gota dos controles (medida em apple.com/iphone-18-pro em 02/11/2026): círculo que cresce,
      cápsula que alarga, depois os pontos. */
@@ -137,6 +159,9 @@
   --cor-trilho: var(--color-control-gray);
   --cor-controle: var(--carousel-track);
   --cor-glifo: var(--carousel-glyph);
+  --cor-controle-hover: var(--carousel-track-hover);
+  --cor-controle-ativo: var(--carousel-track-active);
+  --cor-glifo-hover: var(--carousel-glyph-hover);
   --cor-grafico-previsto: var(--color-steel);
 
   /* Contornos de 1px (o documento não usa sombras projetadas) */
@@ -167,6 +192,11 @@
   --cor-serie-8: #30b0c7;
 }
 
+/* Respiro entre seções: 90px a partir de 834px de largura. O celular deitado continua com o de celular
+   (64px), mesmo com 844 a 932px de largura: com menos de 500px de altura, 90px tomavam um quarto da tela. */
+@media (min-width: 834px) { :root { --espaco-secao: var(--section-gap); } }
+@media (min-width: 834px) and (orientation: landscape) and (max-height: 500px) { :root { --espaco-secao: var(--spacing-64); } }
+
 /* Modo escuro: valores da referência iPhone 18 Pro (tela Obsidian, painel Carbon, cartão
    preto sobre o painel, links Electric Link). O laranja é derivado para passar de 4,5:1. */
 @media (prefers-color-scheme: dark) {
@@ -186,6 +216,9 @@
     --cor-trilho: #333336;
     --cor-controle: rgba(66, 66, 69, 0.72);
     --cor-glifo: rgba(255, 255, 255, 0.56);
+    --cor-controle-hover: rgba(73, 73, 76, 0.7256);
+    --cor-controle-ativo: rgba(57, 57, 60, 0.7424);
+    --cor-glifo-hover: rgba(255, 255, 255, 0.68);
     /* Alta e baixa no escuro: cores de sistema do modo escuro (#30d158 e #ff453a); o texto do selo fica preto. */
     --cor-alta: #30d158;
     --cor-baixa: #ff453a;

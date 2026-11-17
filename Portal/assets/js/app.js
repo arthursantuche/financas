@@ -4,7 +4,7 @@
 import { $, el, reduzido } from './util.js';
 import { sessao, aoMudar, retomar, bloquear, abrirAmostra } from './privado/cofre.js';
 
-export const VERSAO_SITE = '1.0';
+export const VERSAO_SITE = '1.2';
 
 const ROTAS = {
   inicio: { modulo: () => import('./publico/inicio.js') },
@@ -123,6 +123,19 @@ async function rotear() {
   acompanharCapsula();
 }
 
+// Rodapé: data dos dados abertos do dia e a identificação do portal com a versão.
+async function preencherRodape() {
+  $('rodape-versao').textContent = `Portal Finanças · versão ${VERSAO_SITE}`;
+  try {
+    const { indicadores } = await import('./dados.js');
+    const { geradoEm } = await indicadores();
+    if (!geradoEm) return;
+    const d = new Date(geradoEm);
+    $('rodape-dados').textContent = `Dados abertos (Banco Central, Tesouro Nacional e CVM) atualizados em ${d.toLocaleDateString('pt-BR')}, às ${d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}.`;
+    $('rodape-dados').hidden = false;
+  } catch { /* sem os dados, o rodapé fica só com o aviso */ }
+}
+
 async function iniciar() {
   if (!reduzido()) document.documentElement.classList.add('movimento');
   medirTopo();
@@ -140,6 +153,7 @@ async function iniciar() {
   }
   montarMenu();
   await rotear();
+  preencherRodape();
   if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
   // Sincroniza em segundo plano ao abrir e ao voltar à aba, se a nuvem estiver ligada.
   const sincronizarQuieto = async () => {

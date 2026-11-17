@@ -4,6 +4,7 @@
 import { el, brl, brl0, pct, pctSinal, brlSinal, numero, classeSinal, dataBR, dataCurta, somarDias, selo, plural } from '../util.js';
 import { faisca, graficoPreco, moldura, graficoRosca, CORES_SERIE } from '../graficos.js';
 import { sessao } from './cofre.js';
+import { marca } from '../marca.js';
 import { quadro, CLASSES } from './mercado.js';
 import { alocacao, concentracao, estatisticasConjuntas, riscoCarteira } from '../calculo/carteira.js';
 import { alinhar, retornos, volatilidade, drawdownMaximo, retornoTotal } from '../calculo/estatistica.js';
@@ -28,7 +29,7 @@ function linhaPosicao(l, q) {
   const ref = l.variacaoDia != null && l.preco ? l.preco / (1 + l.variacaoDia) : h[0];
   const rotulo = l.codigo || l.nome;
   return el('li', { class: 'cotacao' }, el('a', { href: `#ativo/${l.id}`, 'aria-label': `${rotulo}, ${l.semPreco ? 'sem preço' : brl(l.preco)}, posição de ${brl(l.valor)}` },
-    el('span', { class: 'cotacao__nome' }, el('span', { class: 'cotacao__codigo' }, rotulo), el('span', { class: 'legenda' }, l.codigo ? l.nome : (CLASSES[l.classe]?.um || ''))),
+    el('span', { class: 'cotacao__nome' }, marca({ codigo: l.codigo, nome: l.nome, tamanho: 'm' }), el('span', { class: 'cotacao__textos' }, el('span', { class: 'cotacao__codigo' }, rotulo), el('span', { class: 'legenda' }, l.codigo ? l.nome : (CLASSES[l.classe]?.um || '')))),
     h.length > 1 ? faisca(h, ref) : el('span'),
     el('span', { class: 'cotacao__posicao' }, el('span', { class: 'cotacao__preco' }, brl(l.valor)), el('span', { class: `legenda ${classeSinal(l.lucro)}` }, `${brlSinal(l.lucro)} (${pctSinal(l.rentabilidade)})`)),
     el('span', { class: 'cotacao__valores' }, el('span', { class: 'cotacao__preco' }, l.semPreco ? 'sem preço' : l.classe === 'rendafixa' ? brl(l.valor) : brl(l.preco)), variacao(l.classe === 'rendafixa' || l.variacaoDia == null ? l.rentabilidade : l.variacaoDia))));

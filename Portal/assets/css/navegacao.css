@@ -40,6 +40,9 @@
   font-weight: var(--font-weight-semibold);
 }
 .barra__titulo:hover { text-decoration: none; }
+/* Como os itens do menu: azul com o cursor, sem sublinhado (a cor muda pela transição dos links).
+   O título tem 23px de altura: o alvo de 44px vem da regra de alvo mínimo (componentes.css). */
+@media (hover: hover) { .barra__titulo:hover { color: var(--cor-link); } }
 .barra__acao { grid-area: acao; }
 .barra__secoes {
   grid-area: secoes; display: flex; gap: var(--spacing-16);
@@ -55,6 +58,9 @@
   color: var(--cor-texto); white-space: nowrap;
   font-size: var(--text-body-small); letter-spacing: var(--tracking-body-small); font-weight: var(--font-weight-medium);
   padding: var(--spacing-12) 0; border-radius: 0; -webkit-tap-highlight-color: transparent;
+  /* Alvo de 44px também onde o padding cai para 8px (celular deitado e telas a partir de 834px): a linha
+     da barra já tem 44px por causa da pílula, então a barra não cresce. */
+  display: flex; align-items: center; min-height: 44px;
 }
 .barra__secoes a:hover { text-decoration: none; color: var(--cor-link); }
 .barra__secoes a[aria-current] { color: var(--cor-link); }
@@ -80,7 +86,8 @@
 /* Celular deitado e estreito: as duas linhas tomariam mais de um quarto da altura;
    título, seções e ação ficam numa linha só. */
 @media (max-width: 833px) and (orientation: landscape) and (max-height: 500px) {
-  .topo { padding-top: calc(env(safe-area-inset-top) + var(--spacing-2)); padding-bottom: var(--spacing-2); --capsula-topo: calc(env(safe-area-inset-top) + var(--spacing-2)); --capsula-base: var(--spacing-2); }
+  /* 4px acima e abaixo, como no celular em pé: com 2px a cápsula encostava na borda da tela. */
+  .topo { padding-bottom: var(--spacing-4); }
   .barra { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "titulo secoes acao"; padding: var(--spacing-4) var(--gutter-d) var(--spacing-4) var(--gutter-e); }
   .barra__secoes { margin: 0; padding: 0 var(--spacing-8); }
   .barra__secoes a { padding: var(--spacing-8) 0; }
@@ -104,3 +111,7 @@
   animation: carregando 1.4s var(--ease-apple) infinite;
 }
 .carregamento[data-ativo] { opacity: 1; }
+/* A lista rola na horizontal e, por isso, corta também em cima e embaixo: 4px de respiro para o anel
+   de foco (2px a 2px de distância) dos itens, devolvidos pela margem negativa, sem mexer na altura
+   da barra. Vale em todas as larguras, por isso vem depois das regras de 834px. */
+.barra__secoes { padding-block: var(--spacing-4); margin-block: calc(var(--spacing-4) * -1); }

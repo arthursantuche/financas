@@ -20,9 +20,9 @@ async function listar(pasta) {
   return itens;
 }
 const todos = await listar(saida);
-// Guardados de saída: o site inteiro menos os dados por companhia (5 MB, entram no cache ao serem
-// vistos) e a demonstração.
-const guardar = ['./', ...todos.filter((f) => f !== 'sw.js' && !f.startsWith('dados/empresas/0') && !f.startsWith('dados/amostra/') && !f.endsWith('.DS_Store'))];
+// Guardados de saída: o site inteiro menos os dados por companhia (5 MB), os logotipos (entram no
+// cache ao serem vistos, um a um) e a demonstração.
+const guardar = ['./', ...todos.filter((f) => f !== 'sw.js' && !f.startsWith('dados/empresas/0') && !f.startsWith('assets/logos/') && !f.startsWith('dados/amostra/') && !f.endsWith('.DS_Store'))];
 const sw = (await readFile(join(saida, 'sw.js'), 'utf8')).replace('__VERSAO__', versao).replace('self.__ARQUIVOS__ || [\'./\', \'index.html\', \'manifest.webmanifest\']', JSON.stringify(guardar));
 if (sw.includes('__VERSAO__') || sw.includes('__ARQUIVOS__')) throw new Error('sw.js não foi preenchido: o modelo mudou?');
 await writeFile(join(saida, 'sw.js'), sw);

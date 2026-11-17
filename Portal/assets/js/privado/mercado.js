@@ -12,6 +12,7 @@ import { serieBCB, tesouro as lerTesouro, indiceEmpresas, ler } from '../dados.j
 import { indiceTitulo, aliquotaIR } from '../calculo/rendafixa.js';
 import { posicoes, avaliar, serieCotas, diasCorridos } from '../calculo/carteira.js';
 import { hojeISO } from '../util.js';
+import { registrarFonte } from '../marca.js';
 
 export const CLASSES = {
   acao: { nome: 'Ações', um: 'Ação', bolsa: true },
@@ -80,6 +81,14 @@ export const fechamento = () => daNuvem('mercado/fechamento.json', 60);
 export const fundos = () => daNuvem('mercado/fundos.json', 240);
 export const cadeiaOpcoes = () => daNuvem('mercado/opcoes.json', 60);
 export const alertasDisparados = () => daNuvem('mercado/alertas-disparados.json', 5);
+// Logotipos dos papéis da carteira (inclusive ETFs e FIIs), copiados pela rotina do repositório
+// privado (coleta/logos.mjs --destino). Entram como fonte extra do componente de marca.
+export const logosPrivados = () => daNuvem('mercado/logos.json', 24 * 60);
+registrarFonte(async (codigo) => {
+  if (!codigo || (!sessao.nuvem && !sessao.amostra)) return null;
+  const svg = (await logosPrivados())?.ativos?.[String(codigo).toUpperCase()]?.svg;
+  return svg ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}` : null;
+});
 export async function historico(codigo) {
   const h = await daNuvem(`mercado/historico/${codigo.toUpperCase()}.json`, 240);
   return (h?.pontos || []).map(([data, valor]) => ({ data, valor }));

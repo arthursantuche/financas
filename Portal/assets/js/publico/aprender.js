@@ -2,13 +2,14 @@
 import { el, semAcento, plural, adiar } from '../util.js';
 import { conteudo } from '../dados.js';
 import { cartaoArtigo, NIVEIS } from './inicio.js';
+import { ilustracao } from '../ilustracoes.js';
 
 export async function pagina(ctx, [trilhaId]) {
   const c = await conteudo();
   const trilha = c.trilhas.find((t) => t.id === trilhaId);
   if (trilha) {
     return { titulo: trilha.nome, no: el('section', { class: 'secao' }, el('div', { class: 'conteudo' },
-      el('header', { class: 'pagina__cabecalho' }, el('p', { class: 'kicker' }, el('a', { href: '#aprender' }, 'Aprender')), el('h1', { class: 'titulo' }, `${trilha.nome}.`), el('p', { class: 'copy introducao' }, trilha.descricao || trilha.resumo)),
+      el('header', { class: 'pagina__cabecalho' }, el('div', { class: 'cabecalho-artigo__ilustracao' }, ilustracao(trilha.id, { tracar: true })), el('p', { class: 'kicker' }, el('a', { href: '#aprender' }, 'Aprender')), el('h1', { class: 'titulo' }, `${trilha.nome}.`), el('p', { class: 'copy introducao' }, trilha.descricao || trilha.resumo)),
       el('ol', { class: 'lista' }, trilha.artigos.map((a, i) => el('li', {}, el('a', { class: 'fila fila--entre', href: `#artigo/${a.slug}` },
         el('span', { class: 'empilha' }, el('span', { class: 'kicker' }, `${i + 1}. ${a.titulo}`), el('span', { class: 'copy introducao' }, a.resumo)),
         el('span', { class: 'legenda' }, `${NIVEIS[a.nivel]} · ${a.minutos} min`))))))) };

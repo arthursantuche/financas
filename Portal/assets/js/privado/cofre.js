@@ -286,9 +286,11 @@ export async function importarCopia(texto, { usuario, senha }) {
   await marcarPendente('dados');
 }
 
-// Apaga tudo deste aparelho (não toca na nuvem).
+// Apaga tudo deste aparelho (não toca na nuvem): cofre, sessão, conexão com a nuvem e também as
+// cópias de dados de mercado ('mercado:…'), que revelariam os códigos da carteira, e os
+// marcadores de sincronização. Antes, só as chaves do cofre eram apagadas e a cópia de mercado ficava.
 export async function apagarDoAparelho() {
-  for (const k of ['meta', 'dados', 'nuvem', 'sessao', 'pendente', 'mercado']) await apagar(k);
+  await operar('readwrite', (l) => l.clear());
   await bloquear();
 }
 

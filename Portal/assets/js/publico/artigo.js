@@ -4,6 +4,7 @@ import { conteudo, artigo, valoresAtuais } from '../dados.js';
 import { separar, renderizar } from '../markdown.js';
 import { componente } from './simuladores.js';
 import { nivel, cartaoArtigo } from './inicio.js';
+import { ilustracao } from '../ilustracoes.js';
 
 export async function pagina(ctx, [slug]) {
   const c = await conteudo();
@@ -37,6 +38,7 @@ export async function pagina(ctx, [slug]) {
   const no = el('div', {},
     el('section', { class: 'secao' }, el('div', { class: 'conteudo' },
       el('header', { class: 'pagina__cabecalho' },
+        el('div', { class: 'cabecalho-artigo__ilustracao' }, ilustracao(a.trilha.id, { tracar: true })),
         el('p', { class: 'kicker' }, el('a', { href: `#aprender/${a.trilha.id}` }, a.trilha.nome)),
         el('h1', { class: 'titulo' }, meta.titulo || a.titulo),
         el('p', { class: 'fila' }, nivel(a.nivel), el('span', { class: 'legenda' }, `${a.minutos} min de leitura`))),

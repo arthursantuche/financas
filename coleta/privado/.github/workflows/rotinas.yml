@@ -52,6 +52,7 @@ jobs:
         run: |
           node coleta/b3.mjs --destino "$GITHUB_WORKSPACE/dados" || echo "::warning::fechamento da B3 indisponível"
           node coleta/fundos.mjs --destino "$GITHUB_WORKSPACE/dados" || echo "::warning::cotas de fundos indisponíveis"
+          node coleta/logos.mjs --destino "$GITHUB_WORKSPACE/dados" || echo "::warning::logotipos indisponíveis"
       - name: Cotações do pregão
         if: github.event.schedule == '7,37 13-21 * * 1-5' || (github.event_name == 'workflow_dispatch' && (inputs.rotina == 'tudo' || inputs.rotina == 'cotacoes'))
         working-directory: portal

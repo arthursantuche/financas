@@ -1,12 +1,13 @@
 // Análise fundamentalista. Duas entradas: buscar uma companhia pelo código (dados oficiais da
 // CVM) ou enviar um demonstrativo (envio.js). A página separa quatro camadas, sempre rotuladas:
 // dados oficiais → cálculos do portal → interpretação por regras → sinal.
-import { el, brl, pct, pctSinal, numero, vezes, compacto, dataBR, trimestre, semAcento, adiar, classeSinal } from '../util.js';
+import { el, brl, pct, pctSinal, numero, vezes, compacto, dataBR, trimestre, semAcento, adiar, classeSinal, plural } from '../util.js';
 import { moldura, graficoBarras, graficoLinhas } from '../graficos.js';
 import { indiceEmpresas } from '../dados.js';
 import { dossieEmpresa } from './empresa.js';
 import { lista } from './cofre.js';
 import { presenca, blocoPresenca } from './investidores.js';
+import { marca } from '../marca.js';
 
 const mil = (v) => (v == null ? '—' : compacto(v * 1000));
 const FORMATOS = { pct: (v) => pct(v, 1), vezes: (v) => vezes(v, 2), mil, pctSinal: (v) => pctSinal(v, 1) };
@@ -18,8 +19,8 @@ export function blocoSintese(d) {
   const sinalTexto = s.sinal || 'sem sinal';
   return el('div', { class: 'empilha empilha--folgada' },
     el('div', { class: 'sintese' },
-      el('div', { class: 'veredito' }, el('p', { class: 'selo' }, 'Saúde financeira'), el('p', { class: 'veredito__valor' }, s.saude), el('p', { class: 'legenda' }, `${s.favoraveis.length} critérios favoráveis e ${s.desfavoraveis.length} desfavoráveis`)),
-      el('div', { class: 'veredito' }, el('p', { class: 'selo' }, 'Tendência em 12 meses'), el('p', { class: 'veredito__valor' }, s.tendencia), el('p', { class: 'legenda' }, s.tendencias.length ? `${s.tendencias.filter((t) => t.nota > 0).length} indicadores melhoraram e ${s.tendencias.filter((t) => t.nota < 0).length} pioraram` : 'Falta o período de um ano antes para comparar')),
+      el('div', { class: 'veredito' }, el('p', { class: 'selo' }, 'Saúde financeira'), el('p', { class: 'veredito__valor' }, s.saude), el('p', { class: 'legenda' }, `${plural(s.favoraveis.length, 'critério favorável', 'critérios favoráveis')} e ${plural(s.desfavoraveis.length, 'desfavorável', 'desfavoráveis')}`)),
+      el('div', { class: 'veredito' }, el('p', { class: 'selo' }, 'Tendência em 12 meses'), el('p', { class: 'veredito__valor' }, s.tendencia), el('p', { class: 'legenda' }, s.tendencias.length ? `${plural(s.tendencias.filter((t) => t.nota > 0).length, 'indicador melhorou', 'indicadores melhoraram')} e ${plural(s.tendencias.filter((t) => t.nota < 0).length, 'piorou', 'pioraram')}` : 'Falta o período de um ano antes para comparar')),
       el('div', { class: 'veredito' }, el('p', { class: 'selo' }, 'Sinal pelas regras'), el('p', { class: 'veredito__valor' }, sinalTexto), el('p', { class: 'legenda' }, s.porque))),
     el('div', { class: 'natureza' }, el('strong', {}, 'Como ler'), el('span', { class: 'legenda' }, `Síntese produzida por regras fixas sobre os demonstrativos entregues à CVM (referência ${dataBR(s.referencia)})${d.preco != null ? ` e o preço de ${brl(d.preco)}` : ''}. É uma leitura do passado por critérios gerais: não conhece seus objetivos, não prevê resultados e não substitui a sua análise.`)));
 }
@@ -130,7 +131,7 @@ export function paginaEmpresa(d) {
   const naCarteira = lista('ativos').find((a) => e.tickers.includes(a.codigo));
   return el('div', {},
     el('section', { class: 'secao' }, el('div', { class: 'conteudo' },
-      el('header', { class: 'pagina__cabecalho' }, el('p', { class: 'kicker' }, el('a', { href: '#analise' }, 'Análise'), ' · ', e.setor), el('h1', { class: 'titulo' }, `${d.ticker}.`), el('p', { class: 'copy introducao' }, e.nome),
+      el('header', { class: 'pagina__cabecalho' }, marca({ cvm: e.cvm, codigo: d.ticker, nome: e.nome, tamanho: 'g' }), el('p', { class: 'kicker' }, el('a', { href: '#analise' }, 'Análise'), ' · ', e.setor), el('h1', { class: 'titulo' }, `${d.ticker}.`), el('p', { class: 'copy introducao' }, e.nome),
         e.atividade && el('p', { class: 'legenda' }, e.atividade)),
       blocoSintese(d),
       el('div', { class: 'atalhos espaco-topo' }, naCarteira ? el('a', { class: 'pill', href: `#ativo/${naCarteira.id}` }, 'Ver na carteira') : el('a', { class: 'pill', href: '#lancar/novo/acao' }, 'Cadastrar na carteira'), el('a', { class: 'pill', href: `#alertas/novo/${d.ticker}` }, 'Criar alerta')))),
@@ -162,7 +163,7 @@ export async function pagina(ctx, [codigo]) {
     const t = semAcento(busca.value.trim());
     if (t.length < 2) { resultados.replaceChildren(); return; }
     const achados = empresas.filter((e) => e.tickers.some((x) => x.toLowerCase().startsWith(t)) || semAcento(e.nome).includes(t)).slice(0, 12);
-    resultados.replaceChildren(...achados.map((e) => el('li', {}, el('a', { href: `#analise/${e.tickers[0]}` }, el('strong', {}, e.tickers.join(' · ')), el('span', { class: 'legenda' }, `${e.nome} · ${e.setor}`)))));
+    resultados.replaceChildren(...achados.map((e) => el('li', {}, el('a', { class: 'busca__item', href: `#analise/${e.tickers[0]}` }, marca({ cvm: e.cvm, codigo: e.tickers[0], nome: e.nome, tamanho: 'p' }), el('span', {}, el('strong', {}, e.tickers.join(' · ')), el('span', { class: 'legenda' }, `${e.nome} · ${e.setor}`))))));
   };
   busca.addEventListener('input', adiar(filtrar, 120));
   busca.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { const primeiro = resultados.querySelector('a'); if (primeiro) location.hash = primeiro.getAttribute('href'); } });

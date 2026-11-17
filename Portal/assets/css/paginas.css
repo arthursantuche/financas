@@ -6,65 +6,23 @@
 a.card { color: inherit; }
 a.card:hover { text-decoration: none; }
 
-.espaco-topo { margin-top: var(--spacing-32); }
-.pagina__cabecalho { display: grid; gap: var(--spacing-12); margin-bottom: var(--spacing-40); }
+.espaco-topo { margin-top: var(--espaco-bloco); }
+.pagina__cabecalho { display: grid; gap: var(--espaco-perto); margin-bottom: var(--espaco-cabecalho); }
 
 .grade-2 { display: grid; gap: var(--element-gap); grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); }
-.essencial__itens { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--spacing-8); }
-.essencial__itens li { font-size: var(--text-feature-copy); line-height: var(--leading-feature-copy); }
-/* Quatro cartões (Essenciais) ficam 2 × 2, sem um cartão sozinho na última linha. */
-@media (min-width: 600px) {
-  .grade-2--par { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 .grade-2 > .card { min-width: 0; }
 .grade-2--folgada { row-gap: var(--spacing-64); column-gap: var(--spacing-64); }
 .card--auto { min-height: 0; }
 .card--contorno { box-shadow: var(--contorno-sutil); }
-.card__grafico--alto { min-height: 360px; margin-bottom: var(--spacing-40); }
-
-/* Foto com legenda: a moldura recorta a imagem (o parallax nunca sai dela) e a legenda
-   fica abaixo, fora da moldura. */
-.foto { margin: var(--spacing-40) 0 0; }
-.foto__moldura {
-  position: relative; overflow: hidden; aspect-ratio: 3 / 2;
-  border-radius: var(--radius-images); background: var(--cor-faixa);
-}
-.foto__moldura img {
-  position: absolute; left: 0; top: -6%; width: 100%; height: 112%;
-  display: block; object-fit: cover;
-}
-/* Tela estreita: a paralaxe é maior (movimento.js), e a sobra acompanha. */
-@media (max-width: 833px) {
-  .foto__moldura img { top: -10%; height: 120%; }
-}
-.foto figcaption { margin-top: var(--spacing-12); }
-/* Celular deitado: em 3:2 (e até em 2:1) a foto passaria da área visível; fica em 3:1,
-   para caber na tela. */
-@media (orientation: landscape) and (max-height: 500px) {
-  .foto__moldura { aspect-ratio: 3 / 1; }
-}
 
 .lista { list-style: none; margin: 0; padding: 0; }
-.lista > li { padding: var(--spacing-16) 0; border-top: 1px solid var(--cor-divisoria); display: grid; gap: var(--spacing-4); }
-
-/* Hospedagens: uma estadia por cartão, na ordem da viagem */
-.resumo-estadias {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--element-gap);
-  margin: 0 0 var(--spacing-48);
-}
-.resumo-estadias > div { display: grid; gap: var(--spacing-4); align-content: start; }
-.resumo-estadias dd { margin: 0; }
-@media (max-width: 480px) {
-  .resumo-estadias { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .resumo-estadias > div:first-child { grid-column: 1 / -1; }
-}
+.lista > li { padding: var(--espaco-grupo) 0; border-top: 1px solid var(--cor-divisoria); display: grid; gap: var(--espaco-junto); }
 
 .tarefa { position: relative; grid-template-columns: var(--spacing-28) 1fr; align-items: start; }
 /* A caixa tem 24 px: o rótulo estende a área de toque a 44 px de largura e à altura da linha, por trás dela. */
 .tarefa label::before { content: ''; position: absolute; top: 0; bottom: 0; left: calc(var(--spacing-8) * -1); width: calc(var(--spacing-40) + var(--spacing-4)); }
 .tarefa input { position: relative; z-index: 1; width: var(--spacing-24); height: var(--spacing-24); margin: 0; accent-color: var(--cor-link); }
-.tarefa label { display: grid; gap: var(--spacing-4); cursor: pointer; }
-.tarefa--feita label > span:first-child { color: var(--cor-texto-2); text-decoration: line-through; }
+.tarefa label { display: grid; gap: var(--espaco-junto); cursor: pointer; max-width: var(--medida-leitura); }
 
 .tabela { width: 100%; border-collapse: collapse; font-size: var(--text-body-small); letter-spacing: var(--tracking-body-small); }
 .tabela th, .tabela td { text-align: left; padding: var(--spacing-12) var(--spacing-8); border-top: 1px solid var(--cor-divisoria); vertical-align: top; }
@@ -86,10 +44,10 @@ a.card:hover { text-decoration: none; }
 
 /* Formulários: um só componente de campo ("Rounded Search Input" adaptado).
    17px em todos os campos: abaixo de 16px o iOS aplica zoom ao tocar. */
-.formulario { display: grid; gap: var(--spacing-20); max-width: 520px; }
+.formulario { display: grid; gap: var(--element-gap); max-width: 520px; }
 /* Formulário logo depois de uma lista ou do aviso de lista vazia: nada encosta. */
-.lista + .formulario, .legenda + .formulario { margin-top: var(--spacing-32); }
-.rotulo { display: grid; gap: var(--spacing-8); font-size: var(--text-body-small); line-height: var(--leading-body-small); color: var(--cor-texto-2); min-width: 0; }
+.lista + .formulario, .legenda + .formulario { margin-top: var(--espaco-bloco); }
+.rotulo { display: grid; gap: var(--espaco-par); font-size: var(--text-body-small); line-height: var(--leading-body-small); color: var(--cor-texto-2); min-width: 0; }
 .campo {
   -webkit-appearance: none; appearance: none;
   font: inherit; font-size: var(--text-body); line-height: var(--leading-feature-copy); letter-spacing: var(--tracking-body);
@@ -116,10 +74,6 @@ input[type="date"].campo::-webkit-calendar-picker-indicator { opacity: 0.6; }
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
 }
-/* Status dentro das listas: mesma altura de toque, largura do conteúdo. */
-.seletor--compacto { display: inline-block; justify-self: start; }
-.seletor--compacto .campo { min-height: calc(var(--spacing-40) + var(--spacing-4)); padding: var(--spacing-8) var(--spacing-40) var(--spacing-8) var(--spacing-16); width: auto; }
-.seletor--compacto::after { right: var(--spacing-16); }
 
 /* A segunda coluna nunca fica menor que o próprio conteúdo: no iPhone, com um terço da largura, o nome
    do responsável era cortado ("Pesso") e o rótulo "Moeda · obrigatório" quebrava em duas linhas. */
@@ -147,47 +101,20 @@ input[type="date"].campo::-webkit-calendar-picker-indicator { opacity: 0.6; }
 .acesso::backdrop { background: var(--cor-faixa); }
 .acesso .status-pendente:empty { display: none; }
 
-.rodape .conteudo { display: grid; gap: var(--spacing-8); }
+/* Rodapé: notas em cima; uma linha fina; a identificação do portal embaixo, à parte (como no Escócia 2.1). */
+.rodape .conteudo { display: grid; gap: var(--espaco-grupo); }
+.rodape__notas { display: grid; gap: var(--espaco-junto); }
+.rodape__identidade { padding-top: var(--espaco-grupo); border-top: 1px solid var(--cor-divisoria); }
 body { padding-bottom: env(safe-area-inset-bottom); }
 
-.orcamento__referencia { margin: 0 0 var(--spacing-40); }
-
-/* ---- Hospedagens: galeria, reserva e detalhes */
-.guardar-vouchers { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--spacing-12); margin: calc(var(--spacing-24) * -1) 0 var(--spacing-32); }
-dialog.ampliada {
-  width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0;
-  color: var(--cor-texto); background: var(--cor-fundo);
-}
-dialog.ampliada[open] { display: flex; flex-direction: column; }
-.ampliada__topo {
-  display: flex; align-items: center; gap: var(--spacing-12); flex: none;
-  padding: calc(var(--spacing-12) + env(safe-area-inset-top)) var(--gutter-d) var(--spacing-12) var(--gutter-e);
-  border-bottom: 1px solid var(--cor-divisoria);
-}
-.ampliada__topo > div { flex: 1; min-width: 0; }
-.ampliada__topo .kicker { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.ampliada__topo .pill { flex: none; }
-
-.ampliada__trilho { flex: 1; min-height: 0; display: flex; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior: contain; }
-.ampliada__trilho::-webkit-scrollbar { display: none; }
-.ampliada__slide { flex: 0 0 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--spacing-12); min-width: 0; margin: 0; padding: var(--spacing-16) var(--spacing-20); scroll-snap-align: center; scroll-snap-stop: always; }
-.ampliada__slide img { display: block; min-height: 0; max-width: 100%; max-height: calc(100% - var(--spacing-32)); object-fit: contain; border-radius: var(--spacing-12); }
-.ampliada__setas { display: none; }
-@media (hover: hover) and (min-width: 834px) {
-  .ampliada__setas { display: flex; justify-content: center; gap: var(--spacing-12); flex: none; padding: 0 0 var(--spacing-20); }
-}
-dialog.ampliada::backdrop { background: var(--cor-fundo); }
-.formulario--registrar { max-width: none; gap: var(--spacing-40); }
-.grupo { display: grid; gap: var(--spacing-20); min-width: 0; margin: 0; padding: var(--spacing-24) 0 0; border: 0; border-top: 1px solid var(--cor-divisoria); }
-.grupo__titulo { float: left; width: 100%; padding: 0; margin-bottom: var(--spacing-4); font-size: var(--text-body); font-weight: var(--font-weight-semibold); }
-.grupo__titulo + * { clear: both; }
+.grupo { display: grid; gap: var(--element-gap); min-width: 0; margin: 0; padding: var(--spacing-24) 0 0; border: 0; border-top: 1px solid var(--cor-divisoria); }
 /* "opcional" no mesmo tom do rótulo: com 75% de opacidade o contraste caía para 3:1. O azul de "obrigatório" já faz a distinção. */
 .rotulo__opcional { color: var(--cor-texto-2); }
 .rotulo__obrigatorio { color: var(--cor-link); }
 .linha-campos--iguais { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 379px) {
   .linha-campos--iguais { grid-template-columns: 1fr; }
-  .linha-campos--iguais > .rotulo + .rotulo { margin-top: var(--spacing-12); }
+  .linha-campos--iguais > .rotulo + .rotulo { margin-top: var(--element-gap); }
 }
 /* Ação secundária em forma de link (Remover). Sem estas regras o botão aparecia com a moldura cinza
    padrão do navegador e 21 px de altura; agora tem a área de toque de uma pílula. */
@@ -200,8 +127,7 @@ dialog.ampliada::backdrop { background: var(--cor-fundo); }
 .link-botao:active { transform: scale(0.97); }
 @media (hover: hover) { .link-botao:hover { text-decoration: underline; } }
 .link-botao--alerta { color: var(--cor-alerta); }
-.espaco-abaixo { margin: 0 0 var(--spacing-16); }
-.vazio { padding: var(--spacing-32) var(--spacing-24); border-radius: var(--radius-cards); background: var(--cor-faixa); color: var(--cor-texto-2); text-align: center; }
+.vazio { padding: var(--espaco-bloco) var(--card-padding-compacto); border-radius: var(--radius-cards); background: var(--cor-faixa); color: var(--cor-texto-2); text-align: center; }
 .secao--mist .vazio { background: var(--cor-cartao); }
 .estado { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-8); }
 /* Sem texto de estado (antes da primeira leitura), o botão não fica recuado pelo espaço vazio. */
@@ -210,14 +136,13 @@ dialog.ampliada::backdrop { background: var(--cor-fundo); }
 @media (hover: hover) { .rodape .pill:not(.pill--azul):not(:disabled):hover { background: var(--cor-cartao); } }
 
 /* ---- Estados de carregamento e erro */
-.falha { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--spacing-12); max-width: 980px; margin: var(--spacing-16) auto 0; padding: var(--spacing-16) var(--spacing-20); color: var(--cor-alerta); }
+.falha { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--spacing-12); max-width: var(--largura-conteudo); margin: var(--spacing-16) auto 0; padding: var(--spacing-16) var(--spacing-20); color: var(--cor-alerta); }
 .falha[hidden] { display: none; }
 .falha p { margin: 0; }
 
 /* ---- Acabamento: toque, entradas das telas sobrepostas */
 .link-botao { transition: transform var(--dur-curta) var(--ease-apple), background-color var(--dur-curta) var(--ease-apple), color var(--dur-curta) var(--ease-apple); }
 button.pill:disabled { opacity: 0.5; cursor: default; }
-dialog[open].ampliada { animation: surgir var(--dur-curta) var(--ease-entrada); }
 details[open] > summary ~ * { animation: surgir var(--dur-curta) var(--ease-entrada); }
 @keyframes surgir { from { opacity: 0; } }
 @keyframes surgir-subindo { from { opacity: 0; transform: translateY(12px); } }
@@ -225,5 +150,7 @@ details[open] > summary ~ * { animation: surgir var(--dur-curta) var(--ease-entr
 @keyframes carregando { 0% { transform: scaleX(0); } 60% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
 
 /* ---- Atalhos internos: o que não ocupa o painel superior */
-.atalhos { display: flex; flex-wrap: wrap; gap: var(--spacing-12); margin: calc(var(--spacing-16) * -1) 0 var(--spacing-40); }
-.voltar { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--text-body-small); }
+.atalhos { display: flex; flex-wrap: wrap; gap: var(--espaco-perto); margin: calc(var(--spacing-16) * -1) 0 var(--espaco-cabecalho); }
+/* Link de voltar ("← Aprender", "← Carteira"): um componente só, com alvo de 44px e 8px até o
+   cabeçalho da página, que ele situa. */
+.voltar { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: var(--espaco-par); font-size: var(--text-body-small); }

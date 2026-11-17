@@ -37,6 +37,13 @@ node --test "testes/*.test.mjs"
 node testes/e2e.mjs
 ```
 O segundo abre o Chrome sem interface pelo Playwright do `playwright-cli` e sobe, sozinho, o site, um GitHub simulado e uma IA simulada. `--so publico|amostra|cofre|ia` roda uma parte; `--capturas <pasta>` salva imagens.
+```bash
+node testes/layout.mjs
+```
+```bash
+node testes/checar-indicadores.cjs
+```
+Checagens da identidade visual, vindas do portal Escócia 2027: layout (rolagem lateral, espaços, linhas longas, alvos de toque, contraste) em 18 rotas, 5 tamanhos e 2 temas; e cursor e foco não cortados (`TEMA=dark` para o escuro).
 
 ## Atualizar dados e conteúdo
 ```bash
@@ -46,6 +53,13 @@ node coleta/bcb.mjs && node coleta/tesouro.mjs && node coleta/cvm.mjs && node co
 node coleta/conteudo.mjs
 ```
 O primeiro refaz os dados abertos (o workflow faz isso duas vezes por dia). O segundo refaz o índice depois de criar ou editar um artigo em `Portal/conteudo/`.
+```bash
+node coleta/logos.mjs
+```
+```bash
+node coleta/ilustracoes.mjs
+```
+O primeiro confere os logotipos das companhias (o workflow faz isso toda vez que coleta; só busca o que é novo ou tem mais de 90 dias). O segundo gera `Portal/assets/js/ilustracoes.js` depois de criar ou mudar uma cena em `coleta/ilustracoes.mjs`.
 
 ## Publicar
 Cada envio para a `main` testa e publica. A versão do cache dos aparelhos é o identificador do commit, preenchido na publicação por `coleta/publicar.mjs`: não há número para lembrar de mudar.

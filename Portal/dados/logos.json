@@ -1,0 +1,2041 @@
+{
+ "geradoEm": "2026-11-17T02:14:00.172Z",
+ "fonte": "brapi (icons.brapi.dev), cópia conferida",
+ "aviso": "Marcas de seus titulares, usadas só para identificar o ativo.",
+ "empresas": {
+  "016284": {
+   "arquivo": null,
+   "codigo": "QVQP3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "022179": {
+   "arquivo": "022179.svg",
+   "codigo": "AFLT3",
+   "hash": "51cb323c4e44270a",
+   "obtidoEm": "2026-11-17"
+  },
+  "025658": {
+   "arquivo": "025658.svg",
+   "codigo": "AGXY3",
+   "hash": "defdd8a525904d95",
+   "obtidoEm": "2026-11-17"
+  },
+  "012823": {
+   "arquivo": null,
+   "codigo": "APTI3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "024058": {
+   "arquivo": "024058.svg",
+   "codigo": "AALR3",
+   "hash": "15bd9970ec332f2b",
+   "obtidoEm": "2026-11-17"
+  },
+  "025283": {
+   "arquivo": "025283.svg",
+   "codigo": "AERI3",
+   "hash": "5558d50d2e8b7b96",
+   "obtidoEm": "2026-11-17"
+  },
+  "025330": {
+   "arquivo": "025330.svg",
+   "codigo": "ALLD3",
+   "hash": "44099e8a4839d565",
+   "obtidoEm": "2026-11-17"
+  },
+  "024953": {
+   "arquivo": "024953.svg",
+   "codigo": "ALPK3",
+   "hash": "788284e4cf6ec3bf",
+   "obtidoEm": "2026-11-17"
+  },
+  "010456": {
+   "arquivo": "010456.svg",
+   "codigo": "ALPA3",
+   "hash": "a16f50dad8c701ca",
+   "obtidoEm": "2026-11-17"
+  },
+  "025275": {
+   "arquivo": "025275.svg",
+   "codigo": "AVLL3",
+   "hash": "1f1b55b64baad756",
+   "obtidoEm": "2026-11-17"
+  },
+  "021490": {
+   "arquivo": "021490.svg",
+   "codigo": "ALUP11",
+   "hash": "63c65a5e9bf35beb",
+   "obtidoEm": "2026-11-17"
+  },
+  "024961": {
+   "arquivo": "024961.svg",
+   "codigo": "AMBP3",
+   "hash": "9d6c68693fe39c31",
+   "obtidoEm": "2026-11-17"
+  },
+  "020990": {
+   "arquivo": "020990.svg",
+   "codigo": "AMER3",
+   "hash": "8b84423f75526b38",
+   "obtidoEm": "2026-11-17"
+  },
+  "023248": {
+   "arquivo": "023248.svg",
+   "codigo": "ANIM3",
+   "hash": "d04b591b79fdaa78",
+   "obtidoEm": "2026-11-17"
+  },
+  "025887": {
+   "arquivo": "025887.svg",
+   "codigo": "ARND3",
+   "hash": "7374041b527b33d7",
+   "obtidoEm": "2026-11-17"
+  },
+  "009954": {
+   "arquivo": "009954.svg",
+   "codigo": "RPAD3",
+   "hash": "c2257fa622b46991",
+   "obtidoEm": "2026-11-17"
+  },
+  "027677": {
+   "arquivo": "027677.svg",
+   "codigo": "ATED3",
+   "hash": "13925fb11d121f17",
+   "obtidoEm": "2026-11-17"
+  },
+  "022357": {
+   "arquivo": "022357.svg",
+   "codigo": "ALOS3",
+   "hash": "1e858322ec2e5706",
+   "obtidoEm": "2026-11-17"
+  },
+  "026174": {
+   "arquivo": null,
+   "codigo": "AESO3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "027707": {
+   "arquivo": "027707.svg",
+   "codigo": "AMOB3",
+   "hash": "1914bb1a71d8f8b2",
+   "obtidoEm": "2026-11-17"
+  },
+  "023264": {
+   "arquivo": "023264.svg",
+   "codigo": "ABEV3",
+   "hash": "40bd304825b00630",
+   "obtidoEm": "2026-11-17"
+  },
+  "027626": {
+   "arquivo": "027626.svg",
+   "codigo": "AZTE3",
+   "hash": "5e3e37268c5553f7",
+   "obtidoEm": "2026-11-17"
+  },
+  "011975": {
+   "arquivo": null,
+   "codigo": "AZEV11",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "024112": {
+   "arquivo": "024112.svg",
+   "codigo": "AZUL3",
+   "hash": "c3472e14df6473cd",
+   "obtidoEm": "2026-11-17"
+  },
+  "003050": {
+   "arquivo": "003050.svg",
+   "codigo": "CBEE3",
+   "hash": "0114db358106af1e",
+   "obtidoEm": "2026-11-17"
+  },
+  "022349": {
+   "arquivo": "022349.svg",
+   "codigo": "AZZA3",
+   "hash": "4b6119cc328c71a2",
+   "obtidoEm": "2026-11-17"
+  },
+  "027634": {
+   "arquivo": null,
+   "codigo": "ADMF3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "001155": {
+   "arquivo": "001155.svg",
+   "codigo": "BEES3",
+   "hash": "0bace9de3d315c74",
+   "obtidoEm": "2026-11-17"
+  },
+  "026069": {
+   "arquivo": "026069.svg",
+   "codigo": "ARML3",
+   "hash": "8298387f5e54b12e",
+   "obtidoEm": "2026-11-17"
+  },
+  "026620": {
+   "arquivo": "026620.svg",
+   "codigo": "AURE3",
+   "hash": "1d96229cb198f7a9",
+   "obtidoEm": "2026-11-17"
+  },
+  "001562": {
+   "arquivo": "001562.svg",
+   "codigo": "BALM3",
+   "hash": "2b488d394e703b57",
+   "obtidoEm": "2026-11-17"
+  },
+  "024660": {
+   "arquivo": null,
+   "codigo": "BBML3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "020958": {
+   "arquivo": "020958.svg",
+   "codigo": "ABCB4",
+   "hash": "2276ab8ea1323979",
+   "obtidoEm": "2026-11-17"
+  },
+  "000922": {
+   "arquivo": "000922.svg",
+   "codigo": "BAZA3",
+   "hash": "1ff44986701a1ac7",
+   "obtidoEm": "2026-11-17"
+  },
+  "000906": {
+   "arquivo": "000906.svg",
+   "codigo": "BBDC3",
+   "hash": "18f4563c4eca58f1",
+   "obtidoEm": "2026-11-17"
+  },
+  "001023": {
+   "arquivo": "001023.svg",
+   "codigo": "BBAS3",
+   "hash": "dbdf5d92cff51ba4",
+   "obtidoEm": "2026-11-17"
+  },
+  "001171": {
+   "arquivo": null,
+   "codigo": "BPAR3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "001210": {
+   "arquivo": "001210.svg",
+   "codigo": "BRSR3",
+   "hash": "d02e1a49d31a6698",
+   "obtidoEm": "2026-11-17"
+  },
+  "024600": {
+   "arquivo": "024600.svg",
+   "codigo": "BMGB4",
+   "hash": "b0ef57328a0b96f1",
+   "obtidoEm": "2026-11-17"
+  },
+  "001325": {
+   "arquivo": "001325.svg",
+   "codigo": "BMEB3",
+   "hash": "066a232c54bfcd8c",
+   "obtidoEm": "2026-11-17"
+  },
+  "001228": {
+   "arquivo": "001228.svg",
+   "codigo": "BNBR3",
+   "hash": "6a1c8214fb724570",
+   "obtidoEm": "2026-11-17"
+  },
+  "023159": {
+   "arquivo": "023159.svg",
+   "codigo": "BBSE3",
+   "hash": "dbdf5d92cff51ba4",
+   "obtidoEm": "2026-11-17"
+  },
+  "001520": {
+   "arquivo": "001520.svg",
+   "codigo": "BDLL3",
+   "hash": "c4d425888b939074",
+   "obtidoEm": "2026-11-17"
+  },
+  "020532": {
+   "arquivo": "020532.svg",
+   "codigo": "SANB11",
+   "hash": "eb20cc06676232fd",
+   "obtidoEm": "2026-11-17"
+  },
+  "020567": {
+   "arquivo": "020567.svg",
+   "codigo": "PINE3",
+   "hash": "2340fc0d14d2ab8e",
+   "obtidoEm": "2026-11-17"
+  },
+  "001120": {
+   "arquivo": "001120.svg",
+   "codigo": "BGIP3",
+   "hash": "35410036e68c6261",
+   "obtidoEm": "2026-11-17"
+  },
+  "017884": {
+   "arquivo": null,
+   "codigo": "BETP3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "025500": {
+   "arquivo": "025500.svg",
+   "codigo": "BMOB3",
+   "hash": "19d95c5ec5c71405",
+   "obtidoEm": "2026-11-17"
+  },
+  "001694": {
+   "arquivo": "001694.svg",
+   "codigo": "BMKS3",
+   "hash": "df27f0fed6559f6b",
+   "obtidoEm": "2026-11-17"
+  },
+  "000701": {
+   "arquivo": "000701.svg",
+   "codigo": "BIED3",
+   "hash": "e935c23fa65e9035",
+   "obtidoEm": "2026-11-17"
+  },
+  "019305": {
+   "arquivo": "019305.svg",
+   "codigo": "BIOM3",
+   "hash": "964f89d982ce6950",
+   "obtidoEm": "2026-11-17"
+  },
+  "001309": {
+   "arquivo": "001309.svg",
+   "codigo": "BMIN3",
+   "hash": "6f329e5a2301478d",
+   "obtidoEm": "2026-11-17"
+  },
+  "012190": {
+   "arquivo": null,
+   "codigo": "BOBR3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "025704": {
+   "arquivo": "025704.svg",
+   "codigo": "SOJA3",
+   "hash": "a4662a94233964de",
+   "obtidoEm": "2026-11-17"
+  },
+  "019909": {
+   "arquivo": null,
+   "codigo": "BRML3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "021199": {
+   "arquivo": "021199.svg",
+   "codigo": "BPAN4",
+   "hash": "946a00baedb0ec47",
+   "obtidoEm": "2026-11-17"
+  },
+  "018724": {
+   "arquivo": "018724.svg",
+   "codigo": "BRAP3",
+   "hash": "346381da67fd499a",
+   "obtidoEm": "2026-11-17"
+  },
+  "027570": {
+   "arquivo": "027570.svg",
+   "codigo": "CCTY3",
+   "hash": "c1ee6e6aa09e8469",
+   "obtidoEm": "2026-11-17"
+  },
+  "004820": {
+   "arquivo": "004820.svg",
+   "codigo": "BRKM3",
+   "hash": "0a5ee19a32a3b4c3",
+   "obtidoEm": "2026-11-17"
+  },
+  "025291": {
+   "arquivo": "025291.svg",
+   "codigo": "BRAV3",
+   "hash": "442e0e2d60d2bebf",
+   "obtidoEm": "2026-11-17"
+  },
+  "023795": {
+   "arquivo": "023795.svg",
+   "codigo": "CXSE3",
+   "hash": "b94c12ef01c86cf0",
+   "obtidoEm": "2026-11-17"
+  },
+  "002100": {
+   "arquivo": "002100.svg",
+   "codigo": "CAMB3",
+   "hash": "06f88c0affa7879e",
+   "obtidoEm": "2026-11-17"
+  },
+  "024627": {
+   "arquivo": "024627.svg",
+   "codigo": "BLAU3",
+   "hash": "50436a26f55ec746",
+   "obtidoEm": "2026-11-17"
+  },
+  "020036": {
+   "arquivo": "020036.svg",
+   "codigo": "AGRO3",
+   "hash": "8d79b2575631e2df",
+   "obtidoEm": "2026-11-17"
+  },
+  "002461": {
+   "arquivo": "002461.svg",
+   "codigo": "CLSC3",
+   "hash": "b8074fb48a6ab425",
+   "obtidoEm": "2026-11-17"
+  },
+  "014826": {
+   "arquivo": "014826.svg",
+   "codigo": "PCAR3",
+   "hash": "97575c04c30e3c35",
+   "obtidoEm": "2026-11-17"
+  },
+  "025860": {
+   "arquivo": "025860.svg",
+   "codigo": "BRBI11",
+   "hash": "b6c7fa80cfca3de1",
+   "obtidoEm": "2026-11-17"
+  },
+  "014206": {
+   "arquivo": "014206.svg",
+   "codigo": "BSLI3",
+   "hash": "a79240628a0b9d26",
+   "obtidoEm": "2026-11-17"
+  },
+  "016861": {
+   "arquivo": null,
+   "codigo": "CASN3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "016616": {
+   "arquivo": null,
+   "codigo": "CEGR3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "002453": {
+   "arquivo": "002453.svg",
+   "codigo": "CMIG3",
+   "hash": "767f78c769dcfbc9",
+   "obtidoEm": "2026-11-17"
+  },
+  "024228": {
+   "arquivo": "024228.svg",
+   "codigo": "CAML3",
+   "hash": "695d4e7a0bd49e5a",
+   "obtidoEm": "2026-11-17"
+  },
+  "002437": {
+   "arquivo": "002437.svg",
+   "codigo": "AXIA3",
+   "hash": "5613c9db38cbc877",
+   "obtidoEm": "2026-11-17"
+  },
+  "014869": {
+   "arquivo": "014869.svg",
+   "codigo": "COCE3",
+   "hash": "39976828e9399429",
+   "obtidoEm": "2026-11-17"
+  },
+  "020648": {
+   "arquivo": null,
+   "codigo": "CEED3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "003069": {
+   "arquivo": "003069.svg",
+   "codigo": "FESA3",
+   "hash": "5b6f8b33b8f4c0de",
+   "obtidoEm": "2026-11-17"
+  },
+  "003077": {
+   "arquivo": null,
+   "codigo": "CEDO3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "015636": {
+   "arquivo": "015636.svg",
+   "codigo": "CGAS3",
+   "hash": "8510344bdb451aae",
+   "obtidoEm": "2026-11-17"
+  },
+  "003654": {
+   "arquivo": null,
+   "codigo": "MSPA3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "003298": {
+   "arquivo": "003298.svg",
+   "codigo": "HBTS5",
+   "hash": "f38735f31ee14d46",
+   "obtidoEm": "2026-11-17"
+  },
+  "014311": {
+   "arquivo": "014311.svg",
+   "codigo": "CPLE3",
+   "hash": "be5bfdace2c95a1d",
+   "obtidoEm": "2026-11-17"
+  },
+  "018627": {
+   "arquivo": "018627.svg",
+   "codigo": "SAPR11",
+   "hash": "4eb54122f15df365",
+   "obtidoEm": "2026-11-17"
+  },
+  "014524": {
+   "arquivo": "014524.svg",
+   "codigo": "CEEB3",
+   "hash": "773ea9ce2728f90e",
+   "obtidoEm": "2026-11-17"
+  },
+  "021393": {
+   "arquivo": "021393.svg",
+   "codigo": "GPAR3",
+   "hash": "d073f0f7daf5d789",
+   "obtidoEm": "2026-11-17"
+  },
+  "003158": {
+   "arquivo": null,
+   "codigo": "CTNM3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "004081": {
+   "arquivo": "004081.svg",
+   "codigo": "CTSA3",
+   "hash": "c7374c7b10983eee",
+   "obtidoEm": "2026-11-17"
+  },
+  "026093": {
+   "arquivo": "026093.svg",
+   "codigo": "CLSA3",
+   "hash": "409c1ca9e940f55b",
+   "obtidoEm": "2026-11-17"
+  },
+  "025682": {
+   "arquivo": "025682.svg",
+   "codigo": "VVEO3",
+   "hash": "f601c15ef5c35787",
+   "obtidoEm": "2026-11-17"
+  },
+  "014451": {
+   "arquivo": "014451.svg",
+   "codigo": "CEBR3",
+   "hash": "03b7e4d2c293e5cd",
+   "obtidoEm": "2026-11-17"
+  },
+  "018708": {
+   "arquivo": "018708.svg",
+   "codigo": "PEAB3",
+   "hash": "841bc40c8a46b253",
+   "obtidoEm": "2026-11-17"
+  },
+  "019445": {
+   "arquivo": "019445.svg",
+   "codigo": "CSMG3",
+   "hash": "3eada3166c004f9e",
+   "obtidoEm": "2026-11-17"
+  },
+  "025127": {
+   "arquivo": "025127.svg",
+   "codigo": "PASS3",
+   "hash": "67e865ba48af7264",
+   "obtidoEm": "2026-11-17"
+  },
+  "019208": {
+   "arquivo": null,
+   "codigo": "CRTE3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "004693": {
+   "arquivo": null,
+   "codigo": "ODER3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "004723": {
+   "arquivo": null,
+   "codigo": "CALI11",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "014443": {
+   "arquivo": "014443.svg",
+   "codigo": "SBSP3",
+   "hash": "55a9f0b3d1b5e52a",
+   "obtidoEm": "2026-11-17"
+  },
+  "019836": {
+   "arquivo": "019836.svg",
+   "codigo": "CSAN3",
+   "hash": "c7488c3c4f419419",
+   "obtidoEm": "2026-11-17"
+  },
+  "017973": {
+   "arquivo": "017973.svg",
+   "codigo": "COGN3",
+   "hash": "663e233c6df230f2",
+   "obtidoEm": "2026-11-17"
+  },
+  "018660": {
+   "arquivo": "018660.svg",
+   "codigo": "CPFE3",
+   "hash": "df99b39d57724b25",
+   "obtidoEm": "2026-11-17"
+  },
+  "025984": {
+   "arquivo": "025984.svg",
+   "codigo": "CBAV3",
+   "hash": "889fc9a036aed195",
+   "obtidoEm": "2026-11-17"
+  },
+  "025526": {
+   "arquivo": "025526.svg",
+   "codigo": "CSED3",
+   "hash": "316282ab12e14738",
+   "obtidoEm": "2026-11-17"
+  },
+  "020044": {
+   "arquivo": "020044.svg",
+   "codigo": "CSUD3",
+   "hash": "4a97c98d003455ca",
+   "obtidoEm": "2026-11-17"
+  },
+  "023981": {
+   "arquivo": null,
+   "codigo": "CTCA3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "023310": {
+   "arquivo": "023310.svg",
+   "codigo": "CVCB3",
+   "hash": "b9908e1d25ab6697",
+   "obtidoEm": "2026-11-17"
+  },
+  "014460": {
+   "arquivo": "014460.svg",
+   "codigo": "CYRE3",
+   "hash": "b03b832a854c3a13",
+   "obtidoEm": "2026-11-17"
+  },
+  "025046": {
+   "arquivo": "025046.svg",
+   "codigo": "DMVF3",
+   "hash": "1ab1d66670e582c1",
+   "obtidoEm": "2026-11-17"
+  },
+  "026026": {
+   "arquivo": "026026.svg",
+   "codigo": "DESK3",
+   "hash": "7b031ee982083bba",
+   "obtidoEm": "2026-11-17"
+  },
+  "021148": {
+   "arquivo": "021148.svg",
+   "codigo": "TEND3",
+   "hash": "ff7158bbece79732",
+   "obtidoEm": "2026-11-17"
+  },
+  "016632": {
+   "arquivo": "016632.svg",
+   "codigo": "DEXP3",
+   "hash": "6f067d5f359e28b9",
+   "obtidoEm": "2026-11-17"
+  },
+  "019100": {
+   "arquivo": "019100.svg",
+   "codigo": "ATMP3",
+   "hash": "651245cc80216149",
+   "obtidoEm": "2026-11-17"
+  },
+  "019623": {
+   "arquivo": "019623.svg",
+   "codigo": "DASA3",
+   "hash": "2ce276806a287123",
+   "obtidoEm": "2026-11-17"
+  },
+  "009342": {
+   "arquivo": "009342.svg",
+   "codigo": "PNVL3",
+   "hash": "593e165f079f3d04",
+   "obtidoEm": "2026-11-17"
+  },
+  "021350": {
+   "arquivo": "021350.svg",
+   "codigo": "DIRR3",
+   "hash": "9a9c60a1894f8cb6",
+   "obtidoEm": "2026-11-17"
+  },
+  "006076": {
+   "arquivo": null,
+   "codigo": "DMFN3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "025836": {
+   "arquivo": "025836.svg",
+   "codigo": "DOTZ3",
+   "hash": "991b575fd7a83075",
+   "obtidoEm": "2026-11-17"
+  },
+  "025100": {
+   "arquivo": "025100.svg",
+   "codigo": "CURY3",
+   "hash": "8a3fadfe414bd3c8",
+   "obtidoEm": "2026-11-17"
+  },
+  "019453": {
+   "arquivo": "019453.svg",
+   "codigo": "ECOR3",
+   "hash": "e15b85b18b3c9606",
+   "obtidoEm": "2026-11-17"
+  },
+  "017485": {
+   "arquivo": null,
+   "codigo": "EKTR3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "021091": {
+   "arquivo": "021091.svg",
+   "codigo": "DXCO3",
+   "hash": "ac07c82b340ab176",
+   "obtidoEm": "2026-11-17"
+  },
+  "016993": {
+   "arquivo": null,
+   "codigo": "EMAE3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "020087": {
+   "arquivo": "020087.svg",
+   "codigo": "EMBJ3",
+   "hash": "ee175841638a584a",
+   "obtidoEm": "2026-11-17"
+  },
+  "022608": {
+   "arquivo": "022608.svg",
+   "codigo": "PGMN3",
+   "hash": "2a4562cf56308924",
+   "obtidoEm": "2026-11-17"
+  },
+  "005207": {
+   "arquivo": "005207.svg",
+   "codigo": "DOHL3",
+   "hash": "e773cff50f071413",
+   "obtidoEm": "2026-11-17"
+  },
+  "018597": {
+   "arquivo": "018597.svg",
+   "codigo": "DTCY3",
+   "hash": "95be81088d162a59",
+   "obtidoEm": "2026-11-17"
+  },
+  "015253": {
+   "arquivo": "015253.svg",
+   "codigo": "ENGI11",
+   "hash": "a2377bce2239acb4",
+   "obtidoEm": "2026-11-17"
+  },
+  "021237": {
+   "arquivo": "021237.svg",
+   "codigo": "ENEV3",
+   "hash": "0d80e3fc471a600a",
+   "obtidoEm": "2026-11-17"
+  },
+  "005380": {
+   "arquivo": "005380.svg",
+   "codigo": "EALT3",
+   "hash": "3ae328d4422c2ecc",
+   "obtidoEm": "2026-11-17"
+  },
+  "017329": {
+   "arquivo": "017329.svg",
+   "codigo": "EGIE3",
+   "hash": "1987bcfc253fc56a",
+   "obtidoEm": "2026-11-17"
+  },
+  "025569": {
+   "arquivo": "025569.svg",
+   "codigo": "ELMD3",
+   "hash": "3f5c63b6cd1044c3",
+   "obtidoEm": "2026-11-17"
+  },
+  "025259": {
+   "arquivo": "025259.svg",
+   "codigo": "ENJU3",
+   "hash": "2c297d9bd8334380",
+   "obtidoEm": "2026-11-17"
+  },
+  "018309": {
+   "arquivo": null,
+   "codigo": "CELP3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "005762": {
+   "arquivo": "005762.svg",
+   "codigo": "ETER3",
+   "hash": "97785e1f9a8b0deb",
+   "obtidoEm": "2026-11-17"
+  },
+  "020010": {
+   "arquivo": "020010.svg",
+   "codigo": "EQTL3",
+   "hash": "e7dd7021a64d3dfb",
+   "obtidoEm": "2026-11-17"
+  },
+  "005770": {
+   "arquivo": "005770.svg",
+   "codigo": "EUCA3",
+   "hash": "0d4ed6b33ebbb3ab",
+   "obtidoEm": "2026-11-17"
+  },
+  "001570": {
+   "arquivo": null,
+   "codigo": "BAUH3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "015369": {
+   "arquivo": null,
+   "codigo": "VSPT3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "020630": {
+   "arquivo": null,
+   "codigo": "CRDE3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "015423": {
+   "arquivo": null,
+   "codigo": "FASA3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "014605": {
+   "arquivo": "014605.svg",
+   "codigo": "ENMT3",
+   "hash": "78136b36e6330101",
+   "obtidoEm": "2026-11-17"
+  },
+  "021881": {
+   "arquivo": "021881.svg",
+   "codigo": "FLRY3",
+   "hash": "0a9a08a614bf3eba",
+   "obtidoEm": "2026-11-17"
+  },
+  "006211": {
+   "arquivo": "006211.svg",
+   "codigo": "FRAS3",
+   "hash": "412d27199fd296df",
+   "obtidoEm": "2026-11-17"
+  },
+  "016101": {
+   "arquivo": "016101.svg",
+   "codigo": "GFSA3",
+   "hash": "c3d41f09668018e8",
+   "obtidoEm": "2026-11-17"
+  },
+  "017965": {
+   "arquivo": null,
+   "codigo": "OPGM3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "020524": {
+   "arquivo": "020524.svg",
+   "codigo": "EVEN3",
+   "hash": "e2b16a42f1fd0124",
+   "obtidoEm": "2026-11-17"
+  },
+  "021008": {
+   "arquivo": "021008.svg",
+   "codigo": "GSHP3",
+   "hash": "51c9256bef90d518",
+   "obtidoEm": "2026-11-17"
+  },
+  "003980": {
+   "arquivo": "003980.svg",
+   "codigo": "GGBR3",
+   "hash": "fe2681c6f8ac59d3",
+   "obtidoEm": "2026-11-17"
+  },
+  "019569": {
+   "arquivo": null,
+   "codigo": "GOLL54",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "020770": {
+   "arquivo": "020770.svg",
+   "codigo": "EZTC3",
+   "hash": "bf19b035e620e07e",
+   "obtidoEm": "2026-11-17"
+  },
+  "025712": {
+   "arquivo": "025712.svg",
+   "codigo": "GGPS3",
+   "hash": "1b13f03f8722e6e6",
+   "obtidoEm": "2026-11-17"
+  },
+  "020621": {
+   "arquivo": "020621.svg",
+   "codigo": "FHER3",
+   "hash": "74baec87215ddb7c",
+   "obtidoEm": "2026-11-17"
+  },
+  "006505": {
+   "arquivo": "006505.svg",
+   "codigo": "BHIA3",
+   "hash": "8c9601d30e8eb4f8",
+   "obtidoEm": "2026-11-17"
+  },
+  "027820": {
+   "arquivo": null,
+   "codigo": "SALT3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "025461": {
+   "arquivo": null,
+   "codigo": "TOKY12",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "004669": {
+   "arquivo": "004669.svg",
+   "codigo": "GUAR3",
+   "hash": "8e45292990a8602a",
+   "obtidoEm": "2026-11-17"
+  },
+  "024392": {
+   "arquivo": "024392.svg",
+   "codigo": "HAPV3",
+   "hash": "6f948a829ccc24eb",
+   "obtidoEm": "2026-11-17"
+  },
+  "025402": {
+   "arquivo": "025402.svg",
+   "codigo": "HBRE3",
+   "hash": "ab891faaffae2685",
+   "obtidoEm": "2026-11-17"
+  },
+  "006629": {
+   "arquivo": null,
+   "codigo": "HETA3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "004537": {
+   "arquivo": "004537.svg",
+   "codigo": "CGRA3",
+   "hash": "24a4b0d8ba9023a2",
+   "obtidoEm": "2026-11-17"
+  },
+  "019615": {
+   "arquivo": "019615.svg",
+   "codigo": "GRND3",
+   "hash": "d970503810d7b3f1",
+   "obtidoEm": "2026-11-17"
+  },
+  "022675": {
+   "arquivo": "022675.svg",
+   "codigo": "HBSA3",
+   "hash": "ad127c50fc5f299c",
+   "obtidoEm": "2026-11-17"
+  },
+  "025186": {
+   "arquivo": "025186.svg",
+   "codigo": "GMAT3",
+   "hash": "dde85965df9c5183",
+   "obtidoEm": "2026-11-17"
+  },
+  "024694": {
+   "arquivo": "024694.svg",
+   "codigo": "SBFG3",
+   "hash": "dd5af86839fcd6c5",
+   "obtidoEm": "2026-11-17"
+  },
+  "025674": {
+   "arquivo": null,
+   "codigo": "HMOB3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "025933": {
+   "arquivo": null,
+   "codigo": "GRAO3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "006700": {
+   "arquivo": "006700.svg",
+   "codigo": "HOOT4",
+   "hash": "0e299cf7bdd42a35",
+   "obtidoEm": "2026-11-17"
+  },
+  "020494": {
+   "arquivo": null,
+   "codigo": "IGTA3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "008672": {
+   "arquivo": "008672.svg",
+   "codigo": "IGTI11",
+   "hash": "01daf11302ef6107",
+   "obtidoEm": "2026-11-17"
+  },
+  "024279": {
+   "arquivo": null,
+   "codigo": "INNC3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "007595": {
+   "arquivo": "007595.svg",
+   "codigo": "INEP3",
+   "hash": "65a8a2d9a810ceb1",
+   "obtidoEm": "2026-11-17"
+  },
+  "025747": {
+   "arquivo": null,
+   "codigo": "IFCM11",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "025453": {
+   "arquivo": "025453.svg",
+   "codigo": "INTB3",
+   "hash": "05d10dd6f0e802eb",
+   "obtidoEm": "2026-11-17"
+  },
+  "020877": {
+   "arquivo": "020877.svg",
+   "codigo": "HBOR3",
+   "hash": "8d3bf1e53abd1496",
+   "obtidoEm": "2026-11-17"
+  },
+  "057886": {
+   "arquivo": "057886.svg",
+   "codigo": "INBR32",
+   "hash": "d2465563487193dd",
+   "obtidoEm": "2026-11-17"
+  },
+  "006041": {
+   "arquivo": null,
+   "codigo": "FIGE3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "002429": {
+   "arquivo": "002429.svg",
+   "codigo": "RANI3",
+   "hash": "4fc8e5063b4068e0",
+   "obtidoEm": "2026-11-17"
+  },
+  "025690": {
+   "arquivo": "025690.svg",
+   "codigo": "MATD3",
+   "hash": "7761b2f6fe4fa0e1",
+   "obtidoEm": "2026-11-17"
+  },
+  "021431": {
+   "arquivo": "021431.svg",
+   "codigo": "HYPE3",
+   "hash": "d8df16156297fa36",
+   "obtidoEm": "2026-11-17"
+  },
+  "024180": {
+   "arquivo": "024180.svg",
+   "codigo": "IRBR3",
+   "hash": "500285effd94df0c",
+   "obtidoEm": "2026-11-17"
+  },
+  "018376": {
+   "arquivo": "018376.svg",
+   "codigo": "ISAE3",
+   "hash": "a56fd3967ec79f74",
+   "obtidoEm": "2026-11-17"
+  },
+  "007617": {
+   "arquivo": "007617.svg",
+   "codigo": "ITSA3",
+   "hash": "f68f91c190abcae3",
+   "obtidoEm": "2026-11-17"
+  },
+  "025496": {
+   "arquivo": "025496.svg",
+   "codigo": "JALL3",
+   "hash": "804739d4f257c078",
+   "obtidoEm": "2026-11-17"
+  },
+  "020605": {
+   "arquivo": "020605.svg",
+   "codigo": "JHSF3",
+   "hash": "27cdce1f9b10d0a2",
+   "obtidoEm": "2026-11-17"
+  },
+  "013285": {
+   "arquivo": null,
+   "codigo": "JOPA3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "023574": {
+   "arquivo": "023574.svg",
+   "codigo": "MEAL3",
+   "hash": "d7b97653ddc7a8f4",
+   "obtidoEm": "2026-11-17"
+  },
+  "011932": {
+   "arquivo": "011932.svg",
+   "codigo": "MYPK3",
+   "hash": "b4ce05cbfa3d1bd8",
+   "obtidoEm": "2026-11-17"
+  },
+  "022020": {
+   "arquivo": "022020.svg",
+   "codigo": "JSLG3",
+   "hash": "94f1c48089af3e44",
+   "obtidoEm": "2026-11-17"
+  },
+  "025798": {
+   "arquivo": null,
+   "codigo": "KLAS3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "004146": {
+   "arquivo": null,
+   "codigo": "CTKA3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "019348": {
+   "arquivo": "019348.svg",
+   "codigo": "ITUB3",
+   "hash": "de5b312f4c2eaf47",
+   "obtidoEm": "2026-11-17"
+  },
+  "012653": {
+   "arquivo": "012653.svg",
+   "codigo": "KLBN11",
+   "hash": "6d488223c1b3ed99",
+   "obtidoEm": "2026-11-17"
+  },
+  "020575": {
+   "arquivo": "020575.svg",
+   "codigo": "JBSS3",
+   "hash": "e2ddd20ee99d5afb",
+   "obtidoEm": "2026-11-17"
+  },
+  "019879": {
+   "arquivo": "019879.svg",
+   "codigo": "LIGT3",
+   "hash": "a69629420e51d948",
+   "obtidoEm": "2026-11-17"
+  },
+  "007811": {
+   "arquivo": "007811.svg",
+   "codigo": "JFEN3",
+   "hash": "869bdb05e192ea1b",
+   "obtidoEm": "2026-11-17"
+  },
+  "023272": {
+   "arquivo": "023272.svg",
+   "codigo": "LOGG3",
+   "hash": "ed738e2b12dfd5c7",
+   "obtidoEm": "2026-11-17"
+  },
+  "025038": {
+   "arquivo": "025038.svg",
+   "codigo": "LJQQ3",
+   "hash": "28c8c8f9ba92a98d",
+   "obtidoEm": "2026-11-17"
+  },
+  "008133": {
+   "arquivo": "008133.svg",
+   "codigo": "LREN3",
+   "hash": "f8bfb4d2d6c96eed",
+   "obtidoEm": "2026-11-17"
+  },
+  "020370": {
+   "arquivo": "020370.svg",
+   "codigo": "LPSB3",
+   "hash": "3f78ecb9e24d6e1c",
+   "obtidoEm": "2026-11-17"
+  },
+  "020060": {
+   "arquivo": "020060.svg",
+   "codigo": "LUPA3",
+   "hash": "70f920c4bd055a72",
+   "obtidoEm": "2026-11-17"
+  },
+  "007870": {
+   "arquivo": "007870.svg",
+   "codigo": "KEPL3",
+   "hash": "7cd9c0cc55c04805",
+   "obtidoEm": "2026-11-17"
+  },
+  "025062": {
+   "arquivo": "025062.svg",
+   "codigo": "LAVV3",
+   "hash": "0c2c1f7a184886b6",
+   "obtidoEm": "2026-11-17"
+  },
+  "024910": {
+   "arquivo": "024910.svg",
+   "codigo": "LWSA3",
+   "hash": "584a739a2f136644",
+   "obtidoEm": "2026-11-17"
+  },
+  "020338": {
+   "arquivo": "020338.svg",
+   "codigo": "MDIA3",
+   "hash": "d6ab653e380e931d",
+   "obtidoEm": "2026-11-17"
+  },
+  "022470": {
+   "arquivo": "022470.svg",
+   "codigo": "MGLU3",
+   "hash": "947328fe1d6fb136",
+   "obtidoEm": "2026-11-17"
+  },
+  "008575": {
+   "arquivo": "008575.svg",
+   "codigo": "LEVE3",
+   "hash": "857e322f27b6aa33",
+   "obtidoEm": "2026-11-17"
+  },
+  "019739": {
+   "arquivo": "019739.svg",
+   "codigo": "RENT3",
+   "hash": "4067149a49f83392",
+   "obtidoEm": "2026-11-17"
+  },
+  "008397": {
+   "arquivo": null,
+   "codigo": "MGEL3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "020710": {
+   "arquivo": "020710.svg",
+   "codigo": "LOGN3",
+   "hash": "0268327e20a59868",
+   "obtidoEm": "2026-11-17"
+  },
+  "025232": {
+   "arquivo": "025232.svg",
+   "codigo": "CASH3",
+   "hash": "d913b37d2f97046d",
+   "obtidoEm": "2026-11-17"
+  },
+  "008540": {
+   "arquivo": null,
+   "codigo": "MERC3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "020613": {
+   "arquivo": null,
+   "codigo": "FRIO3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "008656": {
+   "arquivo": "008656.svg",
+   "codigo": "GOAU3",
+   "hash": "fe2681c6f8ac59d3",
+   "obtidoEm": "2026-11-17"
+  },
+  "013439": {
+   "arquivo": null,
+   "codigo": "RSUL3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "008753": {
+   "arquivo": null,
+   "codigo": "MTSA3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "022012": {
+   "arquivo": "022012.svg",
+   "codigo": "MILS3",
+   "hash": "8fa9d874906e009e",
+   "obtidoEm": "2026-11-17"
+  },
+  "008818": {
+   "arquivo": null,
+   "codigo": "MMAQ3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "008427": {
+   "arquivo": "008427.svg",
+   "codigo": "ESTR4",
+   "hash": "125fd6211619b813",
+   "obtidoEm": "2026-11-17"
+  },
+  "008451": {
+   "arquivo": "008451.svg",
+   "codigo": "POMO3",
+   "hash": "f8d074c9070ef578",
+   "obtidoEm": "2026-11-17"
+  },
+  "008893": {
+   "arquivo": null,
+   "codigo": "MOAR3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "025119": {
+   "arquivo": "025119.svg",
+   "codigo": "MELK3",
+   "hash": "51b9eaf8fa46a24f",
+   "obtidoEm": "2026-11-17"
+  },
+  "021067": {
+   "arquivo": "021067.svg",
+   "codigo": "MDNE3",
+   "hash": "2e496b3c5b1ad007",
+   "obtidoEm": "2026-11-17"
+  },
+  "025445": {
+   "arquivo": "025445.svg",
+   "codigo": "ESPA3",
+   "hash": "b4579fb2c68aa166",
+   "obtidoEm": "2026-11-17"
+  },
+  "020931": {
+   "arquivo": "020931.svg",
+   "codigo": "BEEF3",
+   "hash": "c1be1b8975e5eeeb",
+   "obtidoEm": "2026-11-17"
+  },
+  "013765": {
+   "arquivo": "013765.svg",
+   "codigo": "MNPR3",
+   "hash": "0694dbf8a785c3c6",
+   "obtidoEm": "2026-11-17"
+  },
+  "020915": {
+   "arquivo": "020915.svg",
+   "codigo": "MRVE3",
+   "hash": "4c8c4183290118dd",
+   "obtidoEm": "2026-11-17"
+  },
+  "005312": {
+   "arquivo": "005312.svg",
+   "codigo": "MNDL3",
+   "hash": "ee37ee1902c4d42a",
+   "obtidoEm": "2026-11-17"
+  },
+  "024902": {
+   "arquivo": "024902.svg",
+   "codigo": "MTRE3",
+   "hash": "f3fce3b9fdc0769d",
+   "obtidoEm": "2026-11-17"
+  },
+  "018821": {
+   "arquivo": "018821.svg",
+   "codigo": "MOTV3",
+   "hash": "a434cc0da176b3d2",
+   "obtidoEm": "2026-11-17"
+  },
+  "019550": {
+   "arquivo": null,
+   "codigo": "NATU3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "023825": {
+   "arquivo": "023825.svg",
+   "codigo": "MOVI3",
+   "hash": "ecae4f5fe91bf654",
+   "obtidoEm": "2026-11-17"
+  },
+  "025399": {
+   "arquivo": "025399.svg",
+   "codigo": "NGRD3",
+   "hash": "cd3e60c93d470f49",
+   "obtidoEm": "2026-11-17"
+  },
+  "022985": {
+   "arquivo": null,
+   "codigo": "NRTQ3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "021180": {
+   "arquivo": "021180.svg",
+   "codigo": "NEXP3",
+   "hash": "4bc98cb93b9e23f9",
+   "obtidoEm": "2026-11-17"
+  },
+  "025534": {
+   "arquivo": "025534.svg",
+   "codigo": "OPCT3",
+   "hash": "837390462163b6dd",
+   "obtidoEm": "2026-11-17"
+  },
+  "020125": {
+   "arquivo": "020125.svg",
+   "codigo": "ODPV3",
+   "hash": "7789323ca016598e",
+   "obtidoEm": "2026-11-17"
+  },
+  "020982": {
+   "arquivo": "020982.svg",
+   "codigo": "MULT3",
+   "hash": "f3bf7687fc0a570c",
+   "obtidoEm": "2026-11-17"
+  },
+  "011312": {
+   "arquivo": "011312.svg",
+   "codigo": "OIBR3",
+   "hash": "2a48996a695dff4a",
+   "obtidoEm": "2026-11-17"
+  },
+  "026123": {
+   "arquivo": "026123.svg",
+   "codigo": "ONCO3",
+   "hash": "5f1667e238d286a0",
+   "obtidoEm": "2026-11-17"
+  },
+  "024783": {
+   "arquivo": "024783.svg",
+   "codigo": "NTCO3",
+   "hash": "f3269cb9fdd0b8d4",
+   "obtidoEm": "2026-11-17"
+  },
+  "015539": {
+   "arquivo": "015539.svg",
+   "codigo": "NEOE3",
+   "hash": "5aa86b7fa92cbce9",
+   "obtidoEm": "2026-11-17"
+  },
+  "023507": {
+   "arquivo": "023507.svg",
+   "codigo": "OFSA3",
+   "hash": "bf3ebcf81133dc18",
+   "obtidoEm": "2026-11-17"
+  },
+  "018414": {
+   "arquivo": "018414.svg",
+   "codigo": "PDTC3",
+   "hash": "91d079fbd95a0339",
+   "obtidoEm": "2026-11-17"
+  },
+  "000094": {
+   "arquivo": "000094.svg",
+   "codigo": "PATI3",
+   "hash": "c520c58bcb82ca7b",
+   "obtidoEm": "2026-11-17"
+  },
+  "009393": {
+   "arquivo": "009393.svg",
+   "codigo": "PMAM3",
+   "hash": "e757ff354dea58b3",
+   "obtidoEm": "2026-11-17"
+  },
+  "013773": {
+   "arquivo": "013773.svg",
+   "codigo": "PTBL3",
+   "hash": "37778d1298717211",
+   "obtidoEm": "2026-11-17"
+  },
+  "021334": {
+   "arquivo": "021334.svg",
+   "codigo": "NUTR3",
+   "hash": "263dfb6a758bd144",
+   "obtidoEm": "2026-11-17"
+  },
+  "009512": {
+   "arquivo": "009512.svg",
+   "codigo": "PETR3",
+   "hash": "659e50f6c54d8fca",
+   "obtidoEm": "2026-11-17"
+  },
+  "025550": {
+   "arquivo": "025550.svg",
+   "codigo": "ORVR3",
+   "hash": "f443495ef4b79d49",
+   "obtidoEm": "2026-11-17"
+  },
+  "021342": {
+   "arquivo": "021342.svg",
+   "codigo": "OSXB3",
+   "hash": "60743d780c3eb685",
+   "obtidoEm": "2026-11-17"
+  },
+  "013447": {
+   "arquivo": null,
+   "codigo": "PPAR3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "025070": {
+   "arquivo": "025070.svg",
+   "codigo": "PLPL3",
+   "hash": "977df566ed40a100",
+   "obtidoEm": "2026-11-17"
+  },
+  "016659": {
+   "arquivo": "016659.svg",
+   "codigo": "PSSA3",
+   "hash": "3add1cd68d1f6ae0",
+   "obtidoEm": "2026-11-17"
+  },
+  "020478": {
+   "arquivo": "020478.svg",
+   "codigo": "PDGR3",
+   "hash": "22dbdfe35f4b55f9",
+   "obtidoEm": "2026-11-17"
+  },
+  "025780": {
+   "arquivo": "025780.svg",
+   "codigo": "RECV3",
+   "hash": "7ab91f3e4267669b",
+   "obtidoEm": "2026-11-17"
+  },
+  "009539": {
+   "arquivo": "009539.svg",
+   "codigo": "PTNT3",
+   "hash": "046e488ed7be1976",
+   "obtidoEm": "2026-11-17"
+  },
+  "024546": {
+   "arquivo": null,
+   "codigo": "PTCA3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "024236": {
+   "arquivo": "024236.svg",
+   "codigo": "PRNR3",
+   "hash": "b2fccea7b3492de5",
+   "obtidoEm": "2026-11-17"
+  },
+  "025089": {
+   "arquivo": "025089.svg",
+   "codigo": "PETZ3",
+   "hash": "e1995d25fd37f688",
+   "obtidoEm": "2026-11-17"
+  },
+  "022187": {
+   "arquivo": "022187.svg",
+   "codigo": "PRIO3",
+   "hash": "979cbbf4670224f9",
+   "obtidoEm": "2026-11-17"
+  },
+  "020346": {
+   "arquivo": "020346.svg",
+   "codigo": "PFRM3",
+   "hash": "906d4d89f0074153",
+   "obtidoEm": "2026-11-17"
+  },
+  "018333": {
+   "arquivo": null,
+   "codigo": "PRPT3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "023302": {
+   "arquivo": null,
+   "codigo": "QUSW3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "005258": {
+   "arquivo": "005258.svg",
+   "codigo": "RADL3",
+   "hash": "cb8356a125b75eea",
+   "obtidoEm": "2026-11-17"
+  },
+  "003190": {
+   "arquivo": "003190.svg",
+   "codigo": "REDE3",
+   "hash": "1f264b4c698a3a44",
+   "obtidoEm": "2026-11-17"
+  },
+  "020362": {
+   "arquivo": "020362.svg",
+   "codigo": "POSI3",
+   "hash": "8834bb78d222ff20",
+   "obtidoEm": "2026-11-17"
+  },
+  "022497": {
+   "arquivo": "022497.svg",
+   "codigo": "QUAL3",
+   "hash": "1eff86655230e663",
+   "obtidoEm": "2026-11-17"
+  },
+  "014109": {
+   "arquivo": "014109.svg",
+   "codigo": "RAPT3",
+   "hash": "0fc1a9656cbd899b",
+   "obtidoEm": "2026-11-17"
+  },
+  "012572": {
+   "arquivo": "012572.svg",
+   "codigo": "RCSL3",
+   "hash": "c8545211eea9c6ef",
+   "obtidoEm": "2026-11-17"
+  },
+  "027650": {
+   "arquivo": "027650.svg",
+   "codigo": "RVEE3",
+   "hash": "2d5253eef0329048",
+   "obtidoEm": "2026-11-17"
+  },
+  "018368": {
+   "arquivo": "018368.svg",
+   "codigo": "GEPA3",
+   "hash": "aa9969d492887a32",
+   "obtidoEm": "2026-11-17"
+  },
+  "009989": {
+   "arquivo": "009989.svg",
+   "codigo": "RPMG3",
+   "hash": "13320589b7055b93",
+   "obtidoEm": "2026-11-17"
+  },
+  "021636": {
+   "arquivo": "021636.svg",
+   "codigo": "RNEW11",
+   "hash": "432972212029ee0d",
+   "obtidoEm": "2026-11-17"
+  },
+  "024821": {
+   "arquivo": "024821.svg",
+   "codigo": "RDOR3",
+   "hash": "f459a158df8a5fa9",
+   "obtidoEm": "2026-11-17"
+  },
+  "012696": {
+   "arquivo": null,
+   "codigo": "SNSY3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "013781": {
+   "arquivo": "013781.svg",
+   "codigo": "SCAR3",
+   "hash": "0c2aa8cc4813741d",
+   "obtidoEm": "2026-11-17"
+  },
+  "009415": {
+   "arquivo": "009415.svg",
+   "codigo": "AHEB3",
+   "hash": "c5ad4f51054197da",
+   "obtidoEm": "2026-11-17"
+  },
+  "020451": {
+   "arquivo": "020451.svg",
+   "codigo": "RDNI3",
+   "hash": "bd00a981372966dd",
+   "obtidoEm": "2026-11-17"
+  },
+  "007510": {
+   "arquivo": "007510.svg",
+   "codigo": "ROMI3",
+   "hash": "7dd893ce94f8eb3d",
+   "obtidoEm": "2026-11-17"
+  },
+  "014664": {
+   "arquivo": null,
+   "codigo": "SHUL3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "016306": {
+   "arquivo": "016306.svg",
+   "codigo": "RSID3",
+   "hash": "2669dfe1fdf73d13",
+   "obtidoEm": "2026-11-17"
+  },
+  "017450": {
+   "arquivo": "017450.svg",
+   "codigo": "RAIL3",
+   "hash": "964f2defd7fa165c",
+   "obtidoEm": "2026-11-17"
+  },
+  "025160": {
+   "arquivo": "025160.svg",
+   "codigo": "SEQL3",
+   "hash": "388a34e238dbf1ad",
+   "obtidoEm": "2026-11-17"
+  },
+  "023221": {
+   "arquivo": "023221.svg",
+   "codigo": "SEER3",
+   "hash": "6e970420b6a1a956",
+   "obtidoEm": "2026-11-17"
+  },
+  "020745": {
+   "arquivo": "020745.svg",
+   "codigo": "SLCE3",
+   "hash": "c8a4ae411a62e690",
+   "obtidoEm": "2026-11-17"
+  },
+  "024260": {
+   "arquivo": "024260.svg",
+   "codigo": "SMFT3",
+   "hash": "b6d9e9c86c917976",
+   "obtidoEm": "2026-11-17"
+  },
+  "010880": {
+   "arquivo": null,
+   "codigo": "SOND3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "020516": {
+   "arquivo": "020516.svg",
+   "codigo": "SMTO3",
+   "hash": "08ff5f6fefe426ed",
+   "obtidoEm": "2026-11-17"
+  },
+  "020966": {
+   "arquivo": null,
+   "codigo": "SGPS3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "016438": {
+   "arquivo": null,
+   "codigo": "OPTS3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "016586": {
+   "arquivo": null,
+   "codigo": "OPSE3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "009067": {
+   "arquivo": null,
+   "codigo": "NEMO3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "025372": {
+   "arquivo": "025372.svg",
+   "codigo": "ASAI3",
+   "hash": "b58c12e816ab0624",
+   "obtidoEm": "2026-11-17"
+  },
+  "025003": {
+   "arquivo": "025003.svg",
+   "codigo": "SIMH3",
+   "hash": "94f1c48089af3e44",
+   "obtidoEm": "2026-11-17"
+  },
+  "026077": {
+   "arquivo": "026077.svg",
+   "codigo": "ECOM3",
+   "hash": "fab766c3c396cd65",
+   "obtidoEm": "2026-11-17"
+  },
+  "022519": {
+   "arquivo": "022519.svg",
+   "codigo": "TECN3",
+   "hash": "f4493b3c2de2d983",
+   "obtidoEm": "2026-11-17"
+  },
+  "020435": {
+   "arquivo": "020435.svg",
+   "codigo": "TCSA3",
+   "hash": "5d034ef3b1d35035",
+   "obtidoEm": "2026-11-17"
+  },
+  "011231": {
+   "arquivo": null,
+   "codigo": "TKNO3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "013986": {
+   "arquivo": "013986.svg",
+   "codigo": "SUZB3",
+   "hash": "03aae7c6c259374a",
+   "obtidoEm": "2026-11-17"
+  },
+  "021040": {
+   "arquivo": "021040.svg",
+   "codigo": "SYNE3",
+   "hash": "ea618fcf230b9882",
+   "obtidoEm": "2026-11-17"
+  },
+  "006173": {
+   "arquivo": "006173.svg",
+   "codigo": "TASA3",
+   "hash": "923fe94fa7186168",
+   "obtidoEm": "2026-11-17"
+  },
+  "022454": {
+   "arquivo": "022454.svg",
+   "codigo": "SHOW3",
+   "hash": "3226971a238579fa",
+   "obtidoEm": "2026-11-17"
+  },
+  "011258": {
+   "arquivo": "011258.svg",
+   "codigo": "TELB3",
+   "hash": "e37d7d4f8b09393d",
+   "obtidoEm": "2026-11-17"
+  },
+  "007544": {
+   "arquivo": null,
+   "codigo": "TRXR3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "026000": {
+   "arquivo": "026000.svg",
+   "codigo": "LAND3",
+   "hash": "4a82fd530465ff4b",
+   "obtidoEm": "2026-11-17"
+  },
+  "024929": {
+   "arquivo": "024929.svg",
+   "codigo": "TIMS3",
+   "hash": "c8dcd78b02170ffc",
+   "obtidoEm": "2026-11-17"
+  },
+  "020800": {
+   "arquivo": "020800.svg",
+   "codigo": "TGMA3",
+   "hash": "0e9ed66901324249",
+   "obtidoEm": "2026-11-17"
+  },
+  "025950": {
+   "arquivo": "025950.svg",
+   "codigo": "TTEN3",
+   "hash": "be48cccade47cfc0",
+   "obtidoEm": "2026-11-17"
+  },
+  "017671": {
+   "arquivo": "017671.svg",
+   "codigo": "VIVT3",
+   "hash": "864e2082c44ba135",
+   "obtidoEm": "2026-11-17"
+  },
+  "019992": {
+   "arquivo": "019992.svg",
+   "codigo": "TOTS3",
+   "hash": "ab3b688d0b1ac07f",
+   "obtidoEm": "2026-11-17"
+  },
+  "025208": {
+   "arquivo": "025208.svg",
+   "codigo": "TFCO4",
+   "hash": "905ccff79cbacc98",
+   "obtidoEm": "2026-11-17"
+  },
+  "020257": {
+   "arquivo": "020257.svg",
+   "codigo": "TAEE11",
+   "hash": "f721748377cdeadd",
+   "obtidoEm": "2026-11-17"
+  },
+  "019330": {
+   "arquivo": "019330.svg",
+   "codigo": "TPIS3",
+   "hash": "bec1c90b597305db",
+   "obtidoEm": "2026-11-17"
+  },
+  "011398": {
+   "arquivo": null,
+   "codigo": "CRPG3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "006343": {
+   "arquivo": "006343.svg",
+   "codigo": "TUPY3",
+   "hash": "738b37c16e5cc7aa",
+   "obtidoEm": "2026-11-17"
+  },
+  "027766": {
+   "arquivo": null,
+   "codigo": "AUAU3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "011592": {
+   "arquivo": "011592.svg",
+   "codigo": "UNIP3",
+   "hash": "8dcdf5a902a99f63",
+   "obtidoEm": "2026-11-17"
+  },
+  "014320": {
+   "arquivo": "014320.svg",
+   "codigo": "USIM3",
+   "hash": "8ae58f878862f93a",
+   "obtidoEm": "2026-11-17"
+  },
+  "004170": {
+   "arquivo": "004170.svg",
+   "codigo": "VALE3",
+   "hash": "0f985f13984439e6",
+   "obtidoEm": "2026-11-17"
+  },
+  "020028": {
+   "arquivo": "020028.svg",
+   "codigo": "VLID3",
+   "hash": "ccfd35610d7f42e0",
+   "obtidoEm": "2026-11-17"
+  },
+  "021130": {
+   "arquivo": "021130.svg",
+   "codigo": "TRIS3",
+   "hash": "c2387de44daffc00",
+   "obtidoEm": "2026-11-17"
+  },
+  "024716": {
+   "arquivo": "024716.svg",
+   "codigo": "VAMO3",
+   "hash": "270eb4845ab9c703",
+   "obtidoEm": "2026-11-17"
+  },
+  "021440": {
+   "arquivo": "021440.svg",
+   "codigo": "VSTE3",
+   "hash": "0937797d3871cd17",
+   "obtidoEm": "2026-11-17"
+  },
+  "024295": {
+   "arquivo": "024295.svg",
+   "codigo": "VBBR3",
+   "hash": "10f341ad42ba3389",
+   "obtidoEm": "2026-11-17"
+  },
+  "018465": {
+   "arquivo": "018465.svg",
+   "codigo": "UGPA3",
+   "hash": "e4d6d3676eeca99f",
+   "obtidoEm": "2026-11-17"
+  },
+  "022780": {
+   "arquivo": "022780.svg",
+   "codigo": "UCAS3",
+   "hash": "0f6b3f6e9e4ada39",
+   "obtidoEm": "2026-11-17"
+  },
+  "027057": {
+   "arquivo": "027057.svg",
+   "codigo": "VTRU3",
+   "hash": "7d76d602dcc27c2a",
+   "obtidoEm": "2026-11-17"
+  },
+  "025763": {
+   "arquivo": "025763.svg",
+   "codigo": "VITT3",
+   "hash": "daa53f36aa3a068b",
+   "obtidoEm": "2026-11-17"
+  },
+  "026050": {
+   "arquivo": "026050.svg",
+   "codigo": "FIQE3",
+   "hash": "001f0ffae57bb7de",
+   "obtidoEm": "2026-11-17"
+  },
+  "020702": {
+   "arquivo": null,
+   "codigo": "VIVR11",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "011762": {
+   "arquivo": "011762.svg",
+   "codigo": "VULC3",
+   "hash": "b76e281150240a20",
+   "obtidoEm": "2026-11-17"
+  },
+  "011991": {
+   "arquivo": null,
+   "codigo": "MWET3",
+   "motivo": "ausente",
+   "procuradoEm": "2026-11-17"
+  },
+  "023590": {
+   "arquivo": "023590.svg",
+   "codigo": "WIZC3",
+   "hash": "aa2e238cb83f9fe6",
+   "obtidoEm": "2026-11-17"
+  },
+  "011070": {
+   "arquivo": "011070.svg",
+   "codigo": "WLMM3",
+   "hash": "f31c753a0a4aaa75",
+   "obtidoEm": "2026-11-17"
+  },
+  "024805": {
+   "arquivo": "024805.svg",
+   "codigo": "VIVA3",
+   "hash": "5095d0d6933f9c0b",
+   "obtidoEm": "2026-11-17"
+  },
+  "021016": {
+   "arquivo": "021016.svg",
+   "codigo": "YDUQ3",
+   "hash": "c3e0c7b7cf85eee5",
+   "obtidoEm": "2026-11-17"
+  },
+  "025518": {
+   "arquivo": "025518.svg",
+   "codigo": "WEST3",
+   "hash": "57c8fb9823d63be5",
+   "obtidoEm": "2026-11-17"
+  },
+  "005410": {
+   "arquivo": "005410.svg",
+   "codigo": "WEGE3",
+   "hash": "97dd140dfa0aa908",
+   "obtidoEm": "2026-11-17"
+  },
+  "014346": {
+   "arquivo": "014346.svg",
+   "codigo": "WHRL3",
+   "hash": "3acc02f62fea3e90",
+   "obtidoEm": "2026-11-17"
+  },
+  "026247": {
+   "arquivo": "026247.svg",
+   "codigo": "PORT3",
+   "hash": "d5c1c5ecce06d57a",
+   "obtidoEm": "2026-11-17"
+  },
+  "024317": {
+   "arquivo": "024317.svg",
+   "codigo": "ZAMP3",
+   "hash": "8eb3166f104cc379",
+   "obtidoEm": "2026-11-17"
+  }
+ }
+}

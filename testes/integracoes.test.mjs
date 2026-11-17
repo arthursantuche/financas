@@ -42,3 +42,29 @@ test('token do GitHub: página de criação pré-preenchida, só Contents e Acti
   assert.deepEqual(permissoes.sort(), ['actions', 'contents']);
   assert.equal(new URL(linkToken('')).searchParams.has('target_name'), false);
 });
+
+test('logotipos: só SVG inofensivo é guardado', async () => {
+  const { conferirSVG } = await import('../coleta/logos.mjs');
+  const ok = '<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56"><defs><linearGradient id="a"/></defs><path fill="url(#a)" d="M0 0h56v56H0z"/></svg>';
+  assert.equal(conferirSVG(ok), ok);
+  assert.equal(conferirSVG('<?xml version="1.0"?>' + ok), ok);
+  for (const ruim of [
+    '<svg><script>alert(1)</script></svg>',
+    '<svg onload="x()"><path/></svg>',
+    '<svg><image href="https://exemplo.com/a.png"/></svg>',
+    '<svg><path style="fill:url(https://exemplo.com/x)"/></svg>',
+    '<svg><foreignObject><div/></foreignObject></svg>',
+    '<!DOCTYPE svg [<!ENTITY x "y">]><svg></svg>',
+    '<html><svg></svg></html>',
+    '<svg>' + 'x'.repeat(70000) + '</svg>',
+  ]) assert.equal(conferirSVG(ruim), null, ruim.slice(0, 40));
+});
+
+test('logotipos: monograma usa a raiz do código ou as iniciais', async () => {
+  const { letras } = await import('../Portal/assets/js/marca.js');
+  assert.equal(letras({ codigo: 'PETR4' }), 'PETR');
+  assert.equal(letras({ codigo: 'BOVA11' }), 'BOVA');
+  assert.equal(letras({ codigo: 'VALE3F' }), 'VALE');
+  assert.equal(letras({ nome: 'Tesouro IPCA+ 2035' }), 'TI');
+  assert.equal(letras({ nome: 'Banco do Brasil S.A.' }), 'BB');
+});

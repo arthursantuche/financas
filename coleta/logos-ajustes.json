@@ -1,0 +1,5 @@
+{
+  "_como_usar": "excluir: códigos CVM cujo logotipo não deve aparecer (fica o monograma). codigo: código CVM → ticker a usar na busca, quando o primeiro ticker da companhia não tem logotipo e outro tem.",
+  "excluir": [],
+  "codigo": {}
+}

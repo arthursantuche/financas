@@ -3,6 +3,7 @@ import { el, numero, dataBR, plural } from '../util.js';
 import { conteudo, indicadores } from '../dados.js';
 import { iniciarCarrossel } from '../carrossel.js';
 import { SIMULADORES } from './simuladores.js';
+import { ilustracao } from '../ilustracoes.js';
 
 export const NIVEIS = { 1: 'Essencial', 2: 'Intermediário', 3: 'Avançado' };
 export const nivel = (n) => el('span', { class: 'nivel' }, el('span', { class: 'nivel__pontos', 'aria-hidden': 'true' }, [1, 2, 3].map((i) => el('i', { 'data-cheio': i <= n }))), NIVEIS[n] || '');
@@ -39,6 +40,7 @@ export async function pagina() {
   const trilhas = el('section', { class: 'secao secao--mist faixa-carrossel destaques', id: 'trilhas' },
     el('div', { class: 'conteudo' }, el('div', { class: 'destaques__cabecalho' }, el('h2', { class: 'titulo' }, 'Trilhas de conhecimento.'), el('a', { href: '#aprender' }, plural(totalArtigos, 'artigo', 'artigos')))),
     carrossel(c.trilhas.map((t, i) => el('a', { class: 'card card--trilha', href: `#aprender/${t.id}` },
+      el('div', { class: 'card__ilustracao' }, ilustracao(t.id)),
       el('p', { class: 'card__numero' }, String(i + 1).padStart(2, '0')),
       el('div', { class: 'empilha' }, el('h3', { class: 'card__titulo' }, t.nome), el('p', { class: 'copy introducao' }, t.resumo)),
       el('div', { class: 'card__rodape' }, el('span', { class: 'legenda' }, plural(t.artigos.length, 'artigo', 'artigos')), el('span', { class: 'cor-link' }, 'Abrir')))), 'Trilhas de conhecimento'));

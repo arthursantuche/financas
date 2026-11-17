@@ -12,6 +12,21 @@ Fonte da verdade da identidade: `x/Documentação/Identidade Visual - Apple/Iden
 ## O que foi herdado sem mudança
 Paleta e papéis (`--cor-*`), tipografia, espaçamentos, raios, curvas e durações; menu em faixa que vira cápsula ao rolar; barra azul de carregamento; pílulas; cartões; carrosséis com a gota; campos, listas e tabelas; aviso flutuante; blocos de carregamento; entrada de página só do conteúdo, em 240 ms; tema claro ou escuro pelo sistema, sem botão.
 
+## Atualização de 16/11/2026 (versão 1.2)
+O CSS herdado foi alinhado ao Escócia 2027 versão 2.5 (o portal tinha partido da versão de 14/11). Registro completo no Vault, Linguagem visual - Portal Finanças, seção 1.
+
+### Espaçamento
+Papéis do Diretório - Identidade Visual - Apple, seção 7.1, em `tokens.css`: `--espaco-junto` (4), `--espaco-par` (8), `--espaco-perto` (12), `--espaco-grupo` (16), `--element-gap` (20), `--espaco-bloco` (32), `--espaco-cabecalho` (40), `--espaco-secao` (64 no celular, 90 a partir de 834 px, 64 no celular deitado). `--card-padding-compacto` (24) nos cartões densos (escolha, veredito, ordem, caixa, aviso vazio). `--medida-leitura` (66ch) em introduções, legendas, selos, natureza, frases e no texto dos artigos. Escolha pelo que os dois elementos são um para o outro; um degrau direto só dentro de componente, com comentário.
+
+### Toque e cursor
+Área invisível de 44 × 44 px (`::after`) no título da barra, links "Ver…", links de lista, voltar, rodapé, fontes do artigo, selos com link, links de tabela e links nas ações de formulário. Itens do menu com 44 px de altura. Setas do carrossel: fundo `--cor-controle-hover` com o cursor e `--cor-controle-ativo` ao tocar; pontos com `--cor-glifo-hover`. Anel de foco para dentro no controle segmentado (ele rola e corta a borda).
+
+### Logotipos (`marca.js`, `.marca`)
+Ícone de app: quadrado com cantos de 22,5% (30% com `corner-shape: squircle`), contorno de 1 px (`--contorno-sutil`), fundo `--cor-faixa` (ou `--cor-cartao` sobre faixa). 32 px na busca, 40 px nas linhas da carteira e nas ordens, 64 px nos cabeçalhos de empresa e de ativo. Sem logotipo: monograma em `--cor-texto-2`, peso 600. A imagem só entra depois de decodificada. Fonte, cache e segurança: Vault, Linguagem visual, seção 3.
+
+### Ilustrações (`ilustracoes.js`, `.ilustracao`)
+Traço de mão em tinta (`currentColor`) e cinza (`--cor-texto-2`); pesos 2,4, 1,8 e 1,4; sem cor de destaque; preenchimento só com `--ilustracao-fundo` (a cor da superfície). Cartão de trilha: cena parada, 132 px de altura. Abertura de artigo e de trilha: até 420 × 150 px, com o traço principal desenhado pela rolagem (`animation-timeline: view()`, só sem movimento reduzido). Gerar com `node coleta/ilustracoes.mjs`; padrão no Vault, Linguagem visual, seção 5.
+
 ## O que é próprio deste portal
 
 ### Tokens novos (`tokens.css`) [Derivado]
@@ -84,8 +99,12 @@ Laranja não é perda: é o que pede atenção. Vermelho não é erro de formul�
 - **Sombra de 3 px** em volta do ponto de leitura do gráfico, na cor do fundo, para destacá-lo da linha.
 - **Texto dos gráficos em 12 px** e dica com raio de 10 px, escritos em `graficos.js`.
 - **Barra superior:** `saturate(180%)` junto do desfoque, herdado.
+- **2 px entre código e nome** nas linhas da carteira (`.cotacao__textos`): densidade do app Stocks, abaixo do papel "junto".
+- **24 px depois do título de parte do artigo** (`.prosa > h2 + *`): proporcional ao título de 28 px (Diretório, 7.1, relação com a tipografia), sem papel próprio.
+- **Raio de 22,5%** nos logotipos: proporção dos ícones de app, não um raio da escala.
 
 ## Validação
+- `node testes/layout.mjs` (checagem de layout da identidade, 18 rotas, 5 tamanhos, 2 temas) e `node testes/checar-indicadores.cjs` (cursor e foco não cortados) devem terminar sem problema.
 - `node testes/e2e.mjs` percorre as rotas públicas em 1280 × 800, 834 × 1112, 390 × 844, 844 × 390 e 320 × 640, nos dois temas, e a demonstração em três tamanhos: sem rolagem lateral, um título principal por página e console sem erros.
 - Varredura de cor: `grep -nE '#[0-9a-fA-F]{3,6}\b|rgba?\(' Portal/assets/css/*.css` só deve achar `tokens.css`.
 - No iPhone físico ainda é preciso conferir toque, fluidez, área segura e o ícone na tela inicial.

@@ -8,6 +8,7 @@ import { achar, remover, sessao, lista } from './cofre.js';
 import { dossieEmpresa } from './empresa.js';
 import { blocoSintese, blocoCriterios, blocoGraficos, blocoTabela, blocoPares, blocoMultiplos, blocoBalanco } from './analise.js';
 import { analisarEstrutura } from '../calculo/opcoes.js';
+import { marca } from '../marca.js';
 import { PERFIS } from '../agente/dossie.js';
 
 const secao = (titulo, corpo, { mist = false, rotulo = null, intro = null, id = null } = {}) => el('section', { class: `secao ${mist ? 'secao--mist' : ''}`, id }, el('div', { class: 'conteudo' }, rotulo && el('p', { class: 'selo' }, rotulo), el('h2', { class: 'titulo' }, titulo), intro && el('p', { class: 'copy introducao' }, intro), corpo));
@@ -19,7 +20,7 @@ const nivelPorter = (t) => ({ baixa: 1, 'média': 2, media: 2, alta: 3 }[String(
 function cartaoOrdem(o, n) {
   const c = o.criterios;
   return el('article', { class: 'ordem', 'data-subir': true },
-    el('div', { class: 'ordem__topo' }, el('h3', { class: 'ordem__codigo' }, el('a', { href: `#emp-${o.ticker}` }, o.ticker)), el('span', { class: 'legenda' }, o.setor)),
+    el('div', { class: 'ordem__topo' }, el('span', { class: 'ordem__marca' }, marca({ codigo: o.ticker, tamanho: 'm' }), el('h3', { class: 'ordem__codigo' }, el('a', { href: `#emp-${o.ticker}` }, o.ticker))), el('span', { class: 'legenda' }, o.setor)),
     el('dl', { class: 'estatisticas' }, dado('Quantidade', numero(o.quantidade, 0)), dado('Preço de referência', brl(o.preco)), dado('Valor estimado', brl(o.valor)), dado('Peso na carteira depois', pct(o.pesoNaCarteira, 1)), dado('Preço-teto', brl(c.precoTeto)), dado('Ponto de revisão', brl(c.precoRevisao))),
     el('p', { class: 'copy' }, n?.tese),
     el('p', { class: 'legenda' }, `Notas da triagem (0 a 1): saúde ${numero(o.notas.saude, 2)} · qualidade ${numero(o.notas.qualidade, 2)} · preço ${numero(o.notas.valor, 2)} · crescimento ${numero(o.notas.crescimento, 2)}. Preço-teto: ${c.baseTeto}.`));
