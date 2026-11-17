@@ -1,12 +1,12 @@
 {
  "fonte": "Banco Central do Brasil (SGS e Boletim Focus)",
- "geradoEm": "2026-11-17T04:12:44.609Z",
+ "geradoEm": "2026-11-17T18:38:37.156Z",
  "selicMeta": {
   "data": "2026-09-17",
   "valor": 13.75
  },
  "cdiAnual": {
-  "data": "2026-11-13",
+  "data": "2026-11-16",
   "valor": 13.65
  },
  "ipca12m": {
@@ -26,15 +26,15 @@
   "valor": 0.6202
  },
  "dolar": {
-  "data": "2026-11-16",
-  "valor": 5.7324
+  "data": "2026-11-17",
+  "valor": 5.7851
  },
  "juroRealExPost": 0.08716429322374064,
- "cdiAcumulado12m": 0.14136209971144464,
- "cdiAcumuladoAno": 0.1220265532980207,
+ "cdiAcumulado12m": 0.14194177469464608,
+ "cdiAcumuladoAno": 0.12259640814390971,
  "ipcaAcumuladoAno": 0.04096848455567592,
  "poupancaAcumulada12m": 0.08964902988559542,
- "dolar12m": 0.0793854033290653,
+ "dolar12m": 0.08930857874519837,
  "expectativas": {
   "IPCA": {
    "data": "2026-11-13",
