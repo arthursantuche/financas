@@ -19,13 +19,68 @@ O CSS herdado foi alinhado ao Escócia 2027 versão 2.5 (o portal tinha partido 
 Papéis do Diretório - Identidade Visual - Apple, seção 7.1, em `tokens.css`: `--espaco-junto` (4), `--espaco-par` (8), `--espaco-perto` (12), `--espaco-grupo` (16), `--element-gap` (20), `--espaco-bloco` (32), `--espaco-cabecalho` (40), `--espaco-secao` (64 no celular, 90 a partir de 834 px, 64 no celular deitado). `--card-padding-compacto` (24) nos cartões densos (escolha, veredito, ordem, caixa, aviso vazio). `--medida-leitura` (66ch) em introduções, legendas, selos, natureza, frases e no texto dos artigos. Escolha pelo que os dois elementos são um para o outro; um degrau direto só dentro de componente, com comentário.
 
 ### Toque e cursor
-Área invisível de 44 × 44 px (`::after`) no título da barra, links "Ver…", links de lista, voltar, rodapé, fontes do artigo, selos com link, links de tabela e links nas ações de formulário. Itens do menu com 44 px de altura. Setas do carrossel: fundo `--cor-controle-hover` com o cursor e `--cor-controle-ativo` ao tocar; pontos com `--cor-glifo-hover`. Anel de foco para dentro no controle segmentado (ele rola e corta a borda).
+O padrão completo está em "Interação", logo abaixo. Área invisível de 44 × 44 px (`::after`) no título da barra, links "Ver…", links de lista, voltar, rodapé, fontes do artigo, selos com link, links de tabela e links nas ações de formulário. Itens do menu com 44 px de altura. Setas do carrossel: fundo `--cor-controle-hover` com o cursor e `--cor-controle-ativo` ao tocar; pontos com `--cor-glifo-hover`. Anel de foco para dentro no controle segmentado (ele rola e corta a borda).
 
 ### Logotipos (`marca.js`, `.marca`)
 Ícone de app: quadrado com cantos de 22,5% (30% com `corner-shape: squircle`), contorno de 1 px (`--contorno-sutil`), fundo `--cor-faixa` (ou `--cor-cartao` sobre faixa). 32 px na busca, 40 px nas linhas da carteira e nas ordens, 64 px nos cabeçalhos de empresa e de ativo. Sem logotipo: monograma em `--cor-texto-2`, peso 600. A imagem só entra depois de decodificada. Fonte, cache e segurança: Vault, Linguagem visual, seção 3.
 
-### Ilustrações (`ilustracoes.js`, `.ilustracao`)
-Traço de mão em tinta (`currentColor`) e cinza (`--cor-texto-2`); pesos 2,4, 1,8 e 1,4; sem cor de destaque; preenchimento só com `--ilustracao-fundo` (a cor da superfície). Cartão de trilha: cena parada, 132 px de altura. Abertura de artigo e de trilha: até 420 × 150 px, com o traço principal desenhado pela rolagem (`animation-timeline: view()`, só sem movimento reduzido). Gerar com `node coleta/ilustracoes.mjs`; padrão no Vault, Linguagem visual, seção 5.
+## Interação (versão 1.3, 17/11/2026)
+Padrão único, decidido em arena a partir do Escócia 2027 (registro no Vault, Linguagem visual - Portal Finanças). Implementação: seção "Estados de interação" de `componentes.css`. Prova automática: `node testes/estados.mjs`.
+
+**Três níveis, nunca misturados.** Termos: *tinta* é `--cor-texto`; *cinza* é `--cor-texto-2`; *faixa* é `--cor-faixa` (o cinza claro das seções alternadas); *anel* é o contorno de foco do teclado (2 px em `--cor-link`, a 2 px do elemento).
+
+Como decidir, nesta ordem:
+1. **Muda algo ali mesmo** (salvar, filtrar, apagar, abrir ou fechar, sincronizar) ou é **a chamada principal da tela** (Entrar, Lançar, Começar a aprender, mesmo que leve a outra página)? → **ação**: pílula; se for secundária e textual, ação em forma de link (`.link-botao`).
+2. **Leva a outra página e ocupa uma área** (um cartão ou uma linha)? → **destino**. Cartão com título numa grade → `a.card`; opção entre tipos ou ferramentas, com descrição curta → `a.escolha`; item de uma lista vertical → `.lista > li > a`.
+3. **Leva a outra página e está no meio de uma frase ou ao lado de um título de seção** ("Ver a trilha", "22 artigos", "Indicadores")? → link no texto.
+4. **Nada disso** → **informação**. Um botão dentro de um bloco informativo segue o próprio tipo; o bloco continua inerte.
+
+O azul (`--cor-link`) marca, na interação, só: link no texto, ação em forma de link, item atual do menu, título do destino sob o cursor e anel. Fora da interação ele também é cor de dados (série principal de um gráfico, etapa atual do agente), marca "obrigatório" nos formulários (como no Escócia) e a pílula preenchida usa `--cor-acao`, outro azul. **Um sinal de cor por componente:** no destino, o título (a seta da escolha acompanha o título; ela não é um segundo sinal de cor diferente).
+
+| Tipo | Parado | Cursor (`@media (hover: hover)`) | Toque (`:active`) | Selecionado | Foco | Desativado |
+| --- | --- | --- | --- | --- | --- | --- |
+| Link no texto | `--cor-link` | sublinha | — | — | anel azul 2 px, a 2 px | — |
+| Ação em forma de link (`.link-botao`: Bloquear, Remover, Desligar) | `--cor-link` (ou `--cor-alerta` se apaga) | sublinha | 0,97× | — | anel | cinza, sem reação |
+| Pílula (`.pill`) | contorno; azul preenchida só na ação principal | fundo um tom acima; a azul clareia | 0,97× | — | anel | 50%, sem reação |
+| Item do menu | tinta | azul | — | azul (`aria-current`), sem cursor | anel | — |
+| Link do rodapé | `--cor-texto-2` | `--cor-texto` + sublinhado | — | — | anel | — |
+| Destino: cartão (`a.card`: trilha, artigo) | título em tinta, sem seta, sem "Abrir"/"Ler" | **título azul**; borda não muda | 0,985× | — | anel | — |
+| Destino: escolha (`a.escolha`: simuladores, tipos de lançamento) | seta cinza à direita | título azul e seta azul que desliza 4 px | 0,98× | contorno azul de 2 px (`aria-pressed`) | anel | — |
+| Destino: linha de lista (`.lista > li > a`) | texto normal | só o título da linha fica azul; nada sublinha | — | — | anel | — |
+| Linha da carteira (`.cotacao > a`) | código em tinta | código azul | 60% de opacidade | — | anel | — |
+| Controle segmentado | cinza | tinta | — | cápsula preenchida | anel para dentro | — |
+| Setas e pontos do carrossel | translúcido | clareia (100 ms) / ponto escurece (120 ms) | escurece | ponto atual alongado | anel | 40%, sem reação |
+| Informação (`.card--info`, veredito, ordem, caixa, natureza, forças) | fundo `--cor-faixa` (ou cartão sobre faixa) ou contorno sutil; nunca o visual de um destino da mesma página | nada | nada | — | — | — |
+| Campo | contorno | nada | — | — | anel azul de 2 px | — |
+
+Durações e curvas: cor em 320 ms (`--dur-link`), fundo e posição em 240 ms (`--dur-curta`), curva `--ease-apple`; toque sem atraso. Os valores são os medidos na referência; nada de durações próprias por página.
+
+Por que os números variam (e não devem variar além disso): o recuo no toque é 0,97× em controles pequenos (pílula, ação em link), 0,98× no cartão de escolha e 0,985× em cartões grandes, os valores do Escócia (quanto maior a área, menor o recuo); a linha de lista não recua (uma faixa da largura da coluna encolhendo parece a página tremendo) e a linha da carteira escurece a 60%, como no app Stocks. Desativado: pílula a 50% e seta do carrossel a 40% (herdados do Escócia, a seta medida em apple.com); ação em link desativada fica cinza, porque a 50% o azul pareceria outro tom de link.
+
+O contorno, sozinho, não diz se algo é clicável: ele depende da superfície. Cartão sobre a faixa já se destaca pelo fundo (trilhas); cartão sobre a tela branca precisa de contorno ou de fundo de faixa para existir (artigos). Quem diz que é clicável é a reação ao cursor e o cursor de mão.
+
+Informação nunca reage. Ela pode ter fundo de faixa ou contorno sutil (caixa de natureza, forças de Porter), mas **não pode repetir o visual de um destino da mesma página**: em Início, os cartões de artigo (destino) têm contorno, então os cartões "Como este portal trabalha" (informação) usam fundo de faixa.
+
+Legendas de gráfico: o ponto tem a cor da série, o texto é cinza (texto azul parecia link).
+
+## Números
+- **Qual usar:** vários números independentes sobre o mesmo assunto (preço e múltiplos, diagnóstico, uma ordem) → par rótulo e valor; cada linha com uma explicação embaixo (critério da síntese) ou um antes e depois (tendência) → linha com valor à direita.
+- **Par rótulo e valor** (`dl.estatisticas`, em todas as páginas): rótulo em cima, valor embaixo, **sempre**. Valor em 21 px/600, números tabulares; rótulo e valor a 4 px; divisória a 12 px do rótulo. Valores da mesma linha da grade ficam na mesma altura, mesmo quando um rótulo quebra. Colunas de 160 px (120 px dentro de cartões). Nunca `flex-wrap` entre rótulo e valor.
+- **Resultados de simulador** (`.resultados`): o mesmo princípio (rótulo em cima, valor embaixo), com o valor em 28 px, porque ali o número é o resultado principal da conta.
+- **Linhas com valor à direita** (critérios, tendências, tabelas, barras do balanço com `.fila--valor`): rótulo à esquerda, valor alinhado à direita, números tabulares. Não se mistura com o par acima no mesmo bloco.
+- **Cartões lado a lado** com as mesmas partes (ordens sugeridas, estruturas com opções): `.grade-2--alinhada` com as classes `.card--alinhado` e `.card--alinhado-N` juntas, em que N é o número de filhos diretos do cartão (4 na ordem, 8 na estrutura). Cada filho ocupa uma linha da grade comum (`subgrid`), e as linhas de dados de cartões vizinhos ficam na mesma altura. Hoje existem as classes 4 e 8; outro N pede uma linha nova em `financas.css` (o estilo em linha é bloqueado pela política de conteúdo).
+- A **mesma altura dos valores** num par rótulo e valor vem da grade: cada item tem duas linhas (rótulo e valor) e o valor se alinha à base do item, que tem a altura da linha mais alta da grade.
+- **Introdução de seção:** 12 px do título e 32 px até o conteúdo (`base.css`).
+- **Última seção cinza:** uma linha fina separa do rodapé, também cinza.
+
+## Carregamento
+É automático: toda rota passa por `rotear()`, em `app.js`; a página nova não faz nada além de devolver o conteúdo. Como no Escócia: blocos neutros com o formato de uma página (sobretítulo, título, linhas e um bloco de conteúdo), em `--cor-faixa`, **sem pulsar**; só a barra azul do menu se move. Na primeira abertura, os blocos vêm do `index.html`; na troca de página, entram se a página nova demorar mais de 160 ms (`esqueletoPagina`, em `app.js`). Troca rápida não pisca. A página nova entra por esmaecimento de 240 ms. Sem desfoque animado: desfocar a página inteira pesa no iPhone e a referência não o usa.
+
+## Página nova: roteiro
+1. Módulo com `pagina(ctx, partes)` e entrada em `ROTAS` (`app.js`); se for privada, `privada: true`. Destino frequente entra em `MENU_PUBLICO` ou `MENU_PRIVADO`.
+2. Componentes só desta lista: pílula, `.link-botao`, `a.card`, `a.escolha`, `.lista`, `dl.estatisticas`, `.card--info`, `.natureza`, controle segmentado, campos de `formularios.js`. Nada de `:hover` próprio: se um componente novo for inevitável, ele entra na seção "Estados de interação" de `componentes.css` e na tabela acima.
+3. Todo número com selo de fonte e data; análise ou recomendação com a caixa de natureza.
+4. Acrescente a rota em `ROTAS` de `testes/layout.mjs` e de `testes/checar-indicadores.cjs` e, se tiver um componente novo, uma verificação em `testes/estados.mjs`. Rode os quatro testes antes de publicar.
 
 ## O que é próprio deste portal
 
@@ -61,7 +116,7 @@ Laranja não é perda: é o que pede atenção. Vermelho não é erro de formul�
 | Faísca | `.faisca` | SVG de 72 × 32 px (120 px no computador), traço de 1,5 px, linha pontilhada na referência |
 | Gráfico de preço | `.grafico-preco` | Linha de 2 px na cor do desempenho do período; área esmaecida até a base; leitura por arraste (dedo, cursor ou setas do teclado) com valor e data; ao soltar, volta ao resumo |
 | Controle segmentado | `.segmento` | Cápsula com o item atual preenchido; alvo de 44 px; rola de lado se não couber |
-| Estatísticas | `.estatisticas` | Pares rótulo e valor com divisória, em colunas automáticas de 150 px ou mais |
+| Estatísticas | `.estatisticas` | Pares rótulo e valor: rótulo em cima, valor embaixo (ver "Números"), em colunas automáticas de 160 px (120 px em cartões) |
 | Alocação | `.alocacao` | Rosca (Chart.js) com legenda em lista ao lado; embaixo, no celular |
 | Simulador | `.simulador` | Cartão com campos em grade, resultados em 28 px e gráfico; recalcula ao digitar |
 | Artigo | `.prosa`, `.sumario`, `.caixa` | Coluna de leitura; sumário fixo ao lado a partir de 1024 px; caixas de resumo, exemplo e atenção |
@@ -85,7 +140,7 @@ Laranja não é perda: é o que pede atenção. Vermelho não é erro de formul�
 - O menu é remontado só quando o cofre abre ou fecha; na troca de página, só o item atual muda.
 
 ### Movimento
-- Entrada de blocos (`data-subir`): 30 px e esmaecimento em 0,5 s, por `IntersectionObserver`, uma vez. Há uma garantia por tempo: nada fica invisível se o observador não disparar.
+- Entrada de blocos (`data-subir`): 30 px e esmaecimento em 0,5 s, por `IntersectionObserver`, uma vez. Há uma garantia por tempo: nada fica invisível se o observador não disparar. A subida usa a propriedade `translate`, não `transform`, para não anular o recuo do toque dos cartões.
 - Gráfico de preço: a linha é traçada em 900 ms e a área surge depois; só com `.movimento`.
 - Gráficos do Chart.js: 900 ms, `easeOutQuart`, ao ficarem visíveis.
 - Gota dos carrosséis: herdada.
@@ -104,6 +159,7 @@ Laranja não é perda: é o que pede atenção. Vermelho não é erro de formul�
 - **Raio de 22,5%** nos logotipos: proporção dos ícones de app, não um raio da escala.
 
 ## Validação
+- `node testes/estados.mjs` (estados de interação e alinhamento de números, dois temas) deve terminar sem problema.
 - `node testes/layout.mjs` (checagem de layout da identidade, 18 rotas, 5 tamanhos, 2 temas) e `node testes/checar-indicadores.cjs` (cursor e foco não cortados) devem terminar sem problema.
 - `node testes/e2e.mjs` percorre as rotas públicas em 1280 × 800, 834 × 1112, 390 × 844, 844 × 390 e 320 × 640, nos dois temas, e a demonstração em três tamanhos: sem rolagem lateral, um título principal por página e console sem erros.
 - Varredura de cor: `grep -nE '#[0-9a-fA-F]{3,6}\b|rgba?\(' Portal/assets/css/*.css` só deve achar `tokens.css`.

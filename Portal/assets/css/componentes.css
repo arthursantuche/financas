@@ -15,12 +15,12 @@
 button.pill { -webkit-appearance: none; appearance: none; border: 0; cursor: pointer; font: inherit; font-size: var(--text-compact-control); }
 .pill--azul { background: var(--cor-acao); color: var(--cor-sobre-acao); box-shadow: none; }
 .pill:hover { text-decoration: none; }
-.pill { transition: transform var(--dur-curta) var(--ease-apple), background-color var(--dur-curta) var(--ease-apple), box-shadow var(--dur-curta) var(--ease-apple); -webkit-tap-highlight-color: transparent; }
-.pill:active { transform: scale(0.97); }
+.pill { transition: transform var(--dur-curta) var(--ease-apple), background-color var(--dur-curta) var(--ease-apple), box-shadow var(--dur-curta) var(--ease-apple), filter var(--dur-curta) var(--ease-apple); -webkit-tap-highlight-color: transparent; }
+.pill:not(:disabled):active { transform: scale(0.97); }
 @media (hover: hover) {
   .pill:not(.pill--azul):not(:disabled):hover { background: var(--cor-faixa); }
   .secao--mist .pill:not(.pill--azul):not(:disabled):hover { background: var(--cor-cartao); }
-  .pill--azul:hover { filter: brightness(1.08); }
+  .pill--azul:not(:disabled):hover { filter: brightness(1.08); }
 }
 
 /* Hero */
@@ -97,9 +97,7 @@ button.pill { -webkit-appearance: none; appearance: none; border: 0; cursor: poi
   gap: var(--espaco-grupo);
   min-height: 420px;
 }
-a.card { transition: box-shadow var(--dur-curta) var(--ease-apple), transform var(--dur-curta) var(--ease-apple); -webkit-tap-highlight-color: transparent; }
-a.card:active { transform: scale(0.985); }
-@media (hover: hover) { a.card:hover { box-shadow: var(--contorno-forte); } }
+
 .card__numero {
   font-family: var(--font-sf-pro-display);
   font-size: var(--text-feature-heading);
@@ -109,6 +107,12 @@ a.card:active { transform: scale(0.985); }
 }
 .card__grafico { position: relative; flex: 1; min-height: 220px; }
 .legenda-grafico { display: flex; flex-wrap: wrap; gap: var(--spacing-12); }
+.legenda-grafico > span { color: var(--cor-texto-2); }
+/* A cor da série fica só no ponto; o texto da legenda é cinza, para não parecer link (EBITDA, ROIC). */
+.legenda-grafico .cor-link::before { background: var(--cor-link); }
+.legenda-grafico .cor-previsto::before { background: var(--cor-grafico-previsto); }
+.legenda-grafico .cor-pago::before { background: var(--cor-texto); }
+.legenda-grafico .cor-apagar::before { background: var(--cor-alerta); }
 .legenda-grafico span::before {
   content: ''; display: inline-block; width: 10px; height: 10px; margin-right: var(--spacing-4);
   border-radius: var(--radius-buttons); background: currentColor; vertical-align: middle;
@@ -204,7 +208,7 @@ a.card:active { transform: scale(0.985); }
   }
 }
 .carrossel__seta:not(:disabled):active { background-color: var(--cor-controle-ativo); }
-.esqueleto { content: ''; display: inline-block; vertical-align: top; height: 1em; border-radius: var(--radius-links); background: var(--cor-faixa); }
+.esqueleto { content: ''; height: 1em; border-radius: var(--radius-links); background: var(--cor-faixa); }
 .secao--mist .esqueleto { background: var(--cor-cartao); }
 /* Página interna aberta direto pelo endereço (esqueletoPagina, em app.js): nome, título, texto e mídia. */
 .esqueleto { display: block; }
@@ -212,11 +216,70 @@ a.card:active { transform: scale(0.985); }
 .esqueleto--titulo { width: min(70%, 420px); margin-top: var(--spacing-12); font-size: var(--text-feature-heading); }
 .esqueleto--linha { max-width: 560px; margin-top: var(--spacing-16); }
 .esqueleto--curta { width: 45%; margin-top: var(--spacing-8); }
+.esqueleto--bloco { width: 100%; height: 240px; margin-top: var(--espaco-cabecalho); border-radius: var(--radius-cards); }
 .esqueleto--midia { width: 100%; height: auto; max-height: 56svh; aspect-ratio: 3 / 2; margin-top: var(--spacing-40); border-radius: var(--radius-images); }
 
 .rodape { padding: var(--spacing-40) var(--gutter-d) var(--spacing-40) var(--gutter-e); background: var(--cor-faixa); }
+/* Quando a última seção da página também é cinza (Alertas, Análise), ela emendava no rodapé e os dois
+   viravam um bloco só. Uma linha fina na largura da coluna marca onde o conteúdo termina. */
+body:has(#pagina > .secao--mist:last-child, #pagina > :last-child > .secao--mist:last-child) .rodape { box-shadow: inset 0 1px 0 var(--cor-divisoria); }
 
 @media (min-width: 834px) {
   .carrossel__setas { display: flex; }
   .carrossel__trilho { --cartao: min(60vw, 560px); }
 }
+
+
+/* ==========================================================================
+   Estados de interação: o padrão único do portal (DESIGN.md, "Interação").
+   Três níveis, nunca misturados: AÇÃO (texto ou botão que faz algo), DESTINO (área inteira que leva a
+   outra página) e INFORMAÇÃO (não reage a nada). O azul marca só: link dentro do texto, ação em forma
+   de link, item atual do menu, título do destino sob o cursor e o anel de foco. Cursor só com
+   `@media (hover: hover)`; toque em `:active`, sem atraso. Durações e curvas da referência:
+   cor 320 ms (--dur-link), fundo e posição 240 ms (--dur-curta), curva --ease-apple.
+   ========================================================================== */
+
+/* DESTINO: cartão clicável. O título fica azul com o cursor; a borda não muda (um sinal só). Toque: 0,985×. */
+a.card, a.escolha, .lista > li > a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+a.card:hover, a.escolha:hover, .lista > li > a:hover { text-decoration: none; }
+a.card, .escolha { transition: transform var(--dur-curta) var(--ease-apple), box-shadow var(--dur-curta) var(--ease-apple); }
+:is(a.card, a.escolha, .lista > li > a) :is(.card__titulo, .kicker, .escolha__nome), .lista > li > a > .empilha > :first-child { transition: color var(--dur-link) var(--ease-apple); }
+a.card:active { transform: scale(0.985); }
+@media (hover: hover) {
+  :is(a.card, a.escolha, .lista > li > a):hover :is(.card__titulo, .kicker, .escolha__nome), .lista > li > a:hover > .empilha > :first-child { color: var(--cor-link); }
+}
+
+/* DESTINO de escolha (cartões de "Faça as contas", tipos em Lançar, simuladores): o título azul e a seta,
+   em cinza parada, desliza 4 px e fica azul (cartão de escolha do Escócia). Toque: 0,98×. */
+a.escolha { padding-right: var(--spacing-48); }
+a.escolha::after {
+  content: ''; position: absolute; top: calc(var(--card-padding-compacto) + var(--spacing-4)); right: var(--card-padding-compacto);
+  width: var(--spacing-8); height: var(--spacing-12); background: var(--cor-texto-2);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M1.5 1l5 5-5 5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M1.5 1l5 5-5 5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform var(--dur-curta) var(--ease-apple), background-color var(--dur-link) var(--ease-apple);
+}
+:is(a, button).escolha:active { transform: scale(0.98); }
+@media (hover: hover) { a.escolha:hover::after { transform: translateX(4px); background-color: var(--cor-link); } }
+/* Escolha selecionada (botão com aria-pressed, como os tipos de opção): contorno de 2 px azul, sem cursor extra. */
+.escolha[aria-pressed="true"] { box-shadow: var(--cor-link) 0 0 0 2px; }
+
+/* DESTINO em linha de lista (artigos de uma trilha, histórico): texto normal; com o cursor, só o título
+   da linha fica azul. Nada de lista inteira azul nem sublinhada. */
+.lista > li > a { border-radius: var(--radius-links); }
+
+/* AÇÃO em forma de link (Bloquear, Remover, Sincronizar…): azul, sublinha com o cursor (Escócia:
+   "Buscar novidades"). Desativada: cinza, sem reação. */
+.link-botao:disabled { color: var(--cor-texto-2); cursor: default; text-decoration: none; transform: none; }
+
+/* Links do rodapé: navegação discreta, em cinza; com o cursor, a cor do texto e o sublinhado. "Bloquear"
+   é uma ação e continua azul. */
+.rodape a { color: var(--cor-texto-2); }
+@media (hover: hover) { .rodape a:hover { color: var(--cor-texto); text-decoration: underline; } }
+
+/* INFORMAÇÃO: cartão que só informa não tem contorno de cartão clicável nem reage. */
+.card--info { background: var(--cor-faixa); box-shadow: none; }
+.secao--mist .card--info { background: var(--cor-cartao); }
+
+/* Controle segmentado: o item não escolhido escurece com o cursor; o escolhido fica em cápsula. */
+@media (hover: hover) { .segmento button:not([aria-pressed="true"]):hover { color: var(--cor-texto); } }

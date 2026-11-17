@@ -56,10 +56,7 @@ O primeiro refaz os dados abertos (o workflow faz isso duas vezes por dia). O se
 ```bash
 node coleta/logos.mjs
 ```
-```bash
-node coleta/ilustracoes.mjs
-```
-O primeiro confere os logotipos das companhias (o workflow faz isso toda vez que coleta; só busca o que é novo ou tem mais de 90 dias). O segundo gera `Portal/assets/js/ilustracoes.js` depois de criar ou mudar uma cena em `coleta/ilustracoes.mjs`.
+Confere os logotipos das companhias (o workflow faz isso toda vez que coleta; só busca o que é novo ou tem mais de 90 dias).
 
 ## Publicar
 Cada envio para a `main` testa e publica. A versão do cache dos aparelhos é o identificador do commit, preenchido na publicação por `coleta/publicar.mjs`: não há número para lembrar de mudar.

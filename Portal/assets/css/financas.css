@@ -12,7 +12,7 @@
 .num { font-variant-numeric: tabular-nums; }
 .fila { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-perto); }
 .fila--entre { justify-content: space-between; }
-.empilha { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-perto); }
+.empilha { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--espaco-perto); }
 /* Itens de grade encolhem até caber: tabelas e controles largos rolam dentro deles, não a página. */
 .empilha > *, .grade-2 > *, .grade-3 > *, .sintese > * { min-width: 0; }
 .destaques__cabecalho { flex-wrap: wrap; }
@@ -39,7 +39,7 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
   -webkit-appearance: none; appearance: none; border: 0; background: none; cursor: pointer; white-space: nowrap;
   font: inherit; font-size: var(--text-body-small); letter-spacing: var(--tracking-body-small); font-weight: var(--font-weight-medium);
   color: var(--cor-texto-2); min-height: calc(var(--spacing-40) + var(--spacing-4)); min-width: calc(var(--spacing-40) + var(--spacing-4)); padding: 0 var(--spacing-16);
-  border-radius: var(--radius-pills); transition: background-color var(--dur-curta) var(--ease-apple), color var(--dur-curta) var(--ease-apple);
+  border-radius: var(--radius-pills); transition: background-color var(--dur-curta) var(--ease-apple), color var(--dur-link) var(--ease-apple);
 }
 .segmento button[aria-pressed="true"] { background: var(--cor-cartao); color: var(--cor-texto); box-shadow: var(--contorno-sutil); }
 
@@ -65,7 +65,6 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 .nivel__pontos i { width: 6px; height: 6px; border-radius: var(--radius-buttons); background: var(--cor-trilho); }
 .nivel__pontos i[data-cheio] { background: var(--cor-texto); }
 .grade-3 { display: grid; gap: var(--element-gap); grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
-.grade-3 > * { min-width: 0; }
 
 /* ---------- Artigo ---------- */
 .artigo { display: grid; gap: var(--spacing-48); }
@@ -74,7 +73,9 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 @media (min-width: 1024px) {
   .sumario { display: grid; gap: var(--espaco-par); position: sticky; top: calc(var(--altura-topo, 60px) + var(--spacing-24)); padding-left: var(--spacing-20); border-left: 1px solid var(--cor-divisoria); }
   .sumario a { color: var(--cor-texto-2); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); }
-  .sumario a[aria-current="true"], .sumario a:hover { color: var(--cor-link); text-decoration: none; }
+  .sumario a[aria-current="true"] { color: var(--cor-link); }
+  .sumario a:hover { text-decoration: none; }
+  @media (hover: hover) { .sumario a:hover { color: var(--cor-link); } }
 }
 .prosa { min-width: 0; }
 /* Parágrafo e parágrafo fora de cartão: 16px (Diretório, 7.1); o texto fica na medida de leitura. */
@@ -144,7 +145,7 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 .cotacao > a:hover { text-decoration: none; }
 @media (hover: hover) { .cotacao > a:hover .cotacao__codigo { color: var(--cor-link); } }
 .cotacao > a:active { opacity: 0.6; }
-.cotacao__codigo { font-size: var(--text-product-nav-title); font-weight: var(--font-weight-semibold); letter-spacing: 0; transition: color var(--dur-curta) var(--ease-apple); }
+.cotacao__codigo { font-size: var(--text-product-nav-title); font-weight: var(--font-weight-semibold); letter-spacing: 0; transition: color var(--dur-link) var(--ease-apple); }
 .cotacao__valores { display: grid; gap: var(--spacing-4); justify-items: end; font-variant-numeric: tabular-nums; }
 .cotacao__preco { font-weight: var(--font-weight-semibold); }
 .faisca { display: block; width: 72px; height: 32px; overflow: visible; }
@@ -173,10 +174,15 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 @keyframes tracar { to { stroke-dashoffset: 0; } }
 
 /* Estatísticas em grade (abertura, máxima, P/L…), com divisórias, como a ficha do Stocks. */
-.estatisticas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 0 var(--spacing-32); margin: 0; }
-.estatisticas > div { display: flex; justify-content: space-between; align-items: baseline; gap: var(--spacing-12); padding: var(--spacing-12) 0; border-top: 1px solid var(--cor-divisoria); }
-.estatisticas dt { color: var(--cor-texto-2); font-size: var(--text-body-small); letter-spacing: var(--tracking-body-small); }
-.estatisticas dd { margin: 0; font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; text-align: right; }
+/* Par rótulo e valor (DESIGN.md, "Números"): em toda grade de números comparáveis, o rótulo em cima e
+   o valor embaixo, sempre. Antes, o valor ficava ao lado quando cabia e caía para baixo quando não
+   cabia, e números da mesma natureza apareciam em posições diferentes. Rótulo e valor são uma unidade
+   de leitura (4px); a divisória fica a 12px do rótulo. Rótulos de duas linhas não desalinham os
+   valores vizinhos: o valor se alinha à base do item, que tem a altura da linha mais alta da grade. */
+.estatisticas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(160px, 100%), 1fr)); gap: 0 var(--espaco-bloco); margin: 0; }
+.estatisticas > div { display: grid; grid-template-rows: auto 1fr; align-content: start; gap: var(--espaco-junto); min-width: 0; padding: var(--espaco-perto) 0 var(--espaco-grupo); border-top: 1px solid var(--cor-divisoria); }
+.estatisticas dt { color: var(--cor-texto-2); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); }
+.estatisticas dd { margin: 0; align-self: end; font-size: var(--text-product-kicker); line-height: var(--leading-product-nav-title); font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 
 /* Alocação: rosca com legenda ao lado. */
 .alocacao { display: grid; gap: var(--espaco-bloco); align-items: center; }
@@ -190,13 +196,10 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 
 /* Abas de classe no cadastro e escolhas em cartão */
 .escolhas { display: grid; gap: var(--element-gap); grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
-.escolha { position: relative; display: grid; gap: var(--espaco-par); padding: var(--card-padding-compacto); border-radius: var(--radius-cards); background: var(--cor-faixa); color: inherit; text-align: left; border: 0; font: inherit; cursor: pointer; transition: transform var(--dur-curta) var(--ease-apple), box-shadow var(--dur-curta) var(--ease-apple); -webkit-tap-highlight-color: transparent; }
+.escolha { position: relative; display: grid; gap: var(--espaco-par); padding: var(--card-padding-compacto); border-radius: var(--radius-cards); background: var(--cor-faixa); color: inherit; text-align: left; border: 0; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .secao--mist .escolha { background: var(--cor-cartao); }
-.escolha:hover { text-decoration: none; }
-.escolha:active { transform: scale(0.98); }
-@media (hover: hover) { .escolha:hover { box-shadow: var(--contorno-forte); } }
-.escolha[aria-pressed="true"] { box-shadow: var(--cor-link) 0 0 0 2px; }
-.escolha__nome { font-family: var(--font-sf-pro-display); font-size: var(--text-product-kicker); font-weight: var(--font-weight-semibold); }
+
+.escolha__nome { font-family: var(--font-sf-pro-display); font-size: var(--text-product-kicker); line-height: var(--leading-product-nav-title); letter-spacing: var(--tracking-product-kicker); font-weight: var(--font-weight-semibold); text-wrap: balance; }
 .formulario--largo { max-width: 760px; }
 .formulario__acoes { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-perto) var(--spacing-24); }
 
@@ -221,7 +224,8 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 .busca__lista { list-style: none; margin: var(--spacing-8) 0 0; padding: var(--spacing-8); border-radius: var(--radius-navigation); box-shadow: var(--contorno-sutil); background: var(--cor-cartao); max-height: 320px; overflow-y: auto; }
 .busca__lista:empty { display: none; }
 .busca__lista a, .busca__lista button { display: grid; gap: var(--spacing-2); width: 100%; padding: var(--spacing-12); border: 0; background: none; text-align: left; font: inherit; color: inherit; border-radius: var(--radius-links); cursor: pointer; min-height: calc(var(--spacing-40) + var(--spacing-4)); }
-.busca__lista a:hover, .busca__lista button:hover, .busca__lista [aria-selected="true"] { background: var(--cor-faixa); text-decoration: none; }
+.busca__lista [aria-selected="true"] { background: var(--cor-faixa); text-decoration: none; }
+@media (hover: hover) { .busca__lista a:hover, .busca__lista button:hover { background: var(--cor-faixa); text-decoration: none; } }
 .solta { display: grid; place-items: center; gap: var(--espaco-perto); padding: var(--espaco-cabecalho) var(--card-padding-compacto); border-radius: var(--radius-cards); box-shadow: inset 0 0 0 1px var(--cor-contorno); text-align: center; }
 .solta[data-sobre] { box-shadow: inset 0 0 0 2px var(--cor-link); }
 
@@ -236,7 +240,7 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 .etapas li[data-estado="falha"]::before { background: var(--cor-alerta); box-shadow: none; }
 .ordem { display: grid; gap: var(--espaco-grupo); padding: var(--card-padding-compacto); border-radius: var(--radius-cards); background: var(--cor-faixa); }
 .secao--mist .ordem { background: var(--cor-cartao); }
-.ordem__topo { display: flex; align-items: baseline; justify-content: space-between; gap: var(--spacing-12); }
+.ordem__topo { display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-perto); }
 .ordem__codigo { font-family: var(--font-sf-pro-display); font-size: 28px; font-weight: var(--font-weight-semibold); }
 .relatorio__indice { counter-reset: parte; list-style: none; margin: 0; padding: 0; display: grid; gap: var(--spacing-8); }
 .relatorio__parte { counter-increment: parte; }
@@ -257,13 +261,13 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 .estado-nuvem[data-estado="pendente"]::before { background: var(--cor-alerta); }
 
 /* Entrada de blocos e títulos (movimento.js): só com .movimento, isto é, sem movimento reduzido. */
-.movimento [data-subir] { opacity: 0; transform: translateY(30px); }
-.movimento [data-subir].visivel { opacity: 1; transform: none; transition: opacity 500ms var(--ease-entrada), transform 500ms var(--ease-entrada); transition-delay: calc(var(--ordem, 0) * 60ms); }
-.rodape a { color: var(--cor-texto-2); }
+/* A subida usa a propriedade `translate`, e não `transform`: assim o recuo do toque (transform: scale)
+   continua valendo em cartões que entraram subindo. Antes, o `transform: none` da entrada anulava o recuo. */
+.movimento [data-subir] { opacity: 0; translate: 0 30px; }
+.movimento [data-subir].visivel { opacity: 1; translate: none; transition: opacity 500ms var(--ease-entrada), translate 500ms var(--ease-entrada), transform var(--dur-curta) var(--ease-apple); transition-delay: calc(var(--ordem, 0) * 60ms), calc(var(--ordem, 0) * 60ms), 0s; }
 .rodape__links { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--element-gap); }
 .rodape__links a { display: inline-flex; align-items: center; min-height: 44px; }
 .rodape__links .link-botao { padding: 0; }
-@media (hover: hover) { .rodape a:hover { color: var(--cor-link); text-decoration: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   .segmento button, .escolha, .cotacao__codigo, .etapas li::before { transition: none; }
@@ -300,34 +304,9 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 /* Busca: ícone pequeno ao lado do nome. */
 .busca__lista a.busca__item { grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: var(--espaco-perto); }
 .busca__item > span:last-child { display: grid; gap: var(--spacing-2); min-width: 0; }
-.ordem__topo { align-items: center; }
 .ordem__marca { display: flex; align-items: center; gap: var(--espaco-perto); }
 .patrimonio > .marca { margin-bottom: var(--espaco-par); }
 
-/* ---------- Ilustrações das trilhas (ilustracoes.js; padrão no Vault, Linguagem visual) ----------
-   Traço de mão em tinta e cinza, que muda com o tema. Três pesos; destaque por peso, nunca por cor.
-   --ilustracao-fundo tapa o que fica atrás das formas preenchidas: a cor da superfície onde a cena está. */
-.ilustracao { display: block; width: 100%; height: 100%; overflow: visible; color: var(--cor-texto); --ilustracao-fundo: var(--cor-cartao); }
-.ilustracao__traco { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
-.ilustracao__traco--principal { stroke-width: 2.4; }
-.ilustracao__traco--contorno { stroke-width: 1.8; }
-.ilustracao__traco--apoio { stroke-width: 1.4; }
-.ilustracao__traco--cinza { stroke: var(--cor-texto-2); }
-.ilustracao__traco--fundo { fill: var(--ilustracao-fundo); }
-.ilustracao__traco--tracejado { stroke-dasharray: 3 5; }
-.ilustracao__traco--eco { transform: translate(1.4px, 1.2px); opacity: 0.5; }
-/* Cartão de trilha: a cena abre o cartão, numa faixa de 150px; no carrossel, parada. */
-.card--trilha .card__ilustracao { height: 132px; margin: calc(var(--spacing-8) * -1) 0 0; }
-.cabecalho-artigo__ilustracao { height: 150px; max-width: 420px; margin-bottom: var(--espaco-par); }
-.cabecalho-artigo__ilustracao .ilustracao { --ilustracao-fundo: var(--cor-fundo); }
-/* Abertura de artigo: só o traço principal se desenha com a rolagem, uma vez, completo até o meio da
-   entrada na tela; parado (sem suporte ou com movimento reduzido), o desenho aparece inteiro. */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .ilustracao--tracar .ilustracao__traco--principal { stroke-dasharray: 1; animation: tracar-ilustracao linear both; animation-timeline: view(); animation-range: entry 10% entry 60%; }
-  }
-}
-@keyframes tracar-ilustracao { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
 /* Ajustes da bateria de layout (testes/layout.mjs), 16/11/2026 */
 /* Caixa de seleção: o rótulo inteiro é o alvo, com pelo menos 44px de altura também no celular deitado. */
@@ -336,11 +315,28 @@ h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
 .conteudo > p.selo + p { margin-top: var(--espaco-junto); }
 /* Legendas e notas de várias linhas ficam na medida de leitura, mesmo na coluna de 980px. */
 p.legenda, .pagina__cabecalho > p { max-width: var(--medida-leitura); }
-/* Ficha do ativo: valor longo ("+R$ 1.234,56 (+12,3%)") ao lado do rótulo passava 2px da tela de 390px.
-   A linha quebra, e o valor fica à direita na linha de baixo. */
-.estatisticas > div { flex-wrap: wrap; min-width: 0; }
-.estatisticas dd { margin-left: auto; }
+
 p.selo { max-width: var(--medida-leitura); }
 /* O controle segmentado rola na horizontal e corta o que passa da borda: o anel de foco vem para dentro
    da cápsula do item (Diretório, 10.1, solução 2). */
 .segmento button:focus-visible { outline-offset: calc(var(--spacing-2) * -1); }
+
+/* Cartões lado a lado com partes iguais (ordens sugeridas, estruturas com opções): cada parte ocupa uma
+   linha da grade comum, e as linhas de dados de cartões vizinhos ficam na mesma altura, mesmo quando
+   um título ou uma descrição quebra em mais linhas. A classe diz quantas partes o cartão tem (a política
+   de conteúdo do portal não aceita estilo em linha). */
+@supports (grid-template-rows: subgrid) {
+  .grade-2--alinhada > .card--alinhado { display: grid; grid-template-rows: subgrid; row-gap: var(--espaco-grupo); align-content: start; }
+  .grade-2--alinhada > .card--alinhado-4 { grid-row: span 4; }
+  .grade-2--alinhada > .card--alinhado-8 { grid-row: span 8; }
+}
+/* Dentro de cartões (ordem, estrutura com opções), a grade de números usa colunas de 120px:
+   com 160px, um cartão de um terço da coluna ficava com uma coluna só e seis números empilhados. */
+:is(.card, .ordem) .estatisticas { grid-template-columns: repeat(auto-fill, minmax(min(120px, 100%), 1fr)); column-gap: var(--espaco-grupo); }
+/* Código da ordem: leva à apresentação da empresa no relatório. É título de destino: tinta parado, azul
+   com o cursor, como os demais títulos clicáveis. */
+.ordem__codigo a { color: inherit; }
+@media (hover: hover) { .ordem__codigo a:hover { color: var(--cor-link); text-decoration: none; } }
+/* Nome e valor numa linha (barras do balanço): o valor nunca cai para baixo do nome. */
+.fila--valor { flex-wrap: nowrap; }
+.fila--valor > :first-child { min-width: 0; }

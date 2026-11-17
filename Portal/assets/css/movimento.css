@@ -1,5 +1,6 @@
-/* Os estados iniciais das animações são definidos pelo GSAP (assets/js/movimento.js),
-   só quando não há prefers-reduced-motion. Aqui ficam apenas ajustes de movimento reduzido. */
+/* Movimento reduzido e entrada de página. O Portal Finanças não usa GSAP: as entradas de blocos
+   (data-subir) estão em financas.css e só valem com a classe .movimento, posta pelo app.js quando não
+   há prefers-reduced-motion. Este arquivo carrega por último (index.html) e vence os demais. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .carrossel__trilho { scroll-snap-type: none; }

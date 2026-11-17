@@ -44,7 +44,7 @@ export function blocoGraficos(d) {
   const tri = linhas.filter((l) => l.trimestre && l.trimestre.receita != null).slice(-8);
   const udm = linhas.filter((l) => l.udm).slice(-8);
   const blocos = [];
-  const cartao = (titulo, grafico, legendaItens, nota) => el('div', { class: 'card card--auto card--contorno' }, el('h3', { class: 'kicker' }, titulo), legendaItens && el('p', { class: 'legenda legenda-grafico' }, legendaItens.map(([n, c]) => el('span', { class: c }, n))), grafico, nota && el('p', { class: 'selo' }, nota));
+  const cartao = (titulo, grafico, legendaItens, nota) => el('div', { class: 'card card--auto card--info' }, el('h3', { class: 'kicker' }, titulo), legendaItens && el('p', { class: 'legenda legenda-grafico' }, legendaItens.map(([n, c]) => el('span', { class: c }, n))), grafico, nota && el('p', { class: 'selo' }, nota));
   if (tri.length >= 2) {
     const g = moldura('Receita e lucro líquido por trimestre');
     graficoBarras(g.canvas, { rotulos: tri.map((l) => trimestre(l.fim)), series: [{ nome: 'Receita', cor: '--cor-grafico-previsto', valores: tri.map((l) => l.trimestre.receita) }, ...(fin ? [] : [{ nome: 'EBITDA', cor: '--cor-link', valores: tri.map((l) => l.trimestre.ebitda) }]), { nome: 'Lucro líquido', cor: '--cor-texto', valores: tri.map((l) => l.trimestre.lucroLiquido) }], formato: mil, formatoEixo: mil });
@@ -73,7 +73,7 @@ export function blocoGraficos(d) {
 export function blocoBalanco(d) {
   const p = [...d.empresa.periodos].reverse().find((x) => x.bp.ativoTotal), b = p?.bp;
   if (!b) return null;
-  const barra = (nome, valor, total) => (valor == null ? null : el('div', { class: 'empilha' }, el('div', { class: 'fila fila--entre' }, el('span', {}, nome), el('span', { class: 'num' }, `${mil(valor)} · ${pct(valor / total, 1)}`)), el('div', { class: 'barra-peso' }, (() => { const i = el('i'); i.style.width = `${Math.max(0, Math.min(100, (valor / total) * 100))}%`; return i; })())));
+  const barra = (nome, valor, total) => (valor == null ? null : el('div', { class: 'empilha' }, el('div', { class: 'fila fila--entre fila--valor' }, el('span', {}, nome), el('span', { class: 'num' }, `${mil(valor)} · ${pct(valor / total, 1)}`)), el('div', { class: 'barra-peso' }, (() => { const i = el('i'); i.style.width = `${Math.max(0, Math.min(100, (valor / total) * 100))}%`; return i; })())));
   const passivo = (b.passivoCirculante || 0) + (b.passivoNaoCirculante || 0) + (b.patrimonioLiquido || 0) || b.ativoTotal;
   return el('div', { class: 'grade-2 grade-2--folgada' },
     el('div', { class: 'empilha' }, el('h3', { class: 'kicker' }, 'Onde o dinheiro está aplicado'), barra('Caixa e aplicações', (b.caixa || 0) + (b.aplicacoes || 0) || null, b.ativoTotal), barra('Contas a receber', b.contasReceber, b.ativoTotal), barra('Estoques', b.estoques, b.ativoTotal), barra('Imobilizado', b.imobilizado, b.ativoTotal), barra('Intangível', b.intangivel, b.ativoTotal), el('p', { class: 'selo' }, `Ativo total de ${mil(b.ativoTotal)} em ${dataBR(p.fim)}`)),

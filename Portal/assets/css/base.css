@@ -19,7 +19,8 @@ h1, h2, h3, p { margin: 0; }
 [hidden] { display: none !important; }
 
 a { color: var(--cor-link); text-decoration: none; border-radius: var(--radius-links); transition: color var(--dur-link) var(--ease-apple); }
-a:hover { text-decoration: underline; }
+/* Sublinhado só com cursor: no toque, o :hover fica preso depois do toque e o link continuava sublinhado. */
+@media (hover: hover) { a:hover { text-decoration: underline; } }
 
 :focus-visible { outline: 2px solid var(--cor-link); outline-offset: 2px; }
 
@@ -83,6 +84,11 @@ section[id] { scroll-margin-top: 0; padding-top: max(var(--espaco-secao), calc(v
 
 /* Ritmo vertical: um título nunca encosta no bloco seguinte (divisória, lista, tabela). */
 h2.titulo + :not(a) { margin-top: var(--espaco-bloco); }
+/* Título de seção e a introdução dele: um explica o outro (12px). A introdução e o conteúdo que ela
+   apresenta: blocos diferentes (32px). Antes, o conteúdo encostava na introdução (Critérios da síntese,
+   Preço e múltiplos, Presença em fundos, Diagnóstico). */
+.conteudo > h2.titulo + .introducao { margin-top: var(--espaco-perto); }
+.conteudo > .introducao + :not(.introducao) { margin-top: var(--espaco-bloco); }
 .conteudo > h2.kicker + :is(ul, ol, table, form, div, p) { margin-top: var(--espaco-grupo); }
 /* Lista com divisória logo abaixo de um texto ou de um gráfico: a linha nunca encosta no que vem antes. */
 .conteudo > p + .lista { margin-top: var(--espaco-grupo); }

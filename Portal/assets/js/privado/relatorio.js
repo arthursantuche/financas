@@ -19,7 +19,7 @@ const nivelPorter = (t) => ({ baixa: 1, 'média': 2, media: 2, alta: 3 }[String(
 
 function cartaoOrdem(o, n) {
   const c = o.criterios;
-  return el('article', { class: 'ordem', 'data-subir': true },
+  return el('article', { class: 'ordem card--alinhado card--alinhado-4', 'data-subir': true },
     el('div', { class: 'ordem__topo' }, el('span', { class: 'ordem__marca' }, marca({ codigo: o.ticker, tamanho: 'm' }), el('h3', { class: 'ordem__codigo' }, el('a', { href: `#emp-${o.ticker}` }, o.ticker))), el('span', { class: 'legenda' }, o.setor)),
     el('dl', { class: 'estatisticas' }, dado('Quantidade', numero(o.quantidade, 0)), dado('Preço de referência', brl(o.preco)), dado('Valor estimado', brl(o.valor)), dado('Peso na carteira depois', pct(o.pesoNaCarteira, 1)), dado('Preço-teto', brl(c.precoTeto)), dado('Ponto de revisão', brl(c.precoRevisao))),
     el('p', { class: 'copy' }, n?.tese),
@@ -30,7 +30,7 @@ function blocoOpcao(e) {
   const a = analisarEstrutura(e.pernas, { precoAtual: e.precoAtivo, faixa: 0.3 });
   const g = moldura(`Resultado no vencimento de ${e.titulo}`, 'grafico--baixo');
   graficoResultado(g.canvas, { pontos: a.curva, formato: brl0, formatoX: (x) => brl(x), marcas: [...e.equilibrio.map((x) => ({ nome: 'Equilíbrio', x })), { nome: 'Preço atual', x: e.precoAtivo, y: a.curva.reduce((m, p) => (Math.abs(p.preco - e.precoAtivo) < Math.abs(m.preco - e.precoAtivo) ? p : m)).resultado }] });
-  return el('article', { class: 'card card--auto', 'data-subir': true },
+  return el('article', { class: 'card card--auto card--alinhado card--alinhado-8', 'data-subir': true },
     el('h3', { class: 'kicker' }, e.titulo), el('p', { class: 'copy introducao' }, e.objetivo),
     el('dl', { class: 'estatisticas' },
       dado('Ganho máximo', e.ganhoIlimitado ? 'Ilimitado' : brl(e.ganhoMaximo), 'alta'), dado('Perda máxima', e.perdaIlimitada ? 'Ilimitada' : brl(e.perdaMaxima), 'baixa'),
@@ -96,7 +96,7 @@ export async function pagina(ctx, [id]) {
     n.modo === 'ia' && (n.recusados?.length || n.falhas?.length) ? el('div', { class: 'natureza espaco-topo' }, el('strong', { class: 'selo--atencao' }, 'Controle da redação por IA'), n.recusados.map((x) => el('span', { class: 'legenda' }, `Trecho recusado (${x.trecho}): citava ${x.numeros.join(', ')}, que não estão no dossiê. Ficou o texto por regras.`)), (n.falhas || []).map((f) => el('span', { class: 'legenda' }, `Falha: ${f}`))) : null));
 
   const ordens = secao(s.ordens.length ? 'Ordens sugeridas.' : 'Por que não há compras.', el('div', { class: 'empilha empilha--folgada' },
-    s.ordens.length ? el('div', { class: 'grade-2' }, s.ordens.map((o) => cartaoOrdem(o, n.empresas[o.ticker]))) : el('p', { class: 'vazio' }, s.paraRendaVariavel < 100 ? 'O valor destinado à renda variável ficou abaixo do mínimo para uma ordem.' : 'Nenhuma companhia passou, ao mesmo tempo, pela triagem e pela conferência dos demonstrativos.'),
+    s.ordens.length ? el('div', { class: 'grade-2 grade-2--alinhada' }, s.ordens.map((o) => cartaoOrdem(o, n.empresas[o.ticker]))) : el('p', { class: 'vazio' }, s.paraRendaVariavel < 100 ? 'O valor destinado à renda variável ficou abaixo do mínimo para uma ordem.' : 'Nenhuma companhia passou, ao mesmo tempo, pela triagem e pela conferência dos demonstrativos.'),
     el('dl', { class: 'estatisticas' }, dado('Valor informado', brl(d.parametros.orcamento)), d.vendas?.liquido ? dado('Mais o líquido das vendas', brl(d.vendas.liquido)) : null, dado('Para ações', brl(s.ordens.reduce((t, o) => t + o.valor, 0))), dado('Indicado para renda fixa', brl(s.paraRendaFixa)), dado('Sobra (não cabe em quantidades inteiras)', brl(s.sobra))),
     s.motivoRendaFixa && el('p', { class: 'copy' }, s.motivoRendaFixa, ' Para essa parcela, veja os títulos do Tesouro em ', el('a', { href: '#indicadores' }, 'Indicadores'), '.'),
     s.reprovados.length ? el('p', { class: 'legenda' }, `Finalistas descartados na conferência: ${s.reprovados.map((x) => `${x.ticker} (${x.motivo})`).join('; ')}.`) : null), { mist: true, rotulo: 'Cálculo determinístico', intro: s.ordens.length ? 'Quantidades inteiras que cabem no valor disponível, sem levar nenhum papel acima do teto por ativo nem a renda variável acima da faixa do perfil.' : null });
@@ -112,7 +112,7 @@ export async function pagina(ctx, [id]) {
     el('div', { class: 'tabela-rolavel' }, el('table', { class: 'tabela tabela--numeros' }, el('thead', {}, el('tr', {}, ['Ativo', 'Quantidade', 'Preço', 'Valor', 'Resultado'].map((t) => el('th', { scope: 'col' }, t)))), el('tbody', {}, d.vendas.vendas.map((v) => el('tr', {}, el('th', { scope: 'row' }, v.ticker, el('span', { class: 'bloco legenda' }, v.motivo)), el('td', {}, `${numero(v.quantidade, 0)}${v.total ? ' (toda a posição)' : ''}`), el('td', {}, brl(v.preco)), el('td', {}, brl(v.valor)), el('td', { class: classeSinal(v.lucro) }, brl(v.lucro))))))),
     el('p', { class: 'legenda' }, d.vendas.isento ? 'Com vendas de até R$ 20 mil no mês em ações, o ganho fica isento de imposto de renda (confira as outras vendas do mês).' : `Imposto de renda estimado: ${brl(d.vendas.imposto)} (15% sobre o ganho, pago por DARF). Líquido estimado: ${brl(d.vendas.liquido)}.`)), { mist: true, rotulo: 'Cálculo determinístico', intro: 'Só entram posições acima do teto por ativo ou com sinal de redução na análise fundamentalista.' }) : null;
 
-  const opcoes = d.opcoes?.length ? secao('Estruturas com opções.', el('div', { class: 'grade-2' }, d.opcoes.map(blocoOpcao)), { rotulo: 'Cálculo determinístico', intro: 'Alternativas compatíveis com a carteira atual. Opções podem levar à perda total do valor aplicado e exigem acompanhamento até o vencimento. São opcionais em relação às ordens acima.' }) : null;
+  const opcoes = d.opcoes?.length ? secao('Estruturas com opções.', el('div', { class: 'grade-2 grade-2--alinhada' }, d.opcoes.map(blocoOpcao)), { rotulo: 'Cálculo determinístico', intro: 'Alternativas compatíveis com a carteira atual. Opções podem levar à perda total do valor aplicado e exigem acompanhamento até o vencimento. São opcionais em relação às ordens acima.' }) : null;
 
   const triagem = secao('Como a triagem chegou a estes nomes.', el('div', { class: 'empilha' },
     el('p', { class: 'copy' }, `Foram avaliadas ${d.triagem.avaliadas} companhias com demonstrativos na CVM. Ficaram de fora: ${d.triagem.descartes.semPreco} sem preço, ${d.triagem.descartes.prejuizo} com prejuízo ou sem patrimônio, ${d.triagem.descartes.pequenas} com receita abaixo de R$ 500 milhões, ${d.triagem.descartes.semLiquidez} com pouca negociação e ${d.triagem.descartes.noTeto} já no teto por ativo.`),

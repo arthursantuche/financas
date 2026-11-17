@@ -62,7 +62,8 @@
      da barra já tem 44px por causa da pílula, então a barra não cresce. */
   display: flex; align-items: center; min-height: 44px;
 }
-.barra__secoes a:hover { text-decoration: none; color: var(--cor-link); }
+.barra__secoes a:hover { text-decoration: none; }
+@media (hover: hover) { .barra__secoes a:hover { color: var(--cor-link); } }
 .barra__secoes a[aria-current] { color: var(--cor-link); }
 
 @media (min-width: 834px) {

@@ -3,7 +3,6 @@ import { el, numero, dataBR, plural } from '../util.js';
 import { conteudo, indicadores } from '../dados.js';
 import { iniciarCarrossel } from '../carrossel.js';
 import { SIMULADORES } from './simuladores.js';
-import { ilustracao } from '../ilustracoes.js';
 
 export const NIVEIS = { 1: 'Essencial', 2: 'Intermediário', 3: 'Avançado' };
 export const nivel = (n) => el('span', { class: 'nivel' }, el('span', { class: 'nivel__pontos', 'aria-hidden': 'true' }, [1, 2, 3].map((i) => el('i', { 'data-cheio': i <= n }))), NIVEIS[n] || '');
@@ -40,10 +39,9 @@ export async function pagina() {
   const trilhas = el('section', { class: 'secao secao--mist faixa-carrossel destaques', id: 'trilhas' },
     el('div', { class: 'conteudo' }, el('div', { class: 'destaques__cabecalho' }, el('h2', { class: 'titulo' }, 'Trilhas de conhecimento.'), el('a', { href: '#aprender' }, plural(totalArtigos, 'artigo', 'artigos')))),
     carrossel(c.trilhas.map((t, i) => el('a', { class: 'card card--trilha', href: `#aprender/${t.id}` },
-      el('div', { class: 'card__ilustracao' }, ilustracao(t.id)),
       el('p', { class: 'card__numero' }, String(i + 1).padStart(2, '0')),
       el('div', { class: 'empilha' }, el('h3', { class: 'card__titulo' }, t.nome), el('p', { class: 'copy introducao' }, t.resumo)),
-      el('div', { class: 'card__rodape' }, el('span', { class: 'legenda' }, plural(t.artigos.length, 'artigo', 'artigos')), el('span', { class: 'cor-link' }, 'Abrir')))), 'Trilhas de conhecimento'));
+      el('div', { class: 'card__rodape' }, el('span', { class: 'legenda' }, plural(t.artigos.length, 'artigo', 'artigos'))))), 'Trilhas de conhecimento'));
 
   const comecar = c.trilhas.flatMap((t) => t.artigos).filter((a) => a.nivel === 1).slice(0, 6);
   const primeiros = el('section', { class: 'secao' }, el('div', { class: 'conteudo' },
@@ -57,9 +55,9 @@ export async function pagina() {
   const metodo = el('section', { class: 'secao' }, el('div', { class: 'conteudo' },
     el('h2', { class: 'titulo' }, 'Como este portal trabalha.'),
     el('div', { class: 'grade-2' },
-      el('div', { class: 'card card--auto card--contorno', 'data-subir': true }, el('h3', { class: 'kicker' }, 'Fontes primárias'), el('p', { class: 'copy introducao' }, 'Banco Central, CVM, B3 e Tesouro Nacional. Cada número mostra de onde veio e a data de referência.')),
-      el('div', { class: 'card card--auto card--contorno', 'data-subir': true }, el('h3', { class: 'kicker' }, 'Contas abertas'), el('p', { class: 'copy introducao' }, 'As fórmulas dos simuladores são as mesmas da carteira, estão documentadas e são testadas a cada mudança.')),
-      el('div', { class: 'card card--auto card--contorno', 'data-subir': true }, el('h3', { class: 'kicker' }, 'Educação, não recomendação'), el('p', { class: 'copy introducao' }, 'O conteúdo público explica como os investimentos funcionam. Decidir onde investir depende dos seus objetivos e da sua situação.'))),
+      el('div', { class: 'card card--auto card--info', 'data-subir': true }, el('h3', { class: 'kicker' }, 'Fontes primárias'), el('p', { class: 'copy introducao' }, 'Banco Central, CVM, B3 e Tesouro Nacional. Cada número mostra de onde veio e a data de referência.')),
+      el('div', { class: 'card card--auto card--info', 'data-subir': true }, el('h3', { class: 'kicker' }, 'Contas abertas'), el('p', { class: 'copy introducao' }, 'As fórmulas dos simuladores são as mesmas da carteira, estão documentadas e são testadas a cada mudança.')),
+      el('div', { class: 'card card--auto card--info', 'data-subir': true }, el('h3', { class: 'kicker' }, 'Educação, não recomendação'), el('p', { class: 'copy introducao' }, 'O conteúdo público explica como os investimentos funcionam. Decidir onde investir depende dos seus objetivos e da sua situação.'))),
     el('p', { class: 'espaco-topo' }, el('a', { class: 'pill', href: '#sobre' }, 'Metodologia e fontes'))));
 
   return { titulo: '', no: el('div', {}, hero, trilhas, primeiros, sims, metodo) };
@@ -68,5 +66,5 @@ export async function pagina() {
 export function cartaoArtigo(a) {
   return el('a', { class: 'card card--auto card--artigo card--contorno', href: `#artigo/${a.slug}`, 'data-subir': true },
     nivel(a.nivel), el('h3', { class: 'kicker' }, a.titulo), el('p', { class: 'copy introducao' }, a.resumo),
-    el('div', { class: 'card__rodape' }, el('span', { class: 'legenda' }, `${a.minutos} min de leitura`), el('span', { class: 'cor-link' }, 'Ler')));
+    el('div', { class: 'card__rodape' }, el('span', { class: 'legenda' }, `${a.minutos} min de leitura`)));
 }

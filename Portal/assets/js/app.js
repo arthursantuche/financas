@@ -4,7 +4,7 @@
 import { $, el, reduzido } from './util.js';
 import { sessao, aoMudar, retomar, bloquear, abrirAmostra } from './privado/cofre.js';
 
-export const VERSAO_SITE = '1.2';
+export const VERSAO_SITE = '1.3';
 
 const ROTAS = {
   inicio: { modulo: () => import('./publico/inicio.js') },
@@ -96,12 +96,25 @@ export function animar(raiz = pagina) {
 export const navegar = (rota) => { if (location.hash === `#${rota}`) rotear(); else location.hash = rota; };
 const ctx = { avisar, comProgresso, navegar, animar, sessao, versao: VERSAO_SITE };
 
+// Blocos de espera com as medidas de uma página: sobretítulo, título, duas linhas de texto e um bloco
+// de conteúdo. Mesmos blocos da primeira abertura (index.html).
+function esqueletoPagina() {
+  return el('section', { class: 'secao' }, el('div', { class: 'conteudo' },
+    el('span', { class: 'esqueleto esqueleto--kicker' }), el('span', { class: 'esqueleto esqueleto--titulo' }),
+    el('span', { class: 'esqueleto esqueleto--linha' }), el('span', { class: 'esqueleto esqueleto--linha esqueleto--curta' }),
+    el('span', { class: 'esqueleto esqueleto--bloco' })));
+}
+
 async function rotear() {
   const meu = ++pedido;
   const [nome, ...partes] = decodeURIComponent(location.hash.slice(1) || 'inicio').split('/');
   const rota = ROTAS[nome] || ROTAS.inicio;
   if (rota.privada && !sessao.aberta) { sessionStorage.setItem('financas:voltar', location.hash.slice(1)); return navegar('entrar'); }
   atual?.aoSair?.();
+  // Página que demora (dados da CVM, quadro da carteira, relatório): depois de 160 ms, blocos neutros
+  // com o formato de uma página entram no lugar da anterior, como no Escócia 2027. Antes disso, nada
+  // muda: troca rápida não pisca. Os blocos não pulsam; só a barra azul do menu se move.
+  const espera = setTimeout(() => { if (meu === pedido) { pagina.replaceChildren(esqueletoPagina()); pagina.setAttribute('aria-busy', 'true'); } }, 160);
   let resultado;
   try {
     const modulo = await comProgresso(rota.modulo());
@@ -110,7 +123,9 @@ async function rotear() {
     console.error(e);
     resultado = { titulo: 'Algo deu errado', no: el('section', { class: 'secao' }, el('div', { class: 'conteudo' }, el('h1', { class: 'titulo' }, 'Não foi possível abrir esta página.'), el('p', { class: 'copy introducao' }, e.message || 'Tente de novo em instantes.'), el('p', { class: 'espaco-topo' }, el('a', { class: 'pill', href: '#inicio' }, 'Voltar ao início')))) };
   }
+  clearTimeout(espera);
   if (meu !== pedido || !resultado) return; // outra navegação começou enquanto esta carregava
+  pagina.removeAttribute('aria-busy');
   atual = { ...resultado, secao: resultado.secao ?? rota.secao };
   document.title = resultado.titulo ? `${resultado.titulo} · Finanças` : 'Finanças';
   pagina.replaceChildren(resultado.no);
