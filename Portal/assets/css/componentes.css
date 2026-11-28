@@ -1,0 +1,312 @@
+/* Botão (Interação e navegação, 3): pílula azul de 44 px, raio 980, padding 11/21, 17/20 em L e 14/18 em M e S;
+   hover #0076df, toque #006edb, sem escala nem sombra, sem transição. A pílula de contorno (secundária) tem
+   fundo de vidro e anel de 1 px; com o cursor, só troca o fundo, na hora. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--spacing-44);
+  padding: 11px 21px;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-button);
+  line-height: var(--leading-button);
+  letter-spacing: var(--tracking-button);
+  font-weight: var(--font-weight-regular);
+  color: var(--cor-texto);
+  box-shadow: var(--contorno-forte);
+  background: var(--cor-vidro);
+  transition: none; -webkit-tap-highlight-color: transparent;
+}
+button.pill { -webkit-appearance: none; appearance: none; border: 0; cursor: pointer; font: inherit; font-size: var(--text-button); line-height: var(--leading-button); letter-spacing: var(--tracking-button); }
+.pill--azul { background: var(--cor-acao); color: var(--cor-sobre-acao); box-shadow: none; }
+.pill:hover { text-decoration: none; }
+.pill:focus-visible { outline-offset: 3px; }
+.pill--azul:not(:disabled):active { background: var(--cor-acao-ativo); }
+@media (hover: hover) {
+  .pill:not(.pill--azul):not(:disabled):hover { background: var(--cor-botao-contorno-hover); }
+  .pill--azul:not(:disabled):hover { background: var(--cor-acao-hover); }
+  .pill--azul:not(:disabled):active { background: var(--cor-acao-ativo); }
+}
+
+/* Hero */
+.hero { text-align: center; padding-top: var(--spacing-64); }
+.hero .kicker { margin-bottom: var(--spacing-16); }
+.hero .display + .copy { margin-top: var(--spacing-16); }
+.destaques .titulo { margin-top: var(--espaco-perto); }
+/* Números-chave da abertura: contagem regressiva, noites e cidades em tipografia grande,
+   sem cartão, alinhados à coluna de conteúdo (como as faixas de números das páginas da Apple). */
+.numeros {
+  margin: var(--spacing-48) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+}
+/* column-reverse põe o número acima da legenda; flex-end (o início visual nessa direção)
+   alinha os três números pelo topo, mesmo quando uma legenda tem menos linhas. */
+.numeros__item { display: flex; flex-direction: column-reverse; justify-content: flex-end; align-items: center; gap: var(--spacing-8); padding: 0 var(--spacing-8); }
+.numeros__item + .numeros__item { border-left: 1px solid var(--cor-divisoria); }
+.numeros__valor {
+  margin: 0;
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-stat-valor);
+  line-height: var(--leading-stat-valor);
+  letter-spacing: var(--tracking-stat-valor);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Próximo compromisso: "Floating Pricing Callout" da referência, com o texto e a pílula
+   dentro do mesmo cartão. No computador, a pílula fica à direita. */
+.proximo {
+  margin-top: var(--spacing-40);
+  text-align: left;
+  padding: var(--card-padding);
+  border-radius: var(--radius-cards);
+  box-shadow: var(--contorno-sutil);
+  display: grid;
+  gap: var(--spacing-20);
+  justify-items: start;
+}
+.proximo__texto { display: grid; gap: var(--spacing-8); }
+@media (min-width: 834px) {
+  .proximo { grid-template-columns: 1fr auto; align-items: center; gap: var(--spacing-32); }
+}
+
+/* Alvo de toque mínimo (Fundamentos - Identidade Visual - Apple, 3.8): links soltos com menos
+   de 44px de altura ou de largura ganham uma área invisível de 44 × 44px centrada neles, sem mudar a
+   linha nem o layout. Onde o link já passa de 44px, o min() deixa a área igual à caixa. Links dentro de
+   texto corrido ficam de fora. */
+:is(.barra__titulo, .barra__acao, .destaques__cabecalho a, .lista > li > a, .voltar, .rodape a, .rodape .link-botao, .artigo__fontes a, a.selo, .tabela th[scope="row"] > a, .formulario__acoes > a) { position: relative; }
+:is(.barra__titulo, .barra__acao, .destaques__cabecalho a, .lista > li > a, .voltar, .rodape a, .rodape .link-botao, .artigo__fontes a, a.selo, .tabela th[scope="row"] > a, .formulario__acoes > a)::after {
+  content: ''; position: absolute; inset: min(0px, calc(50% - var(--spacing-24) + var(--spacing-2)));
+}
+
+/* Destaques: cabeçalho com título e link ("Highlights Stage") */
+.destaques__cabecalho {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--element-gap);
+  margin-bottom: var(--espaco-bloco);
+}
+.destaques__cabecalho a { white-space: nowrap; color: var(--cor-link); }
+/* Telas estreitas: o link vai para baixo do título em vez de espremê-lo. */
+@media (max-width: 389px) {
+  .destaques__cabecalho { flex-direction: column; align-items: flex-start; gap: var(--espaco-perto); }
+}
+.card {
+  scroll-snap-align: start;
+  background: var(--cor-cartao);
+  border-radius: var(--radius-cards);
+  padding: var(--card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-grupo);
+  min-height: 420px;
+}
+
+.card__numero {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-stat-valor);
+  line-height: var(--leading-stat-valor);
+  letter-spacing: var(--tracking-stat-valor);
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+.card__grafico { position: relative; flex: 1; min-height: 220px; }
+.legenda-grafico { display: flex; flex-wrap: wrap; gap: var(--spacing-12); }
+.legenda-grafico > span { color: var(--cor-texto-2); }
+/* A cor da série fica só no ponto; o texto da legenda é cinza, para não parecer link (EBITDA, ROIC). */
+.legenda-grafico .cor-link::before { background: var(--cor-link); }
+.legenda-grafico .cor-previsto::before { background: var(--cor-grafico-previsto); }
+.legenda-grafico .cor-pago::before { background: var(--cor-texto); }
+.legenda-grafico .cor-apagar::before { background: var(--cor-alerta); }
+.legenda-grafico span::before {
+  content: ''; display: inline-block; width: 10px; height: 10px; margin-right: var(--spacing-4);
+  border-radius: var(--radius-buttons); background: currentColor; vertical-align: middle;
+}
+
+/* Barra de progresso do checklist */
+.progresso { height: var(--spacing-8); border-radius: var(--radius-buttons); background: var(--cor-trilho); overflow: hidden; }
+.progresso__barra { height: 100%; background: var(--cor-link); border-radius: inherit; }
+
+/* Carrossel horizontal (Carrosséis, família A, Highlights, com autoplay como medido: carrossel.js). O trilho sangra até as bordas
+   da tela e o respiro é o mesmo da coluna de conteúdo (90 / 64 / 52 / 24 px). Cartão de 87,5% da largura (no máximo
+   1260 px; em S, a coluna de 420 px menos o gap de 20 px, para o próximo cartão aparecer), altura fixa de 612 / 576 /
+   480 px. Encaixe obrigatório, centrado em L e M e no início em S. A rolagem e o encaixe são nativos. */
+.carrossel { --margem: calc((100% - min(87.5%, var(--conteiner-max))) / 2); --altura-cartao: 612px; container-type: inline-size; }
+.carrossel__trilho { --cartao: min(87.5cqw, 1260px); --folga-fim: 0px; }
+.carrossel__trilho {
+  display: flex; gap: var(--element-gap);
+  overflow-x: scroll; overflow-y: hidden; scroll-snap-type: x mandatory; scroll-behavior: auto; overscroll-behavior-x: auto;
+  padding: 0 var(--margem) var(--spacing-8); scroll-padding-inline: var(--margem);
+  /* Quem rola na horizontal corta também na vertical: sem estes 4px em cima, o contorno do cartão
+     ao passar o cursor e o anel de foco perdiam o lado de cima. A margem negativa devolve os 4px. */
+  padding-top: var(--spacing-4); margin-top: calc(var(--spacing-4) * -1);
+  padding-inline-end: calc(var(--margem) + var(--folga-fim));
+  scrollbar-width: none;
+}
+.carrossel__trilho::-webkit-scrollbar { display: none; }
+.carrossel__trilho > .card { flex: 0 0 var(--cartao); height: var(--altura-cartao); min-height: 0; scroll-snap-align: center; }
+/* Legenda: a única camada que se move em relação ao cartão (translateX de até 162 px e opacidade cúbica, escritas
+   por carrossel.js a cada rolagem, sem transição). Sem JavaScript ou com movimento reduzido, fica parada e visível. */
+.carrossel__legenda { will-change: transform, opacity; }
+.carrossel__legenda[data-fora="sim"] { pointer-events: none; }
+
+/* Grupo de controles: cápsula de pontos centrada e setas à direita, grudado a 32 px da base da tela (20 px em S). */
+.carrossel__controles {
+  position: sticky; bottom: var(--spacing-32); z-index: 1; pointer-events: none;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; column-gap: var(--spacing-16);
+  width: min(87.5%, var(--conteiner-max)); margin: var(--gap-linha) auto 0;
+}
+.carrossel__controles > * { pointer-events: auto; }
+.carrossel__grupo { grid-column: 2; display: flex; align-items: center; gap: var(--spacing-16); }
+/* Botão tocar, pausar e repetir: círculo de 56 px, mesmo fundo da cápsula. */
+.carrossel__reproducao {
+  -webkit-appearance: none; appearance: none; position: relative; flex: none; width: 56px; height: 56px; border: 0; padding: 0; cursor: pointer;
+  border-radius: 28px; background: var(--cor-capsula); -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px);
+  display: grid; place-items: center; transition: background-color 100ms linear;
+}
+.carrossel__reproducao > i { display: block; width: 24px; height: 24px; background: var(--cor-ponto-atual); transition: background-color 250ms linear; -webkit-mask: var(--icone) center / contain no-repeat; mask: var(--icone) center / contain no-repeat; }
+.carrossel[data-estado="tocando"] .carrossel__reproducao > i { --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 4h4v16H6zM14 4h4v16h-4z'/%3E%3C/svg%3E"); }
+.carrossel[data-estado="fim"] .carrossel__reproducao > i { --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4a8 8 0 1 0 8 8h-2.5A5.5 5.5 0 1 1 12 6.5V10l5-4.5L12 1z'/%3E%3C/svg%3E"); }
+.carrossel__reproducao > i { --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 4l13 8-13 8z'/%3E%3C/svg%3E"); }
+.carrossel[data-estado="tocando"] .carrossel__reproducao > i, .carrossel[data-estado="fim"] .carrossel__reproducao > i { background: var(--cor-ponto-atual); }
+@media (hover: hover) { .carrossel__reproducao:hover { background: var(--cor-controle-hover); } }
+.carrossel__reproducao:active { background: var(--cor-controle-ativo); }
+.carrossel__reproducao:focus-visible { outline-offset: 3px; }
+.carrossel__pontos {
+  display: flex; align-items: center; height: 56px; padding: 0 var(--spacing-16);
+  border-radius: 28px; background: var(--cor-capsula);
+  -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px);
+}
+/* Cada ponto é um botão de (largura do ponto + 16) × 44 px: o ponto tem 8 × 8 e margem de 8 px (24 px de passo),
+   e o atual mede 48 × 8. A largura vem de --w, que o carrossel.js escreve a cada rolagem (interpolação linear). */
+.carrossel__pontos button {
+  -webkit-appearance: none; appearance: none; position: relative; border: 0; background: none; cursor: pointer;
+  display: grid; place-items: center; width: calc(var(--w, 8px) + 16px); height: 44px; padding: 0; margin: 0;
+}
+.carrossel__pontos button::after { content: ''; position: absolute; inset: 0 -10px; }
+.carrossel__pontos i {
+  position: relative; display: block; width: var(--w, 8px); height: var(--spacing-8); border-radius: 10px; overflow: hidden;
+  background: var(--cor-ponto); transition: background-color 250ms linear;
+}
+/* Ponto atual: trilho igual ao ponto e preenchimento de 15% (o carrossel parado, como o da Apple em pausa). */
+.carrossel__pontos button[aria-current="true"] { cursor: default; }
+.carrossel__pontos button[aria-current="true"] i::after { content: ''; position: absolute; inset: 0 auto 0 0; width: 15%; border-radius: inherit; background: var(--cor-ponto-atual); }
+/* Autoplay: o preenchimento do ponto atual vai de 0 a 115% (o excesso é cortado) em 6,15 s, linear; ao terminar, o
+   carrossel avança. Pausado, congela; no fim, fica cheio. */
+.carrossel[data-estado="tocando"] .carrossel__pontos button[aria-current="true"] i::after, .carrossel[data-estado="pausado"] .carrossel__pontos button[aria-current="true"] i::after { width: 0; animation: progresso-ponto 6150ms linear forwards; }
+.carrossel[data-estado="pausado"] .carrossel__pontos button[aria-current="true"] i::after { animation-play-state: paused; }
+.carrossel[data-estado="fim"] .carrossel__pontos button[aria-current="true"] i::after { width: 100%; }
+@keyframes progresso-ponto { to { width: 115%; } }
+.carrossel__setas { grid-column: 3; justify-self: end; display: none; gap: var(--gap-setas); }
+.carrossel__seta {
+  -webkit-appearance: none; appearance: none; position: relative; border: 0; cursor: pointer;
+  width: 36px; height: 36px; border-radius: var(--radius-pills); background: var(--cor-controle);
+  display: grid; place-items: center;
+  transition: background-color var(--dur-seta) linear, opacity var(--dur-seta) linear;
+}
+.carrossel__seta::after { content: ''; position: absolute; inset: -4px; }
+.carrossel__seta > i {
+  display: block; width: var(--spacing-12); height: var(--spacing-8); background: var(--cor-glifo); transform: rotate(90deg);
+  transition: background-color var(--dur-seta) linear;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.carrossel__seta--proxima > i { transform: rotate(-90deg); }
+/* Na ponta a seta não some: fica desativada, ainda visível. */
+.carrossel__seta:disabled { cursor: default; opacity: var(--opacidade-seta-desativada); pointer-events: none; }
+/* Cursor e toque (valores em tokens.css): a seta clareia com o cursor e escurece ao ser pressionada; o ponto que
+   não é o atual escurece com o cursor, em 250 ms. Nada muda de tamanho, e só a própria seta reage (sem proximidade). */
+@media (hover: hover) {
+  .carrossel__seta:not(:disabled):hover { background-color: var(--cor-controle-hover); }
+  .carrossel__seta:not(:disabled):hover > i { background: var(--cor-glifo-hover); }
+  .carrossel__pontos button:not([aria-current="true"]):hover i { background: var(--cor-ponto-hover); }
+}
+.carrossel__seta:not(:disabled):active { background-color: var(--cor-controle-ativo); }
+/* Entrada da cápsula (Carrosséis, 6.3): só com .movimento. Antes do gatilho o grupo fica 180 px abaixo, a cápsula em
+   escala 1,3 e os pontos e as setas invisíveis; carrossel.js liga .aberto e anima a mola com a Web Animations. */
+.movimento .carrossel__controles:not(.aberto) { transform: translateY(180px); }
+.movimento .carrossel__controles:not(.aberto) .carrossel__pontos { transform: scale(1.3); }
+.movimento .carrossel__controles:not(.aberto) .carrossel__reproducao { opacity: 0; }
+.movimento .carrossel__controles:not(.aberto) .carrossel__pontos i, .movimento .carrossel__controles:not(.aberto) .carrossel__seta { opacity: 0; }
+.carrossel__aviso { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.esqueleto { content: ''; height: 1em; border-radius: var(--radius-small); background: var(--cor-faixa); }
+.secao--mist .esqueleto { background: var(--cor-cartao); }
+/* Página interna aberta direto pelo endereço (esqueletoPagina, em app.js): nome, título, texto e mídia. */
+.esqueleto { display: block; }
+.esqueleto--kicker { width: 9em; font-size: var(--text-product-kicker); }
+.esqueleto--titulo { width: min(70%, 420px); margin-top: var(--spacing-12); font-size: var(--text-section-title); }
+.esqueleto--linha { max-width: 560px; margin-top: var(--spacing-16); }
+.esqueleto--curta { width: 45%; margin-top: var(--spacing-8); }
+.esqueleto--bloco { width: 100%; height: 240px; margin-top: var(--espaco-cabecalho); border-radius: var(--radius-cards); }
+.esqueleto--midia { width: 100%; height: auto; max-height: 56svh; aspect-ratio: 3 / 2; margin-top: var(--spacing-40); border-radius: var(--radius-images); }
+
+/* Rodapé (Interação e navegação, 4.6): fundo da faixa (adaptação A11: segue o tema), coluna de 980 px com
+   margem de 22 px (16 px em S), texto de 12/16 a 56%, links a 72% que só sublinham com o cursor. Em cima, as
+   notas legais com linha de 1 px a 16%; embaixo, a identificação do portal e a lista de links, com
+   separadores de 1 × 10 px. */
+.rodape { background: var(--cor-faixa); color: var(--cor-rodape-texto); font-size: var(--text-compact-control); line-height: var(--leading-compact-control); letter-spacing: var(--tracking-compact-control); }
+.rodape .legenda { font-size: inherit; line-height: inherit; letter-spacing: inherit; color: inherit; }
+.rodape__interno {
+  width: min(var(--largura-conteudo), calc(100% - max(var(--margem-rodape), env(safe-area-inset-left)) - max(var(--margem-rodape), env(safe-area-inset-right))));
+  margin: 0 auto;
+}
+@media (max-width: 734px) { .rodape { --margem-rodape: 16px; } }
+/* Quando a última seção da página também é cinza (Alertas, Análise), ela emendava no rodapé e os dois
+   viravam um bloco só. Uma linha fina na largura da coluna marca onde o conteúdo termina. */
+body:has(#pagina > .secao--mist:last-child, #pagina > :last-child > .secao--mist:last-child) .rodape { box-shadow: inset 0 1px 0 var(--cor-divisoria); }
+
+@media (min-width: 834px) { .carrossel__setas { display: flex; } }
+@media (max-width: 1068px) { .carrossel { --altura-cartao: 576px; } }
+@media (max-width: 734px) {
+  .carrossel { --altura-cartao: 480px; }
+  .carrossel__trilho { --cartao: calc(min(87.5cqw, 420px) - var(--element-gap)); --folga-fim: var(--element-gap); }
+  .carrossel__trilho > .card { scroll-snap-align: start; }
+  .carrossel__controles { bottom: var(--spacing-20); }
+}
+
+
+/* ==========================================================================
+   Estados de interação (Identidade Visual - Apple, "Interação e navegação", seções 2 e 3; DESIGN.md).
+   No corpo da página tudo é instantâneo (transition: none): link, botão, cartão. Só animam os itens
+   da barra (cor, 320 ms) e o zoom do cartão-link (escala de 1,015 em 300 ms). Cursor só com
+   `@media (hover: hover)`; toque em `:active`, sem atraso. Os níveis continuam três: AÇÃO (botão ou
+   link que faz algo), DESTINO (área inteira que leva a outra página) e INFORMAÇÃO (não reage).
+   ========================================================================== */
+
+/* DESTINO: cartão clicável. Sem mudança de cor, sem sublinhado, sem recuo no toque; com o cursor o cartão
+   cresce a 1,015× em 300 ms (curva da Apple para o cartão-link). Foco: anel para dentro (afastamento de -3 px),
+   porque o trilho do carrossel recorta o que passa da borda. */
+a.card, a.escolha, .lista > li > a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+a.card:hover, a.escolha:hover, .lista > li > a:hover { text-decoration: none; }
+a.card, a.escolha { transition: scale var(--dur-tile) var(--ease-tile); }
+a.card:focus-visible, a.escolha:focus-visible { outline-offset: -3px; }
+@media (hover: hover) { a.card:hover, a.escolha:hover { scale: var(--escala-tile); } }
+
+/* DESTINO de escolha (cartões de "Faça as contas", tipos em Lançar, simuladores): a seta (chevron) fica
+   em azul de link e não se move. */
+a.escolha { padding-right: var(--spacing-48); }
+a.escolha::after {
+  content: ''; position: absolute; top: calc(var(--card-padding-compacto) + var(--spacing-4)); right: var(--card-padding-compacto);
+  width: var(--spacing-8); height: var(--spacing-12); background: var(--cor-link);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M1.5 1l5 5-5 5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 12'%3E%3Cpath d='M1.5 1l5 5-5 5' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Escolha selecionada (botão com aria-pressed, como os tipos de opção): contorno de 2 px azul. */
+.escolha[aria-pressed="true"] { box-shadow: var(--cor-link) 0 0 0 2px; }
+
+/* DESTINO em linha de lista (artigos de uma trilha, histórico): o texto não muda de cor; com o cursor, só
+   o título da linha sublinha, na hora (como o link de corpo). */
+@media (hover: hover) {
+  .lista > li > a:hover .kicker, .lista > li > a:hover > .empilha > :first-child { text-decoration: underline; }
+}
+
+/* AÇÃO em forma de link (Bloquear, Remover, Sincronizar…): azul, sublinha com o cursor, sem recuo no toque.
+   Desativada: cinza, sem reação. */
+.link-botao:disabled { color: var(--cor-texto-2); cursor: default; text-decoration: none; }
+
+/* Links do rodapé: 72% de opacidade; com o cursor, só sublinham (a cor não muda). "Bloquear" é uma ação e
+   continua azul. Foco: anel de 2 px a 1 px, retangular. */
+.rodape a { color: var(--cor-rodape-link); }
+@media (hover: hover) { .rodape a:hover { text-decoration: underline; } }
+
+/* INFORMAÇÃO: cartão que só informa não tem contorno de cartão clicável nem reage. */
+.card--info { background: var(--cor-faixa); box-shadow: none; }
+.secao--mist .card--info { background: var(--cor-cartao); }

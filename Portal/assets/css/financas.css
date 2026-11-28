@@ -1,0 +1,468 @@
+/* Componentes próprios do Portal Finanças. Só tokens de papel (--cor-*): nenhuma cor literal aqui.
+   Regras de uso em DESIGN.md. */
+
+/* ---------- Estrutura comum ---------- */
+.pagina { min-height: 70svh; }
+.conteudo--estreito { max-width: 760px; }
+.conteudo--largo { max-width: 1200px; }
+.pagina__cabecalho .introducao { max-width: var(--medida-leitura); }
+.centro { text-align: center; }
+.alta { color: var(--cor-alta); }
+.baixa { color: var(--cor-baixa); }
+.num { font-variant-numeric: tabular-nums; }
+.fila { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-perto); }
+.fila--entre { justify-content: space-between; }
+.empilha { display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--espaco-perto); }
+/* Itens de grade encolhem até caber: tabelas e controles largos rolam dentro deles, não a página. */
+.empilha > *, .grade-2 > *, .grade-3 > *, .sintese > * { min-width: 0; }
+.destaques__cabecalho { flex-wrap: wrap; }
+.destaques__cabecalho .titulo { min-width: 0; }
+.empilha--folgada { gap: var(--espaco-bloco); }
+.espaco-fundo { margin-bottom: var(--espaco-bloco); }
+/* Atalhos em fila: aqui sem a margem negativa herdada, que só servia logo abaixo de um cabeçalho. */
+.atalhos { margin: 0; }
+.atalhos.espaco-topo, .espaco-topo > .atalhos:first-child { margin-top: var(--espaco-bloco); }
+.secao--compacta { padding-top: var(--espaco-cabecalho); padding-bottom: var(--espaco-cabecalho); }
+/* Subtítulo de bloco (kicker de 21px) e o conteúdo dele: 16px (Diretório, 7.1). */
+h3.kicker + :is(p, ul, ol, div, table, dl) { margin-top: var(--espaco-grupo); }
+.selo { color: var(--cor-texto-2); font-size: var(--text-compact-control); line-height: var(--leading-compact-control); letter-spacing: var(--tracking-compact-control); }
+.selo--atencao { color: var(--cor-alerta); font-weight: var(--font-weight-semibold); }
+/* Aviso de natureza do conteúdo (educação, análise, recomendação): sempre visível, nunca alarmista. */
+.natureza { display: grid; gap: var(--espaco-junto); max-width: var(--medida-leitura); padding: var(--espaco-grupo) var(--element-gap); border-radius: var(--radius-navigation); box-shadow: var(--contorno-sutil); }
+.natureza strong { font-weight: var(--font-weight-semibold); }
+/* Links empilhados dentro do aviso, no toque: cada um com 44 px de altura (A3). Área invisível por ::after se
+   sobreporia à do vizinho, então é a própria linha que cresce. */
+@media (pointer: coarse) { .natureza > a { display: flex; align-items: center; min-height: var(--spacing-44); } }
+
+/* Controle segmentado (períodos do gráfico, abas): cápsula com o item atual preenchido. */
+.segmento { display: inline-flex; max-width: 100%; overflow-x: auto; scrollbar-width: none; padding: var(--spacing-2); border-radius: var(--radius-buttons); background: var(--cor-faixa); }
+.segmento::-webkit-scrollbar { display: none; }
+.secao--mist .segmento, .card .segmento { background: var(--cor-controle); }
+.segmento button {
+  -webkit-appearance: none; appearance: none; border: 0; background: none; cursor: pointer; white-space: nowrap;
+  font: inherit; font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); font-weight: var(--font-weight-regular);
+  color: var(--cor-texto); opacity: 0.8; min-height: var(--spacing-44); min-width: var(--spacing-44); padding: 0 var(--spacing-16);
+  border-radius: var(--radius-buttons);
+  transition: opacity 0.1s ease-in-out, background-color var(--dur-aba-indicador) ease-out, color var(--dur-aba-texto) ease-in-out;
+}
+/* Abas (Interação e navegação, 2): texto a 80% e, com o cursor, 100%; a escolhida é o indicador cheio. */
+@media (hover: hover) { .segmento button:hover { opacity: 1; } }
+.segmento button[aria-pressed="true"] { background: var(--cor-texto); color: var(--cor-fundo); opacity: 1; }
+
+/* ---------- Abertura e indicadores ---------- */
+.hero--financas { padding-bottom: var(--spacing-64); }
+.hero--financas .copy { max-width: 620px; margin-left: auto; margin-right: auto; }
+.hero__acoes { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--espaco-perto); margin-top: var(--espaco-bloco); }
+.numeros__legenda { color: var(--cor-texto-2); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); text-align: center; margin: 0; }
+.numeros__valor small { font-size: var(--text-product-nav-title); letter-spacing: 0; font-weight: var(--font-weight-semibold); }
+.numeros + .selo { display: block; text-align: center; margin-top: var(--spacing-24); }
+@media (max-width: 599px) { .numeros--quatro { grid-template-columns: repeat(2, 1fr); row-gap: var(--espaco-bloco); } .numeros--quatro .numeros__item:nth-child(3) { border-left: 0; } }
+@media (min-width: 600px) { .numeros--quatro { grid-template-columns: repeat(4, 1fr); } }
+
+/* Cartões de trilha e de artigo */
+.card--trilha { justify-content: space-between; }
+.card--trilha .card__numero { color: var(--cor-texto-2); font-size: var(--text-big-value); line-height: var(--leading-big-value); letter-spacing: var(--tracking-big-value); }
+.card--trilha .carrossel__legenda { display: flex; flex-direction: column; gap: var(--espaco-grupo); max-width: 560px; }
+.card__titulo { font-family: var(--font-sf-pro-display); font-size: var(--text-subtitle); line-height: var(--leading-subtitle); letter-spacing: var(--tracking-subtitle); font-weight: var(--font-weight-semibold); }
+.card__rodape { display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-perto); margin-top: auto; padding-top: var(--espaco-grupo); }
+.card--artigo { min-height: 0; gap: var(--espaco-perto); }
+.nivel { display: inline-flex; align-items: center; gap: var(--espaco-par); color: var(--cor-texto-2); font-size: var(--text-compact-control); letter-spacing: var(--tracking-compact-control); }
+.nivel__pontos { display: inline-flex; gap: var(--spacing-2); }
+.nivel__pontos i { width: 6px; height: 6px; border-radius: var(--radius-buttons); background: var(--cor-trilho); }
+.nivel__pontos i[data-cheio] { background: var(--cor-texto); }
+.grade-3 { display: grid; gap: var(--gap-linha) var(--element-gap); grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); }
+
+/* ---------- Artigo ---------- */
+.artigo { display: grid; gap: var(--spacing-48); }
+@media (min-width: 1024px) { .artigo--com-sumario { grid-template-columns: minmax(0, 1fr) 220px; align-items: start; column-gap: var(--spacing-64); } }
+.sumario { display: none; }
+@media (min-width: 1024px) {
+  .sumario { display: grid; gap: var(--espaco-par); position: sticky; top: calc(var(--altura-topo, 60px) + var(--spacing-24)); padding-left: var(--spacing-20); border-left: 1px solid var(--cor-divisoria); }
+  .sumario a { color: var(--cor-texto-2); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); }
+  .sumario a[aria-current="true"] { color: var(--cor-link); }
+  .sumario a:hover { text-decoration: none; }
+  @media (hover: hover) { .sumario a:hover { color: var(--cor-link); } }
+}
+.prosa { min-width: 0; }
+/* Parágrafo e parágrafo fora de cartão: 16px (Diretório, 7.1); o texto fica na medida de leitura. */
+.prosa > * + * { margin-top: var(--espaco-grupo); }
+.prosa > :is(p, ul, ol, h2, h3) { max-width: var(--medida-leitura); }
+.prosa h2 { font-family: var(--font-sf-pro-display); font-size: var(--text-subtitle); line-height: var(--leading-subtitle); letter-spacing: var(--tracking-subtitle); font-weight: var(--font-weight-semibold); margin-top: var(--spacing-64); scroll-margin-top: calc(var(--altura-topo, 60px) + var(--spacing-24)); }
+.prosa h3 { font-family: var(--font-sf-pro-display); font-size: var(--text-product-kicker); line-height: var(--leading-product-kicker-longo); letter-spacing: var(--tracking-product-kicker); font-weight: var(--font-weight-semibold); margin-top: var(--espaco-bloco); }
+/* Título de parte (28px) e o primeiro parágrafo: 24px, cerca de 0,8× o tamanho do título (Diretório, 7.1). */
+.prosa > h2 + * { margin-top: var(--spacing-24); }
+.prosa > h2:first-child { margin-top: 0; }
+.prosa ul, .prosa ol { padding-left: var(--spacing-24); display: grid; gap: var(--espaco-par); }
+.prosa li::marker { color: var(--cor-texto-2); }
+.prosa strong { font-weight: var(--font-weight-semibold); }
+.prosa .tabela-rolavel { overflow-x: auto; }
+.prosa table { min-width: 100%; }
+.prosa th { white-space: nowrap; }
+.prosa .lide { color: var(--cor-texto-2); }
+.prosa code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88em; padding: var(--spacing-2) var(--spacing-4); border-radius: var(--radius-small); background: var(--cor-faixa); }
+/* Caixas editoriais: destaque (ideia central), exemplo (conta resolvida) e atenção (risco). */
+.caixa { display: grid; gap: var(--espaco-par); padding: var(--card-padding-compacto); border-radius: var(--radius-cards); background: var(--cor-faixa); }
+.caixa > * { margin: 0; }
+.caixa > p { max-width: var(--medida-leitura); }
+.caixa__rotulo { font-size: var(--text-compact-control); letter-spacing: var(--tracking-compact-control); font-weight: var(--font-weight-semibold); color: var(--cor-texto-2); }
+.caixa--atencao { background: none; box-shadow: var(--contorno-sutil); }
+.caixa--atencao .caixa__rotulo { color: var(--cor-alerta); }
+.caixa--exemplo { background: none; box-shadow: var(--contorno-sutil); }
+.caixa ul { padding-left: var(--spacing-20); display: grid; gap: var(--espaco-junto); }
+.artigo__fontes { display: grid; gap: var(--espaco-par); margin-top: var(--spacing-64); padding-top: var(--spacing-24); border-top: 1px solid var(--cor-divisoria); }
+.artigo__fontes ol { margin: 0; padding-left: var(--spacing-20); display: grid; gap: var(--espaco-junto); }
+.vizinhos { display: grid; gap: var(--gap-linha) var(--element-gap); grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); }
+
+/* ---------- Simuladores ---------- */
+.simulador { display: grid; gap: var(--espaco-bloco); padding: var(--card-padding); border-radius: var(--radius-cards); background: var(--cor-faixa); }
+.secao--mist .simulador { background: var(--cor-cartao); }
+.prosa .simulador { margin-top: var(--espaco-bloco); margin-bottom: var(--espaco-bloco); }
+.simulador__campos { display: grid; gap: var(--element-gap); grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); align-items: end; }
+.simulador__saida { display: grid; gap: var(--espaco-bloco); }
+.resultados { display: grid; gap: var(--element-gap) var(--espaco-bloco); grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); margin: 0; }
+.resultados > div { display: grid; gap: var(--espaco-junto); align-content: start; }
+.resultados dt { color: var(--cor-texto-2); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); }
+.resultados dd { margin: 0; font-family: var(--font-sf-pro-display); font-size: var(--text-subtitle); line-height: var(--leading-subtitle); letter-spacing: var(--tracking-subtitle); font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; }
+.resultados dd small { display: block; margin-top: var(--spacing-4); font-family: var(--font-sf-pro-text); font-size: var(--text-body-small); line-height: var(--leading-body-small); font-weight: var(--font-weight-regular); color: var(--cor-texto-2); }
+.grafico { position: relative; min-height: 260px; }
+.grafico--baixo { min-height: 180px; }
+/* O canvas nasce com 300 px antes de o gráfico ser criado: a moldura recorta e limita a largura. */
+.grafico { overflow: hidden; }
+.grafico canvas { position: absolute; inset: 0; max-width: 100%; }
+.campo--sufixo { position: relative; display: block; }
+.campo--sufixo .campo { padding-right: var(--spacing-64); }
+.campo--sufixo > span { position: absolute; right: var(--spacing-20); top: 50%; transform: translateY(-50%); color: var(--cor-texto-2); font-size: var(--text-body-small); pointer-events: none; }
+.rotulo > span:first-child { display: block; }
+
+/* ---------- Carteira (referência: app Stocks) ---------- */
+.patrimonio { display: grid; gap: var(--espaco-par); }
+.patrimonio__valor { font-family: var(--font-sf-pro-display); font-size: var(--text-big-value); line-height: var(--leading-big-value); letter-spacing: var(--tracking-big-value); font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; }
+.patrimonio__dia { font-size: var(--text-product-kicker); font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; }
+.patrimonio__dia span:not([class]) { color: var(--cor-texto-2); font-weight: var(--font-weight-regular); font-size: var(--text-body); }
+/* Pílula de variação (Stocks, seção 3): fundo sólido de alta ou queda, texto com sinal, 58 × 20 px de raio 4. */
+.variacao { display: inline-block; box-sizing: border-box; min-width: 58px; height: 20px; padding: var(--spacing-2) var(--spacing-4); border-radius: var(--radius-variacao); text-align: center; white-space: nowrap; color: var(--cor-sobre-variacao); font-size: var(--text-compact-control); line-height: var(--leading-compact-control); letter-spacing: var(--tracking-compact-control); font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; }
+.variacao--alta { background: var(--cor-alta); }
+.variacao--baixa { background: var(--cor-baixa); }
+.variacao:not(.variacao--alta):not(.variacao--baixa) { background: var(--cor-trilho); color: var(--cor-texto); }
+
+/* Lista de ativos e painel (Stocks, seções 2 e 3). Computador: barra lateral de 330 px (fundo de cartão, sem linha de
+   divisão: o divisor é só o contraste) e painel. Celular: só a lista; a linha leva à ficha. Só a linha selecionada
+   muda (fundo um tom acima e contorno de 2 px em azul); passar o cursor ou tocar nas outras linhas não muda nada. */
+.estoque { display: grid; gap: var(--espaco-cabecalho); }
+.estoque__painel { display: none; min-width: 0; }
+.estoque__lateral { padding: var(--spacing-8); border-radius: var(--radius-cards); background: var(--cor-cartao); }
+.estoque__grupo + .estoque__grupo { margin-top: var(--spacing-8); }
+.estoque__grupo-titulo { display: flex; align-items: baseline; justify-content: space-between; gap: var(--espaco-perto); padding: var(--spacing-12) var(--spacing-16) var(--spacing-4); }
+.estoque__grupo-titulo h3 { margin: 0; font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); font-weight: var(--font-weight-semibold); }
+.estoque__grupo-titulo span { color: var(--cor-texto-2); font-size: var(--text-compact-control); line-height: var(--leading-compact-control); letter-spacing: var(--tracking-compact-control); }
+@media (min-width: 834px) {
+  .estoque { grid-template-columns: 330px minmax(0, 1fr); align-items: start; }
+  .estoque__painel { display: block; }
+  .estoque__lateral { max-height: min(80svh, 820px); overflow-y: auto; scrollbar-width: thin; }
+}
+.cotacoes { list-style: none; margin: 0; padding: 0; }
+.cotacao { position: relative; }
+.cotacao + .cotacao::before { content: ''; position: absolute; top: 0; left: var(--spacing-16); right: 0; border-top: 1px solid var(--cor-divisoria); }
+.cotacao:has(> a[aria-current="true"]) + .cotacao::before, .cotacao:has(> a[aria-current="true"])::before { opacity: 0; }
+.cotacao > a { display: grid; grid-template-columns: minmax(0, 1fr) 62px auto; align-items: center; column-gap: var(--spacing-8); min-height: 61px; padding: 0 var(--spacing-8) 0 var(--spacing-16); border-radius: var(--radius-selecao); color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.cotacao > a:hover { text-decoration: none; }
+.cotacao > a:focus-visible { outline-offset: -2px; }
+.cotacao > a[aria-current="true"] { background: var(--cor-faixa); box-shadow: inset 0 0 0 2px var(--cor-link); }
+.cotacao__nome { display: flex; align-items: center; gap: var(--espaco-perto); min-width: 0; }
+.cotacao__textos { display: grid; min-width: 0; }
+.cotacao__codigo { font-size: var(--text-body); line-height: var(--leading-button); letter-spacing: var(--tracking-body); font-weight: var(--font-weight-semibold); }
+.cotacao__sub { color: var(--cor-texto-2); font-size: var(--text-compact-control); line-height: var(--leading-compact-control); letter-spacing: var(--tracking-compact-control); }
+.cotacao__codigo, .cotacao__sub { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cotacao__valores { display: grid; gap: var(--spacing-2); justify-items: end; font-variant-numeric: tabular-nums; }
+.cotacao__preco { font-size: var(--text-body); line-height: var(--leading-button); letter-spacing: var(--tracking-body); font-weight: var(--font-weight-semibold); white-space: nowrap; }
+.faisca { display: block; width: 62px; height: 26px; overflow: visible; }
+.faisca path { fill: none; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.faisca line { stroke: var(--cor-contorno); stroke-width: 1; stroke-dasharray: 1 3; vector-effect: non-scaling-stroke; }
+
+/* Cabeçalho do ativo (Stocks, seção 4): ticker grande e nome em cinza na mesma linha de base, mercado e moeda
+   embaixo; à direita preço, variação do período (cor e sinal) e o rótulo do período. */
+/* A coluna é minmax(0, 1fr): sem isso a fileira de períodos (que rola de lado) alargava a página em 320 px. */
+.painel-ativo { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-grupo); min-width: 0; }
+.ativo-cab { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--espaco-grupo) var(--espaco-bloco); }
+.ativo-cab__id { display: flex; align-items: center; gap: var(--espaco-perto); min-width: 0; }
+.ativo-cab__linha { margin: 0; font-family: var(--font-sf-pro-display); line-height: var(--leading-ativo-ticker); }
+.ativo-cab__ticker { font-size: var(--text-ativo-ticker); line-height: var(--leading-ativo-ticker); letter-spacing: var(--tracking-ativo-ticker); font-weight: var(--font-weight-semibold); }
+.ativo-cab__nome { color: var(--cor-texto-2); font-size: var(--text-product-kicker); line-height: var(--leading-product-kicker-longo); letter-spacing: var(--tracking-product-kicker); font-weight: var(--font-weight-regular); }
+.ativo-cab__mercado, .ativo-cab__contexto { margin: 0; color: var(--cor-texto-2); }
+.ativo-cab__mercado { font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); }
+.ativo-cab__cotacao { display: grid; gap: var(--espaco-junto); justify-items: end; text-align: right; }
+.ativo-cab__linha-preco { margin: 0; font-size: var(--text-body); line-height: var(--leading-button); letter-spacing: var(--tracking-body); font-weight: var(--font-weight-semibold); }
+.ativo-cab__contexto { font-size: var(--text-compact-control); line-height: var(--leading-compact-control); letter-spacing: var(--tracking-compact-control); }
+.painel-ativo__ficha { margin: 0; }
+/* Ao lado da lista o cabeçalho fica sempre em duas colunas (preço à direita, como no Stocks): o nome encurta com
+   reticências na linha do ticker. Em painel estreito (iPad em pé) a variação desce para a linha de baixo do preço e
+   a marca, que o Stocks não tem, sai do cabeçalho. */
+@media (min-width: 834px) {
+  .estoque__painel { container: painel / inline-size; }
+  .estoque__painel .ativo-cab { flex-wrap: nowrap; }
+  .estoque__painel .ativo-cab__id { flex: 1 1 0; }
+  .estoque__painel .ativo-cab__textos { min-width: 0; }
+  .estoque__painel .ativo-cab__linha { display: flex; align-items: baseline; gap: var(--spacing-8); }
+  .estoque__painel .ativo-cab__ticker { flex: none; }
+  .estoque__painel .ativo-cab__nome { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .estoque__painel .ativo-cab__cotacao { flex: none; }
+}
+@container painel (max-width: 560px) {
+  .ativo-cab { column-gap: var(--espaco-grupo); }
+  .ativo-cab__linha-preco { display: grid; justify-items: end; }
+}
+@container painel (max-width: 440px) { .ativo-cab .marca { display: none; } }
+
+/* Seletor de período (Stocks, seção 5): texto cinza entre duas linhas finas, pílula no selecionado. Na leitura do
+   gráfico a data ocupa o lugar da fileira. Área de toque de 44 px de altura. */
+.periodos-linha { position: relative; min-width: 0; max-width: 100%; border-top: 1px solid var(--cor-divisoria); border-bottom: 1px solid var(--cor-divisoria); }
+.periodos { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-4); overflow-x: auto; scrollbar-width: none; }
+.periodos::-webkit-scrollbar { display: none; }
+.periodos button {
+  -webkit-appearance: none; appearance: none; position: relative; isolation: isolate; flex: 0 0 auto; min-width: var(--spacing-44); height: var(--spacing-44); padding: 0 var(--spacing-12);
+  border: 0; background: none; cursor: pointer; white-space: nowrap; color: var(--cor-texto-2); font: inherit;
+  font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); font-weight: var(--font-weight-semibold);
+}
+/* O alvo tem 44 × 44 px (A3); a pílula desenhada fica 4 px para dentro de cada lado. */
+.periodos button::before { content: ''; position: absolute; z-index: -1; inset: 0 var(--spacing-4); margin: auto 0; height: 32px; border-radius: var(--radius-buttons); }
+.periodos button[aria-checked="true"] { color: var(--cor-texto); }
+.periodos button[aria-checked="true"]::before { background: var(--cor-trilho); }
+.periodos button:focus-visible { outline-offset: -2px; }
+.periodos-linha__data { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; margin: 0; font-size: var(--text-body); line-height: var(--leading-button); letter-spacing: var(--tracking-body); font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; }
+.periodos-linha[data-lendo] .periodos { visibility: hidden; }
+.periodos-linha[data-lendo] .periodos-linha__data { display: flex; }
+
+/* Gráfico de preço (Stocks, seção 6): linha de 1,5 px e área em degradê (35% a 0) na cor do período; eixo de preços à
+   direita, grades sutis, eixo de tempo e faixa de volume. A área é a única superfície com degradê do portal (exceção
+   registrada em DESIGN.md). Sem animação de desenho. Com o cursor (ou foco e setas) a linha e a área viram o azul de
+   destaque e aparecem a linha vertical, o marcador e o preço em azul acima; o resto não muda. */
+.grafico-preco { --gp-cor: var(--cor-alta-traco); --eixo-y: 64px; display: grid; gap: var(--espaco-par); }
+.grafico-preco--baixa { --gp-cor: var(--cor-baixa-traco); }
+.grafico-preco--neutro { --gp-cor: var(--cor-texto-2); }
+.grafico-preco[data-lendo] { --gp-cor: var(--cor-link); }
+.grafico-preco__corpo { display: grid; grid-template-columns: minmax(0, 1fr) var(--eixo-y); padding-top: var(--spacing-24); }
+.grafico-preco__plot { position: relative; grid-column: 1; grid-row: 1; height: clamp(200px, 32svh, 280px); touch-action: pan-y; cursor: crosshair; -webkit-user-select: none; user-select: none; border-bottom: 1px solid var(--cor-contorno); }
+.grafico-preco__svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.grafico-preco__linha { fill: none; stroke: var(--gp-cor); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.grafico-preco__referencia { stroke: var(--cor-contorno); stroke-width: 1; stroke-dasharray: 2 4; vector-effect: non-scaling-stroke; }
+.grafico-preco__grade { position: absolute; display: block; top: 0; left: 0; right: calc(var(--eixo-y) * -1); height: 0; border-top: 1px solid var(--cor-divisoria); pointer-events: none; }
+.grafico-preco__grade--v { right: auto; top: 0; bottom: 0; height: auto; width: 0; border-top: 0; border-left: 1px solid var(--cor-divisoria); }
+.grafico-preco__y { position: relative; grid-column: 2; grid-row: 1; }
+.grafico-preco__y span { position: absolute; left: var(--spacing-8); transform: translateY(-50%); white-space: nowrap; color: var(--cor-texto-2); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; }
+.grafico-preco__x { position: relative; grid-column: 1; grid-row: 2; height: var(--spacing-24); }
+.grafico-preco__x span { position: absolute; top: var(--spacing-4); transform: translateX(var(--spacing-4)); white-space: nowrap; color: var(--cor-texto-2); font-size: var(--text-compact-control); line-height: var(--leading-compact-control); letter-spacing: var(--tracking-compact-control); font-weight: var(--font-weight-semibold); }
+.grafico-preco__volume { grid-column: 1; grid-row: 3; height: 10px; margin-top: var(--spacing-4); }
+.grafico-preco__volume svg { display: block; width: 100%; height: 100%; }
+.grafico-preco__volume path { fill: none; stroke: var(--cor-contorno); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.grafico-preco__cursor { position: absolute; top: 0; bottom: 0; width: 1.5px; translate: -50% 0; background: var(--cor-link); pointer-events: none; opacity: 0; }
+.grafico-preco__ponto { position: absolute; width: 13px; height: 13px; translate: -50% -50%; border-radius: var(--radius-buttons); background: var(--cor-link); box-shadow: 0 0 0 3px var(--cor-fundo); pointer-events: none; opacity: 0; }
+.secao--mist .grafico-preco__ponto { box-shadow: 0 0 0 3px var(--cor-faixa); }
+.grafico-preco__valor { position: absolute; top: 0; display: none; transform: translate(-50%, -100%); padding-bottom: var(--spacing-4); white-space: nowrap; pointer-events: none; color: var(--cor-link); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; }
+.grafico-preco__valor[data-borda="inicio"] { transform: translate(0, -100%); }
+.grafico-preco__valor[data-borda="fim"] { transform: translate(-100%, -100%); }
+.grafico-preco[data-lendo] .grafico-preco__cursor, .grafico-preco[data-lendo] .grafico-preco__ponto { opacity: 1; }
+.grafico-preco[data-lendo] .grafico-preco__valor { display: block; }
+.grafico-preco__tabela summary { cursor: pointer; color: var(--cor-link); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); }
+.grafico-preco__vazio { margin: 0; }
+/* Carregamento: indicador circular ao centro da área do gráfico (estático em movimento reduzido). */
+.grafico-preco__carregando { display: grid; place-items: center; height: clamp(200px, 32svh, 280px); }
+.grafico-preco__carregando i { display: block; width: 28px; height: 28px; border: 2px solid var(--cor-trilho); border-top-color: var(--cor-texto-2); border-radius: var(--radius-buttons); animation: girar 1s linear infinite; }
+
+/* Tabela de indicadores (Stocks, seção 7): 4 colunas por 3 linhas lidas por coluna, separadas por linhas finas
+   verticais; rótulo cinza à esquerda e valor em semibold à direita (passo de 22 px). Ausente é "–". Em S, 2 colunas. */
+.indicadores { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, auto); grid-auto-flow: column; margin: 0; }
+.indicadores > div { display: flex; align-items: baseline; justify-content: space-between; gap: var(--spacing-8); min-width: 0; min-height: 22px; padding: var(--spacing-2) var(--spacing-16); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); font-variant-numeric: tabular-nums; }
+.indicadores > div:nth-child(-n+3) { padding-left: 0; }
+.indicadores > div:nth-child(n+10) { padding-right: 0; }
+.indicadores > div:nth-child(n+4) { border-left: 1px solid var(--cor-divisoria); }
+.indicadores dt { margin: 0; color: var(--cor-texto-2); }
+.indicadores dd { margin: 0; text-align: right; font-weight: var(--font-weight-semibold); }
+.indicadores .indicadores__ausente { color: var(--cor-texto-2); font-weight: var(--font-weight-regular); }
+/* No painel estreito ao lado da lista (iPad) rótulo e valor não cabem lado a lado em 4 colunas: o valor desce para
+   baixo do rótulo, alinhado pela base com os vizinhos. As 4 colunas por 3 linhas continuam. */
+@media (min-width: 735px) {
+  @container painel (max-width: 640px) {
+    .indicadores > div { flex-direction: column; align-items: flex-start; gap: var(--espaco-junto); padding: var(--spacing-8); }
+    .indicadores > div:nth-child(-n+3) { padding-left: 0; }
+    .indicadores > div:nth-child(n+10) { padding-right: 0; }
+    .indicadores dd { text-align: left; }
+  }
+}
+@media (max-width: 734px) {
+  .indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(6, auto); }
+  .indicadores > div, .indicadores > div:nth-child(-n+3), .indicadores > div:nth-child(n+10) { padding: var(--spacing-2) var(--spacing-16); }
+  .indicadores > div:nth-child(n+4) { border-left: 0; }
+  .indicadores > div:nth-child(-n+6) { padding-left: 0; }
+  .indicadores > div:nth-child(n+7) { border-left: 1px solid var(--cor-divisoria); padding-right: 0; }
+}
+
+/* Estatísticas em grade (abertura, máxima, P/L…), com divisórias, como a ficha do Stocks. */
+/* Par rótulo e valor (DESIGN.md, "Números"): em toda grade de números comparáveis, o rótulo em cima e
+   o valor embaixo, sempre. Antes, o valor ficava ao lado quando cabia e caía para baixo quando não
+   cabia, e números da mesma natureza apareciam em posições diferentes. Rótulo e valor são uma unidade
+   de leitura (4px); a divisória fica a 12px do rótulo. Rótulos de duas linhas não desalinham os
+   valores vizinhos: o valor se alinha à base do item, que tem a altura da linha mais alta da grade. */
+.estatisticas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(160px, 100%), 1fr)); gap: 0 var(--espaco-bloco); margin: 0; }
+.estatisticas > div { display: grid; grid-template-rows: auto 1fr; align-content: start; gap: var(--espaco-junto); min-width: 0; padding: var(--espaco-perto) 0 var(--espaco-grupo); border-top: 1px solid var(--cor-divisoria); }
+.estatisticas dt { color: var(--cor-texto-2); font-size: var(--text-body-small); line-height: var(--leading-body-small); letter-spacing: var(--tracking-body-small); }
+.estatisticas dd { margin: 0; align-self: end; font-size: var(--text-product-kicker); line-height: var(--leading-product-kicker); letter-spacing: var(--tracking-product-kicker); font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+/* Alocação: barra de composição (o gráfico de pizza não faz parte do Stocks) e legenda em lista com valor e participação. */
+.alocacao { display: grid; gap: var(--espaco-bloco); }
+.composicao { display: flex; gap: var(--spacing-2); height: var(--spacing-16); border-radius: var(--radius-small); overflow: hidden; }
+.composicao > i { display: block; height: 100%; min-width: 2px; }
+.alocacao__lista { list-style: none; margin: 0; padding: 0; }
+.alocacao__lista li { display: grid; grid-template-columns: 12px minmax(0, 1fr) auto auto; align-items: baseline; gap: var(--spacing-12); padding: var(--spacing-12) 0; border-top: 1px solid var(--cor-divisoria); font-variant-numeric: tabular-nums; }
+.alocacao__lista i { width: 10px; height: 10px; border-radius: var(--radius-buttons); align-self: center; }
+.barra-peso { height: var(--spacing-4); border-radius: var(--radius-buttons); background: var(--cor-trilho); overflow: hidden; }
+.barra-peso > i { display: block; height: 100%; background: var(--cor-texto); border-radius: inherit; }
+
+/* Abas de classe no cadastro e escolhas em cartão */
+.escolhas { display: grid; gap: var(--gap-linha) var(--element-gap); grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
+.escolha { position: relative; display: grid; gap: var(--espaco-par); padding: var(--card-padding-compacto); border-radius: var(--radius-cards); background: var(--cor-faixa); color: inherit; text-align: left; border: 0; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.secao--mist .escolha { background: var(--cor-cartao); }
+
+.escolha__nome { font-family: var(--font-sf-pro-display); font-size: var(--text-product-kicker); line-height: var(--leading-product-kicker-longo); letter-spacing: var(--tracking-product-kicker); font-weight: var(--font-weight-semibold); }
+.formulario--largo { max-width: 760px; }
+.formulario__acoes { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-perto) var(--spacing-24); }
+
+/* ---------- Análise e relatórios ---------- */
+.sintese { display: grid; gap: var(--gap-linha) var(--element-gap); grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
+.veredito { display: grid; gap: var(--espaco-par); align-content: start; padding: var(--card-padding-compacto); border-radius: var(--radius-cards); background: var(--cor-faixa); }
+.secao--mist .veredito { background: var(--cor-cartao); }
+.veredito__valor { font-family: var(--font-sf-pro-display); font-size: var(--text-subtitle); line-height: var(--leading-subtitle); letter-spacing: var(--tracking-subtitle); font-weight: var(--font-weight-semibold); }
+.criterio { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--espaco-junto) var(--espaco-grupo); padding: var(--espaco-grupo) 0; border-top: 1px solid var(--cor-divisoria); }
+.criterio__valor { font-weight: var(--font-weight-semibold); font-variant-numeric: tabular-nums; text-align: right; }
+.criterio .legenda { grid-column: 1 / -1; }
+.leitura { font-size: var(--text-compact-control); letter-spacing: var(--tracking-compact-control); font-weight: var(--font-weight-semibold); }
+.leitura--favoravel, .leitura--melhora { color: var(--cor-alta); }
+.leitura--desfavoravel, .leitura--piora { color: var(--cor-baixa); }
+.leitura--neutro, .leitura--estavel { color: var(--cor-texto-2); }
+.frases { display: grid; gap: var(--espaco-perto); max-width: var(--medida-leitura); padding-left: var(--spacing-20); margin: 0; }
+.tabela--numeros td, .tabela--numeros th:not(:first-child) { text-align: right; white-space: nowrap; }
+.tabela--numeros th[scope="row"] { font-weight: var(--font-weight-regular); }
+.tabela-rolavel { overflow-x: auto; }
+.busca { position: relative; max-width: 520px; }
+.busca__lista { list-style: none; margin: var(--spacing-8) 0 0; padding: var(--spacing-8); border-radius: var(--radius-navigation); box-shadow: var(--contorno-sutil); background: var(--cor-cartao); max-height: 320px; overflow-y: auto; }
+.busca__lista:empty { display: none; }
+.busca__lista a, .busca__lista button { display: grid; gap: var(--spacing-2); width: 100%; padding: var(--spacing-12); border: 0; background: none; text-align: left; font: inherit; color: inherit; border-radius: var(--radius-small); cursor: pointer; min-height: calc(var(--spacing-40) + var(--spacing-4)); }
+.busca__lista [aria-selected="true"] { background: var(--cor-faixa); text-decoration: none; }
+@media (hover: hover) { .busca__lista a:hover, .busca__lista button:hover { background: var(--cor-faixa); text-decoration: none; } }
+.solta { display: grid; place-items: center; gap: var(--espaco-perto); padding: var(--espaco-cabecalho) var(--card-padding-compacto); border-radius: var(--radius-cards); box-shadow: inset 0 0 0 1px var(--cor-contorno); text-align: center; }
+.solta[data-sobre] { box-shadow: inset 0 0 0 2px var(--cor-link); }
+
+/* Etapas do agente: lista vertical com marcador que enche quando a etapa termina. */
+.etapas { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espaco-grupo); }
+.etapas li { display: grid; grid-template-columns: var(--spacing-24) minmax(0, 1fr); gap: var(--spacing-12); align-items: start; color: var(--cor-texto-2); }
+.etapas li::before { content: ''; width: var(--spacing-12); height: var(--spacing-12); margin: 6px auto 0; border-radius: var(--radius-buttons); box-shadow: var(--contorno-forte); transition: background-color var(--dur-curta) var(--ease-apple); }
+.etapas li[data-estado="feita"] { color: var(--cor-texto); }
+.etapas li[data-estado="feita"]::before { background: var(--cor-texto); box-shadow: none; }
+.etapas li[data-estado="atual"] { color: var(--cor-texto); }
+.etapas li[data-estado="atual"]::before { background: var(--cor-link); box-shadow: none; }
+.etapas li[data-estado="falha"]::before { background: var(--cor-alerta); box-shadow: none; }
+.ordem { display: grid; gap: var(--espaco-grupo); padding: var(--card-padding-compacto); border-radius: var(--radius-cards); background: var(--cor-faixa); }
+.secao--mist .ordem { background: var(--cor-cartao); }
+.ordem__topo { display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-perto); }
+.ordem__codigo { font-family: var(--font-sf-pro-display); font-size: var(--text-subtitle); line-height: var(--leading-subtitle); letter-spacing: var(--tracking-subtitle); font-weight: var(--font-weight-semibold); }
+.relatorio__indice { counter-reset: parte; list-style: none; margin: 0; padding: 0; display: grid; gap: var(--spacing-8); }
+.relatorio__parte { counter-increment: parte; }
+.relatorio__parte > .kicker::before { content: counter(parte, decimal-leading-zero) '  '; color: var(--cor-texto-2); font-variant-numeric: tabular-nums; }
+.forcas { display: grid; gap: var(--element-gap); grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
+.forca { display: grid; gap: var(--espaco-par); align-content: start; padding: var(--spacing-20); border-radius: var(--radius-navigation); box-shadow: var(--contorno-sutil); }
+.forca__nivel { display: flex; gap: var(--spacing-4); }
+.forca__nivel i { flex: 1; height: var(--spacing-4); border-radius: var(--radius-buttons); background: var(--cor-trilho); }
+.forca__nivel i[data-cheio] { background: var(--cor-texto); }
+
+/* ---------- Acesso ---------- */
+.entrar { max-width: 440px; margin: 0 auto; display: grid; gap: var(--espaco-bloco); }
+.entrar .formulario { max-width: none; }
+.chave-recuperacao { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--text-body); letter-spacing: 0.04em; line-height: 1.6; padding: var(--spacing-20); border-radius: var(--radius-navigation); background: var(--cor-faixa); word-break: break-all; -webkit-user-select: all; user-select: all; }
+.estado-nuvem { display: inline-flex; align-items: center; gap: var(--spacing-8); }
+.estado-nuvem::before { content: ''; width: var(--spacing-8); height: var(--spacing-8); border-radius: var(--radius-buttons); background: var(--cor-contorno); }
+.estado-nuvem[data-estado="ok"]::before { background: var(--cor-alta-traco); }
+.estado-nuvem[data-estado="pendente"]::before { background: var(--cor-alerta); }
+
+/* Revelação temporal única (app.js, animar): só com .movimento, isto é, sem movimento reduzido. A subida usa a
+   propriedade `translate`, e não `transform`: assim o recuo do toque (transform: scale) continua valendo em cartões
+   que entraram subindo. Esmaecimento em 850 ms ease-in-out; subida de 30 px com a curva mais rápida; o atraso
+   (--atraso) é de 150 ms por bloco do grupo. */
+.movimento [data-subir] { opacity: 0; translate: 0 var(--reveal-y); }
+.movimento [data-subir]:not(.pronta) { will-change: opacity, translate; }
+.movimento [data-subir].visivel {
+  opacity: 1; translate: none;
+  transition: opacity var(--dur-reveal) var(--ease-in-out) var(--atraso, 0ms), translate var(--dur-reveal) var(--ease-reveal-move) var(--atraso, 0ms), scale var(--dur-tile) var(--ease-tile);
+}
+/* Lista de links do rodapé: itens de 12/16 com área de 4 × 9 px e separador de 1 × 10 px entre os visíveis. */
+.rodape__links { display: flex; flex-wrap: wrap; align-items: center; margin: 0 -9px; }
+.rodape__links > * { position: relative; display: inline-flex; align-items: center; padding: var(--spacing-4) 9px; }
+.rodape__links > :not([hidden]) ~ :not([hidden])::before { content: ''; position: absolute; left: 0; top: calc(50% - 5px); width: 1px; height: 10px; background: var(--cor-rodape-separador); }
+.rodape__links .link-botao { min-height: 0; border-radius: 0; font-size: inherit; line-height: inherit; letter-spacing: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  .segmento button, .escolha, .etapas li::before { transition: none; }
+}
+
+/* ---------- Logotipos (marca.js) ----------
+   Ícone de app: quadrado de cantos arredondados (22,5% do lado, a proporção dos ícones da Apple),
+   contorno de 1px (--contorno-sutil) para o ícone branco não se perder no claro e o escuro não
+   sumir no escuro. Sem logotipo, um monograma no mesmo formato, sobre a faixa. */
+.marca {
+  --lado: 44px;
+  flex: none; display: grid; place-items: center; width: var(--lado); height: var(--lado);
+  border-radius: 22.5%; overflow: hidden; background: var(--cor-faixa); box-shadow: var(--contorno-sutil);
+  isolation: isolate;
+}
+@supports (corner-shape: squircle) { .marca { corner-shape: squircle; border-radius: 30%; } }
+.secao--mist .marca, .card .marca, .escolha .marca, .ordem .marca, .veredito .marca { background: var(--cor-cartao); }
+.marca img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.marca__monograma {
+  font-family: var(--font-sf-pro-display); font-weight: var(--font-weight-semibold); color: var(--cor-texto-2);
+  font-size: calc(var(--lado) * 0.3); letter-spacing: 0; line-height: 1;
+}
+.marca[data-letras="2"] .marca__monograma { font-size: calc(var(--lado) * 0.38); }
+.marca--p { --lado: 32px; }
+.marca--m { --lado: 40px; }
+.marca--g { --lado: 64px; }
+/* Linhas da carteira: logotipo à esquerda do código, a 12px (um explica o outro). */
+/* Cabeçalho de empresa ou ativo: o ícone abre o cabeçalho, acima do sobretítulo. */
+.pagina__cabecalho > .marca { margin-bottom: var(--espaco-par); }
+/* Busca: ícone pequeno ao lado do nome. */
+.busca__lista a.busca__item { grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: var(--espaco-perto); }
+.busca__item > span:last-child { display: grid; gap: var(--spacing-2); min-width: 0; }
+.ordem__marca { display: flex; align-items: center; gap: var(--espaco-perto); }
+.patrimonio > .marca { margin-bottom: var(--espaco-par); }
+
+
+/* Ajustes da bateria de layout (testes/layout.mjs), 16/11/2026 */
+/* Caixa de seleção: o rótulo inteiro é o alvo, com pelo menos 44px de altura também no celular deitado. */
+.tarefa label { min-height: 44px; align-content: center; }
+/* Fonte e endereço de relações com investidores: uma unidade de leitura, a 4px. */
+.conteudo > p.selo + p { margin-top: var(--espaco-junto); }
+/* Legendas e notas de várias linhas ficam na medida de leitura, mesmo na coluna de 980px. */
+p.legenda, .pagina__cabecalho > p { max-width: var(--medida-leitura); }
+
+p.selo { max-width: var(--medida-leitura); }
+.rodape p.legenda { max-width: none; }
+/* O controle segmentado rola na horizontal e corta o que passa da borda: o anel de foco vem para dentro
+   da cápsula do item (Diretório, 10.1, solução 2). */
+.segmento button:focus-visible { outline-offset: calc(var(--spacing-2) * -1); }
+
+/* Cartões lado a lado com partes iguais (ordens sugeridas, estruturas com opções): cada parte ocupa uma
+   linha da grade comum, e as linhas de dados de cartões vizinhos ficam na mesma altura, mesmo quando
+   um título ou uma descrição quebra em mais linhas. A classe diz quantas partes o cartão tem (a política
+   de conteúdo do portal não aceita estilo em linha). */
+@supports (grid-template-rows: subgrid) {
+  .grade-2--alinhada > .card--alinhado { display: grid; grid-template-rows: subgrid; row-gap: var(--espaco-grupo); align-content: start; }
+  .grade-2--alinhada > .card--alinhado-4 { grid-row: span 4; }
+  .grade-2--alinhada > .card--alinhado-8 { grid-row: span 8; }
+}
+/* Dentro de cartões (ordem, estrutura com opções), a grade de números usa colunas de 120px:
+   com 160px, um cartão de um terço da coluna ficava com uma coluna só e seis números empilhados. */
+:is(.card, .ordem) .estatisticas { grid-template-columns: repeat(auto-fill, minmax(min(120px, 100%), 1fr)); column-gap: var(--espaco-grupo); }
+/* Código da ordem: leva à apresentação da empresa no relatório. É título de destino: tinta parado, azul
+   com o cursor, como os demais títulos clicáveis. */
+.ordem__codigo a { color: inherit; }
+@media (hover: hover) { .ordem__codigo a:hover { color: var(--cor-link); text-decoration: none; } }
+/* Nome e valor numa linha (barras do balanço): o valor nunca cai para baixo do nome. */
+.fila--valor { flex-wrap: nowrap; }
+.fila--valor > :first-child { min-width: 0; }

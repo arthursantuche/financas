@@ -1,0 +1,139 @@
+/* Menu superior (adaptação A1, Identidade Visual - Apple, nota superior e "Interação e navegação", 6).
+   Uma só barra. No topo da página ela ocupa a largura toda, como a barra global da Apple: 44 px no
+   computador (≥ 834 px) e 48 px no celular, fundo de vidro (--cor-vidro-topo, 80%, saturate(1.8)
+   blur(20px)), sem borda nem sombra e com o conteúdo na coluna de 1024 px. Ao rolar, vira a pílula da
+   barra local: 51,5 px de altura (a barra mais 7,5 px), 10 px das bordas, raio 18, vidro de 20 px,
+   contorno de 1 px por sombra, sem sombra projetada.
+   Como a Apple, a mudança usa só transform e opacity, em 230 ms ease: a faixa (.topo::before) some, a
+   pílula (.topo::after) desce de cima e o conteúdo desce 13,75 px para ficar no centro dela. Nada
+   anima altura nem largura, então a página não salta. Quem liga é .topo--flutuante, em acompanharTopo
+   (app.js), a partir de um elemento sentinela no alto do conteúdo, nunca do scrollY. A folga do topo é
+   padding do próprio painel (área segura), nunca margem da barra.
+   Quem define os itens é o index.html; o item atual é marcado por marcarSecao (app.js).
+   Barra azul de carregamento: .carregamento, ligada por comProgresso (app.js). */
+.topo {
+  position: sticky; top: 0; z-index: 10; pointer-events: none;
+  padding-top: env(safe-area-inset-top);
+  --barra-h: 44px;           /* altura da barra: 44 no computador */
+  --barra-pad: 20px;         /* recuo do conteúdo dentro da pílula: 20 no computador, 12 no celular */
+  --pilula-margem: 10px;     /* distância da pílula às bordas da tela e ao topo */
+  --pilula-folga: 3.75px;    /* meia diferença entre a pílula (barra + 7,5 px) e a barra */
+  --pilula-largura: 1024px;
+}
+.topo::before, .topo::after { content: ''; position: absolute; z-index: -1; pointer-events: none; }
+/* Faixa do topo da página. */
+.topo::before {
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: var(--cor-vidro-topo);
+  -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+  transition: opacity var(--dur-barra) var(--ease-barra);
+}
+/* Pílula flutuante: escondida acima da tela (translateY de -72 px, a altura reservada da barra local). */
+.topo::after {
+  top: calc(env(safe-area-inset-top) + var(--pilula-margem)); bottom: calc((var(--pilula-margem) + var(--pilula-folga) * 2) * -1);
+  left: max(var(--pilula-margem), calc((100% - var(--pilula-largura)) / 2)); right: max(var(--pilula-margem), calc((100% - var(--pilula-largura)) / 2));
+  border-radius: var(--radius-navigation);
+  background: var(--cor-vidro);
+  -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  box-shadow: var(--contorno-sutil);
+  opacity: 0; transform: translateY(-72px);
+  transition: transform var(--dur-barra) var(--ease-barra), opacity var(--dur-barra) var(--ease-barra);
+}
+.topo--flutuante::before { opacity: 0; }
+.topo--flutuante::after { opacity: 1; transform: none; }
+
+.barra {
+  pointer-events: auto;
+  display: grid; align-items: center; column-gap: var(--spacing-12);
+  width: min(var(--pilula-largura), calc(100% - var(--pilula-margem) * 2)); margin: 0 auto;
+  padding: 0 max(var(--barra-pad), calc(env(safe-area-inset-right) - var(--pilula-margem))) 0 max(var(--barra-pad), calc(env(safe-area-inset-left) - var(--pilula-margem)));
+  transition: transform var(--dur-barra) var(--ease-barra);
+}
+.topo--flutuante .barra { transform: translateY(calc(var(--pilula-margem) + var(--pilula-folga))); }
+
+/* Celular (≤ 833 px): duas linhas de conteúdo, 48 px cada na primeira e 44 px na segunda; linha de 1 px embaixo. */
+@media (max-width: 833px) {
+  .topo { --barra-pad: 12px; }
+  .topo::before { box-shadow: inset 0 -1px 0 var(--cor-contorno-suave); }
+  .barra { grid-template-columns: 1fr auto; grid-template-areas: "titulo acao" "secoes secoes"; }
+}
+/* Computador (≥ 834 px): uma linha só, até 1024 px. */
+@media (min-width: 834px) {
+  .barra { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "titulo secoes acao"; height: var(--barra-h); }
+}
+
+.barra__titulo {
+  grid-area: titulo; white-space: nowrap; display: flex; align-items: center; min-height: 44px;
+  color: var(--cor-barra-item);
+  font-family: var(--font-sf-pro-display); font-size: var(--text-product-nav-title);
+  line-height: var(--leading-product-nav-title); letter-spacing: var(--tracking-product-nav-title);
+  font-weight: var(--font-weight-semibold);
+  transition: color var(--dur-link) var(--ease-apple);
+}
+@media (max-width: 833px) { .barra__titulo { min-height: 48px; } }
+.barra__titulo:hover { text-decoration: none; }
+/* Itens da barra: a cor vai de 80% a 100% em 320 ms, sem sublinhado nem fundo (Interação e navegação, 2). */
+@media (hover: hover) { .barra__titulo:hover { color: var(--cor-barra-item-hover); } }
+.barra__titulo:focus-visible, .barra__secoes a:focus-visible { outline-offset: -7px; }
+
+/* Ação da barra (Buy da barra local): 41 × 28, raio 120, 12/16. A área de toque de 44 × 44 vem do ::after. */
+.barra .barra__acao {
+  grid-area: acao; min-height: 28px; padding: 6px 10px; border-radius: var(--radius-barra-botao);
+  font-size: var(--text-compact-control); line-height: var(--leading-compact-control); letter-spacing: var(--tracking-compact-control);
+}
+.barra .barra__acao:focus-visible { outline-offset: 2px; }
+
+.barra__secoes {
+  grid-area: secoes; display: flex; gap: var(--spacing-20);
+  overflow-x: auto; scrollbar-width: none;
+}
+.barra__secoes::-webkit-scrollbar { display: none; }
+/* Esmaecimento nas bordas indica que a lista continua (data-inicio/data-fim vêm do app.js). */
+.barra__secoes[data-fim="nao"] { -webkit-mask-image: linear-gradient(to right, black calc(100% - 48px), transparent); mask-image: linear-gradient(to right, black calc(100% - 48px), transparent); }
+.barra__secoes[data-inicio="nao"] { -webkit-mask-image: linear-gradient(to left, black calc(100% - 48px), transparent); mask-image: linear-gradient(to left, black calc(100% - 48px), transparent); }
+.barra__secoes[data-inicio="nao"][data-fim="nao"] { -webkit-mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent); mask-image: linear-gradient(to right, transparent, black 48px, black calc(100% - 48px), transparent); }
+.barra__secoes a {
+  color: var(--cor-barra-item); white-space: nowrap;
+  font-size: var(--text-global-nav); line-height: var(--leading-global-nav); letter-spacing: var(--tracking-global-nav);
+  font-weight: var(--font-weight-regular);
+  display: flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; -webkit-tap-highlight-color: transparent;
+  transition: color var(--dur-link) var(--ease-apple);
+}
+.barra__secoes a:hover { text-decoration: none; }
+@media (hover: hover) { .barra__secoes a:hover { color: var(--cor-barra-item-hover); } }
+/* Seção atual (A1): em azul de link, com aria-current; o cursor não a muda. */
+.barra__secoes a[aria-current], .barra__secoes a[aria-current]:hover { color: var(--cor-link); }
+@media (min-width: 834px) {
+  .barra__secoes { justify-content: center; -webkit-mask-image: none !important; mask-image: none !important; }
+}
+/* Celular deitado e estreito: as duas linhas tomariam mais de um quarto da altura; título, seções e ação
+   ficam numa linha só (a barra continua com 48 px). */
+@media (max-width: 833px) and (orientation: landscape) and (max-height: 500px) {
+  .barra { grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "titulo secoes acao"; }
+  .barra__secoes { padding: 0 var(--spacing-8); }
+}
+/* Sem transparência (ajuste do sistema) ou sem suporte a desfoque: fundo sólido. */
+@media (prefers-reduced-transparency: reduce) {
+  .topo::before, .topo::after { background: var(--cor-fundo) !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .topo::before, .topo::after { background: var(--cor-fundo); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topo::before, .topo::after, .barra { transition: none; }
+}
+
+/* Barra azul de carregamento, sempre presente no painel: entra e sai por opacidade, sem
+   mudar a altura de nada. Ligada enquanto há leitura ou gravação na planilha. */
+.carregamento {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 2px; overflow: hidden;
+  opacity: 0; pointer-events: none; transition: opacity var(--dur-curta) var(--ease-apple);
+}
+.carregamento::after {
+  content: ''; display: block; height: 100%; transform-origin: left; background: var(--cor-link);
+  animation: carregando 1.4s var(--ease-apple) infinite;
+}
+.carregamento[data-ativo] { opacity: 1; }
+
+/* Sentinela do menu superior: 1 px no alto do conteúdo, só para o IntersectionObserver do app.js. */
+.sentinela { height: 1px; margin-bottom: -1px; pointer-events: none; }

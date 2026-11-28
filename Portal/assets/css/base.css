@@ -1,0 +1,125 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; color-scheme: light dark; }
+
+body {
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--font-sf-pro-text);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  font-weight: var(--font-weight-regular);
+  font-kerning: auto; font-optical-sizing: auto; font-synthesis: none;
+  text-transform: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p { margin: 0; }
+/* Dois pesos: 400 no corpo e 600 em todo título e rótulo. Nunca 700. */
+h1, h2, h3, h4, th, strong, b { font-weight: var(--font-weight-semibold); }
+
+/* O atributo hidden vence o display dos componentes (ex.: .proximo sem pendências). */
+[hidden] { display: none !important; }
+
+/* Link de corpo: azul, sem sublinhado; com o cursor, só sublinha, na hora (Interação e navegação, 3).
+   A cor não muda e não há transição. Só os itens da barra animam a cor. */
+a { color: var(--cor-link); text-decoration: none; transition: none; }
+/* Sublinhado só com cursor: no toque, o :hover fica preso depois do toque e o link continuava sublinhado. */
+@media (hover: hover) { a:hover { text-decoration: underline; } }
+
+/* Foco do teclado (Interação e navegação, 2.1): 2 px, a 1 px do elemento; cada tipo traz o seu afastamento. */
+:focus-visible { outline: 2px solid var(--cor-foco); outline-offset: 1px; }
+
+/* Âncoras (#roteiro, #cidades, #pendencias): a seção começa no topo da tela e o painel flutua
+   sobre o fundo dela. Parar abaixo do painel deixava a seção anterior aparecendo atrás dele. */
+section[id] { scroll-margin-top: 0; padding-top: max(var(--espaco-secao), calc(var(--altura-topo, 0px) + var(--espaco-bloco))); }
+
+/* Seção: o padding vertical é o da faixa de largura e do tipo (história na tela; fundo alternado na faixa).
+   A altura segue o conteúdo. O fundo ocupa a largura toda; o conteúdo, o contêiner. */
+.secao { --espaco-secao: var(--secao-historia); padding: var(--espaco-secao) 0; }
+.secao--mist { --espaco-secao: var(--secao-alternada); background: var(--cor-faixa); }
+/* Abertura da página: a primeira seção começa logo abaixo da barra (a altura da seção de abertura segue
+   o conteúdo; o papel de espaço é o de cabeçalho de página). */
+#pagina > .secao:first-child, #pagina > :first-child > .secao:first-child { padding-top: var(--espaco-cabecalho); }
+
+/* Contêiner: 87,5% da largura, no máximo 1260 px; em S, no máximo 420 px, centrado (Fundamentos, 3.4). */
+.conteudo { width: min(87.5%, var(--conteiner-max)); margin: 0 auto; }
+
+/* Tipografia (papéis da escala; os degraus estão em tokens.css) */
+.kicker {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-product-kicker);
+  line-height: var(--leading-product-kicker);
+  letter-spacing: var(--tracking-product-kicker);
+  font-weight: var(--font-weight-semibold);
+}
+/* Eyebrow que quebra em mais de uma linha (título de cartão, subtítulo de bloco): entrelinha de 25 px. */
+:is(h2, h3, h4).kicker, .card--artigo .kicker, .proximo__texto .kicker, .relatorio__parte > .kicker { line-height: var(--leading-product-kicker-longo); }
+.display {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-hero-display);
+  line-height: var(--leading-hero-display);
+  letter-spacing: var(--tracking-hero-display);
+  font-weight: var(--font-weight-semibold);
+}
+/* Título de seção e de página: 48/52 (L), 40/44 (M), 32/36 (S). Entrelinha = tamanho + 4, para que
+   os descendentes (ç, g, p) fiquem dentro da caixa. Sem text-wrap: balance. */
+.titulo {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-section-title);
+  line-height: var(--leading-section-title);
+  letter-spacing: var(--tracking-section-title);
+  font-weight: var(--font-weight-semibold);
+}
+.copy {
+  font-size: var(--text-feature-copy);
+  line-height: var(--leading-feature-copy);
+  letter-spacing: var(--tracking-feature-copy);
+}
+/* Parágrafo de abertura (lide): 21/29 em L e M, 19/27 em S. */
+.hero .copy, .prosa .lide {
+  font-family: var(--font-sf-pro-display);
+  font-size: var(--text-lockup-copy);
+  line-height: var(--leading-lockup-copy);
+  letter-spacing: var(--tracking-lockup-copy);
+}
+/* Texto de apoio sob um título: tom secundário. */
+.introducao { color: var(--cor-texto-2); }
+.legenda {
+  font-size: var(--text-body-small);
+  line-height: var(--leading-body-small);
+  letter-spacing: var(--tracking-body-small);
+  color: var(--cor-texto-2);
+}
+.status-pendente {
+  color: var(--cor-alerta);
+  font-size: var(--text-compact-control);
+  line-height: var(--leading-compact-control);
+  letter-spacing: var(--tracking-compact-control);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Ritmo vertical: um título nunca encosta no bloco seguinte (divisória, lista, tabela). */
+h2.titulo + :not(a) { margin-top: var(--espaco-bloco); }
+/* Título de seção e a introdução dele: um explica o outro (12px). A introdução e o conteúdo que ela
+   apresenta: blocos diferentes (32px). Antes, o conteúdo encostava na introdução (Critérios da síntese,
+   Preço e múltiplos, Presença em fundos, Diagnóstico). */
+.conteudo > h2.titulo + .introducao { margin-top: var(--espaco-perto); }
+.conteudo > .introducao + :not(.introducao) { margin-top: var(--espaco-bloco); }
+.conteudo > h2.kicker + :is(ul, ol, table, form, div, p) { margin-top: var(--espaco-grupo); }
+/* Lista com divisória logo abaixo de um texto ou de um gráfico: a linha nunca encosta no que vem antes. */
+.conteudo > p + .lista { margin-top: var(--espaco-grupo); }
+.conteudo > .card__grafico + .lista, .conteudo > .grafico + .lista { margin-top: var(--espaco-bloco); }
+/* Medida de leitura: texto corrido não passa de ~80 caracteres por linha, mesmo na coluna de 980px.
+   Notas em legenda soltas na coluna também. A legenda centrada da abertura (.copy) fica de fora. */
+.introducao, .glossario, .conteudo > p.legenda:not(.copy), .grupo > p.legenda { max-width: var(--medida-leitura); }
+/* Duas seções seguidas com o mesmo fundo: um só respiro entre elas, não a soma dos dois. */
+.secao.secao--continua { padding-top: 0; }
+
+.oculto-leitura {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+/* Link "Pular para o conteúdo": aparece quando recebe o foco do teclado. */
+.oculto-leitura:focus { position: fixed; top: var(--spacing-12); left: var(--spacing-12); z-index: 30; width: auto; height: auto; overflow: visible; clip: auto; padding: var(--spacing-8) var(--spacing-16); background: var(--cor-fundo); box-shadow: var(--contorno-forte); }

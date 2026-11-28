@@ -1,0 +1,81 @@
+# Portal Finanças: testa, coleta os dados abertos e publica no GitHub Pages.
+#  - a cada envio para a main: testa e publica;
+#  - duas vezes por dia (e sob demanda): coleta Banco Central, Tesouro e CVM, grava em Portal/dados
+#    e publica. Um envio feito pelo próprio workflow não dispara outro, por isso a publicação
+#    acontece aqui mesmo, no fim.
+name: Portal
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 9 * * *'    # 06h17 de Brasília: antes da abertura do mercado
+    - cron: '47 21 * * 1-5' # 18h47 de Brasília: depois do fechamento
+  workflow_dispatch:
+    inputs:
+      coletar:
+        description: 'Coletar os dados abertos antes de publicar'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  actions: read
+  issues: write
+
+concurrency:
+  group: portal
+  cancel-in-progress: false
+
+jobs:
+  portal:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Testar o motor de cálculo
+        run: node --test "testes/*.test.mjs"
+      - name: Coletar dados abertos
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.coletar)
+        id: coleta
+        run: |
+          set -o pipefail
+          falhas=""
+          node coleta/bcb.mjs || falhas="$falhas Banco Central;"
+          node coleta/tesouro.mjs || falhas="$falhas Tesouro;"
+          node coleta/cvm.mjs || falhas="$falhas CVM;"
+          node coleta/investidores.mjs || falhas="$falhas Fundos (CDA);"
+          # A demonstração fictícia é refeita só às segundas, para não gerar um commit grande por dia.
+          [ "$(date +%u)" = 1 ] && node coleta/amostra.mjs || true
+          # Logotipos: confere as companhias novas e as cópias com mais de 90 dias (rápido quando nada mudou).
+          node coleta/logos.mjs || falhas="$falhas Logotipos;"
+          echo "falhas=$falhas" >> "$GITHUB_OUTPUT"
+      - name: Conferir o conteúdo editorial
+        run: node coleta/conteudo.mjs
+      - name: Gravar os dados novos
+        if: steps.coleta.outcome == 'success'
+        run: |
+          git config user.name "coleta-automatica"
+          git config user.email "coleta@users.noreply.github.com"
+          git add Portal/dados Portal/conteudo/indice.json Portal/assets/logos
+          git diff --cached --quiet || (git commit -m "Atualiza os dados abertos" && git push)
+      - name: Avisar se uma fonte falhou
+        if: steps.coleta.outputs.falhas != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "Coleta com falha:${{ steps.coleta.outputs.falhas }}" --body "A coleta automática não conseguiu atualizar:${{ steps.coleta.outputs.falhas }} O site segue no ar com os dados anteriores. Veja o registro em ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}." || true
+      - name: Montar o site
+        run: node coleta/publicar.mjs _site "$(git rev-parse HEAD)"
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v5

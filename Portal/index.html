@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Finanças</title>
+<meta name="description" content="Educação financeira, indicadores oficiais e simuladores de investimentos, com fontes e datas de referência.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<!-- Política de segurança de conteúdo: só scripts e estilos do próprio site; conexões apenas com
+     o Banco Central, o GitHub (repositório privado do dono) e os provedores de IA configuráveis. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://api.github.com https://api.bcb.gov.br https://generativelanguage.googleapis.com https://api.groq.com https://openrouter.ai https://brapi.dev http://127.0.0.1:* http://localhost:*; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Finanças">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/img/icone-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/img/icone-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/icone-180.png">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/navegacao.css">
+<link rel="stylesheet" href="assets/css/componentes.css">
+<link rel="stylesheet" href="assets/css/paginas.css">
+<link rel="stylesheet" href="assets/css/financas.css">
+<link rel="stylesheet" href="assets/css/movimento.css">
+<script defer src="assets/vendor/chart.umd.min.js"></script>
+<script type="module" src="assets/js/app.js"></script>
+</head>
+<body>
+<a class="oculto-leitura" href="#pagina">Pular para o conteúdo</a>
+<header class="topo" id="topo">
+  <nav class="barra" aria-label="Seções">
+    <a class="barra__titulo" href="#inicio">Finanças</a>
+    <div class="barra__secoes" id="secoes"></div>
+    <a class="pill pill--azul barra__acao" id="acao" href="#entrar">Entrar</a>
+  </nav>
+  <div class="carregamento" id="carregamento" role="progressbar" aria-label="Carregando" aria-hidden="true"></div>
+</header>
+
+<!-- Sentinela do menu superior: quando ela sobe para baixo do topo da tela, a barra vira a pílula flutuante (app.js). -->
+<div class="sentinela" id="sentinela" aria-hidden="true"></div>
+
+<main id="pagina" class="pagina" tabindex="-1">
+  <!-- Blocos de carregamento da primeira abertura: ocupam o lugar do título e do texto. -->
+  <section class="secao" aria-busy="true">
+    <div class="conteudo">
+      <span class="esqueleto esqueleto--kicker"></span>
+      <span class="esqueleto esqueleto--titulo"></span>
+      <span class="esqueleto esqueleto--linha"></span>
+      <span class="esqueleto esqueleto--linha esqueleto--curta"></span>
+      <span class="esqueleto esqueleto--bloco"></span>
+    </div>
+  </section>
+</main>
+
+<noscript><p class="secao">Este portal precisa de JavaScript para funcionar.</p></noscript>
+
+<footer class="rodape">
+  <div class="rodape__interno">
+    <div class="rodape__notas">
+      <p class="legenda">Conteúdo educativo e informativo. Não é recomendação de investimento nem oferta de valores mobiliários. Rentabilidade passada não garante resultado futuro.</p>
+      <p class="legenda" id="rodape-dados" hidden></p>
+    </div>
+    <div class="rodape__fim">
+      <p class="legenda rodape__identidade" id="rodape-versao">Portal Finanças</p>
+      <p class="legenda rodape__links"><a href="#sobre">Metodologia e fontes</a><a href="#saude">Saúde do sistema</a><a href="#ajustes" id="rodape-ajustes" hidden>Ajustes</a><button class="link-botao" id="rodape-sair" type="button" hidden>Bloquear</button></p>
+    </div>
+  </div>
+</footer>
+<p class="aviso" id="aviso" role="status" hidden></p>
+</body>
+</html>

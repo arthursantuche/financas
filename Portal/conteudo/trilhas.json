@@ -1,0 +1,8 @@
+[
+  { "id": "fundamentos", "nome": "Fundamentos", "resumo": "Juros, inflação, risco e liquidez: a base para entender qualquer investimento.", "descricao": "Os conceitos que aparecem em todos os outros temas. Comece por aqui se nunca investiu, ou volte quando um termo ficar confuso." },
+  { "id": "renda-fixa", "nome": "Renda fixa", "resumo": "Tesouro Direto, CDB, LCI, LCA e debêntures: quando você empresta dinheiro e recebe juros.", "descricao": "Títulos em que a regra de remuneração é conhecida na compra. Fixa é a regra, não o preço: entenda quando eles oscilam." },
+  { "id": "renda-variavel", "nome": "Renda variável", "resumo": "Ações, ETFs e fundos imobiliários: quando você vira sócio e o retorno não é combinado.", "descricao": "Ativos negociados em bolsa, sem remuneração definida. O ganho vem do resultado das empresas e dos imóveis, e do preço que o mercado aceita pagar." },
+  { "id": "fundos", "nome": "Fundos e previdência", "resumo": "Fundos de investimento e previdência privada: custos, tributação e como ler um fundo.", "descricao": "Quando outra pessoa decide por você. O que olhar antes de entregar o dinheiro a um gestor." },
+  { "id": "derivativos", "nome": "Opções", "resumo": "Calls, puts e estruturas: como funcionam, para que servem e onde está o risco.", "descricao": "Contratos cujo valor deriva de outro ativo. Servem para proteger, gerar renda ou alavancar; nos três casos, o risco precisa ser medido antes." },
+  { "id": "analise", "nome": "Análise e estratégia", "resumo": "Balanços, indicadores, impostos e a montagem de uma carteira.", "descricao": "Como avaliar uma empresa pelos números que ela publica, quanto custa o imposto e como juntar tudo numa carteira coerente." }
+]

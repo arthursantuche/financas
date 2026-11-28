@@ -1,0 +1,5 @@
+coleta/.cache/
+node_modules/
+.DS_Store
+.playwright-cli/
+*.local.json

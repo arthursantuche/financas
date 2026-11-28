@@ -1,0 +1,440 @@
+{
+ "geradoEm": "2026-11-27T19:05:42.502Z",
+ "trilhas": [
+  {
+   "id": "fundamentos",
+   "nome": "Fundamentos",
+   "resumo": "Juros, inflação, risco e liquidez: a base para entender qualquer investimento.",
+   "descricao": "Os conceitos que aparecem em todos os outros temas. Comece por aqui se nunca investiu, ou volte quando um termo ficar confuso.",
+   "artigos": [
+    {
+     "slug": "juros-compostos",
+     "arquivo": "fundamentos/juros-compostos",
+     "titulo": "Juros compostos e o valor do dinheiro no tempo",
+     "resumo": "Por que R$ 100 hoje valem mais que R$ 100 daqui a um ano, e como o tempo trabalha a favor de quem investe.",
+     "nivel": 1,
+     "temas": [
+      "juros",
+      "capitalização",
+      "taxa equivalente",
+      "valor presente"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-14"
+    },
+    {
+     "slug": "inflacao-e-juro-real",
+     "arquivo": "fundamentos/inflacao-e-juro-real",
+     "titulo": "Inflação e juro real",
+     "resumo": "O que é o IPCA, como a inflação corrói o dinheiro parado e por que só o ganho acima dela conta.",
+     "nivel": 1,
+     "temas": [
+      "inflação",
+      "IPCA",
+      "IGP-M",
+      "juro real",
+      "poder de compra"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-14"
+    },
+    {
+     "slug": "selic-cdi-e-politica-monetaria",
+     "arquivo": "fundamentos/selic-cdi-e-politica-monetaria",
+     "titulo": "Selic, CDI e a política monetária",
+     "resumo": "A taxa que serve de piso para todos os investimentos do país, quem a decide e como ela chega à sua carteira.",
+     "nivel": 1,
+     "temas": [
+      "Selic",
+      "CDI",
+      "Copom",
+      "taxa de juros",
+      "TR",
+      "poupança"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-14"
+    },
+    {
+     "slug": "risco-retorno-e-volatilidade",
+     "arquivo": "fundamentos/risco-retorno-e-volatilidade",
+     "titulo": "Risco, retorno e volatilidade",
+     "resumo": "O que realmente pode dar errado em um investimento, como o risco é medido e por que retorno alto sem risco não existe.",
+     "nivel": 1,
+     "temas": [
+      "risco",
+      "volatilidade",
+      "desvio-padrão",
+      "drawdown",
+      "risco de crédito",
+      "risco de mercado"
+     ],
+     "minutos": 4,
+     "atualizado": "2026-11-14"
+    },
+    {
+     "slug": "liquidez-e-reserva-de-emergencia",
+     "arquivo": "fundamentos/liquidez-e-reserva-de-emergencia",
+     "titulo": "Liquidez e reserva de emergência",
+     "resumo": "O que é liquidez, quanto ela custa e como montar a reserva que vem antes de qualquer investimento de risco.",
+     "nivel": 1,
+     "temas": [
+      "liquidez",
+      "reserva de emergência",
+      "D+0",
+      "carência",
+      "Tesouro Selic"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-14"
+    },
+    {
+     "slug": "diversificacao-e-correlacao",
+     "arquivo": "fundamentos/diversificacao-e-correlacao",
+     "titulo": "Diversificação e correlação",
+     "resumo": "Por que espalhar o dinheiro reduz o risco sem necessariamente reduzir o retorno, e quando a diversificação falha.",
+     "nivel": 2,
+     "temas": [
+      "diversificação",
+      "correlação",
+      "covariância",
+      "alocação de ativos",
+      "risco sistemático"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-14"
+    }
+   ]
+  },
+  {
+   "id": "renda-fixa",
+   "nome": "Renda fixa",
+   "resumo": "Tesouro Direto, CDB, LCI, LCA e debêntures: quando você empresta dinheiro e recebe juros.",
+   "descricao": "Títulos em que a regra de remuneração é conhecida na compra. Fixa é a regra, não o preço: entenda quando eles oscilam.",
+   "artigos": [
+    {
+     "slug": "como-funciona-a-renda-fixa",
+     "arquivo": "renda-fixa/como-funciona-a-renda-fixa",
+     "titulo": "Como funciona a renda fixa",
+     "resumo": "Pré, pós ou atrelada à inflação: o que é fixo, o que varia e por que um título seguro pode perder valor antes do vencimento.",
+     "nivel": 1,
+     "temas": [
+      "renda fixa",
+      "prefixado",
+      "pós-fixado",
+      "IPCA+",
+      "marcação a mercado",
+      "duration"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "tesouro-direto",
+     "arquivo": "renda-fixa/tesouro-direto",
+     "titulo": "Tesouro Direto",
+     "resumo": "Os títulos públicos ao alcance da pessoa física: qual escolher para cada objetivo, quanto custa e o que os preços do dia dizem.",
+     "nivel": 1,
+     "temas": [
+      "Tesouro Direto",
+      "Tesouro Selic",
+      "Tesouro IPCA+",
+      "Tesouro Prefixado",
+      "RendA+",
+      "Educa+",
+      "títulos públicos"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "cdb-lci-e-lca",
+     "arquivo": "renda-fixa/cdb-lci-e-lca",
+     "titulo": "CDB, LCI e LCA",
+     "resumo": "Os títulos de banco mais comuns, a garantia do FGC, a isenção das letras de crédito e a conta que mostra qual rende mais de verdade.",
+     "nivel": 1,
+     "temas": [
+      "CDB",
+      "LCI",
+      "LCA",
+      "FGC",
+      "Fundo Garantidor de Créditos",
+      "liquidez diária"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "debentures-cri-e-cra",
+     "arquivo": "renda-fixa/debentures-cri-e-cra",
+     "titulo": "Debêntures, CRI e CRA",
+     "resumo": "O crédito privado paga mais porque não tem a garantia do FGC. Como ler o risco, o rating, as garantias e a isenção das debêntures incentivadas.",
+     "nivel": 2,
+     "temas": [
+      "debêntures",
+      "CRI",
+      "CRA",
+      "crédito privado",
+      "rating",
+      "debêntures incentivadas",
+      "spread"
+     ],
+     "minutos": 2,
+     "atualizado": "2026-11-15"
+    }
+   ]
+  },
+  {
+   "id": "renda-variavel",
+   "nome": "Renda variável",
+   "resumo": "Ações, ETFs e fundos imobiliários: quando você vira sócio e o retorno não é combinado.",
+   "descricao": "Ativos negociados em bolsa, sem remuneração definida. O ganho vem do resultado das empresas e dos imóveis, e do preço que o mercado aceita pagar.",
+   "artigos": [
+    {
+     "slug": "acoes",
+     "arquivo": "renda-variavel/acoes",
+     "titulo": "Ações",
+     "resumo": "O que é ser sócio de uma empresa pela bolsa, de onde vem o retorno, como se negocia e por que o preço oscila tanto.",
+     "nivel": 1,
+     "temas": [
+      "ações",
+      "bolsa",
+      "B3",
+      "ON e PN",
+      "dividendos",
+      "Ibovespa",
+      "home broker"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "etfs",
+     "arquivo": "renda-variavel/etfs",
+     "titulo": "ETFs",
+     "resumo": "Fundos de índice negociados em bolsa: diversificação em uma única compra, com custo baixo. Como funcionam, o que custam e como são tributados.",
+     "nivel": 1,
+     "temas": [
+      "ETF",
+      "fundos de índice",
+      "Ibovespa",
+      "S&P 500",
+      "taxa de administração",
+      "investimento passivo"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "fundos-imobiliarios",
+     "arquivo": "renda-variavel/fundos-imobiliarios",
+     "titulo": "Fundos imobiliários",
+     "resumo": "Renda mensal de imóveis e de títulos imobiliários pela bolsa: tipos de fundo, os indicadores que importam e os riscos por trás do rendimento.",
+     "nivel": 2,
+     "temas": [
+      "FII",
+      "fundos imobiliários",
+      "dividend yield",
+      "P/VP",
+      "vacância",
+      "IFIX",
+      "CRI"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "dividendos-e-proventos",
+     "arquivo": "renda-variavel/dividendos-e-proventos",
+     "titulo": "Dividendos e proventos",
+     "resumo": "Como as empresas remuneram os sócios, o que são data-com, payout e dividend yield, e por que dividendo alto não é sinônimo de bom investimento.",
+     "nivel": 2,
+     "temas": [
+      "dividendos",
+      "JCP",
+      "juros sobre capital próprio",
+      "payout",
+      "dividend yield",
+      "data-com",
+      "bonificação",
+      "desdobramento"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    }
+   ]
+  },
+  {
+   "id": "fundos",
+   "nome": "Fundos e previdência",
+   "resumo": "Fundos de investimento e previdência privada: custos, tributação e como ler um fundo.",
+   "descricao": "Quando outra pessoa decide por você. O que olhar antes de entregar o dinheiro a um gestor.",
+   "artigos": [
+    {
+     "slug": "fundos-de-investimento",
+     "arquivo": "fundos/fundos-de-investimento",
+     "titulo": "Fundos de investimento",
+     "resumo": "Como funciona um fundo, o que são cota, classes e taxas, como o come-cotas reduz o retorno e o que olhar antes de escolher um gestor.",
+     "nivel": 1,
+     "temas": [
+      "fundos de investimento",
+      "cota",
+      "taxa de administração",
+      "taxa de performance",
+      "come-cotas",
+      "multimercado",
+      "CVM 175"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "previdencia-privada",
+     "arquivo": "fundos/previdencia-privada",
+     "titulo": "Previdência privada",
+     "resumo": "PGBL ou VGBL, tabela progressiva ou regressiva: quando a previdência é o melhor veículo de longo prazo e quando as taxas anulam a vantagem.",
+     "nivel": 2,
+     "temas": [
+      "previdência privada",
+      "PGBL",
+      "VGBL",
+      "tabela regressiva",
+      "portabilidade",
+      "sucessão"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    }
+   ]
+  },
+  {
+   "id": "derivativos",
+   "nome": "Opções",
+   "resumo": "Calls, puts e estruturas: como funcionam, para que servem e onde está o risco.",
+   "descricao": "Contratos cujo valor deriva de outro ativo. Servem para proteger, gerar renda ou alavancar; nos três casos, o risco precisa ser medido antes.",
+   "artigos": [
+    {
+     "slug": "opcoes",
+     "arquivo": "derivativos/opcoes",
+     "titulo": "Opções: como funcionam",
+     "resumo": "Calls e puts, strike, prêmio e vencimento. O que determina o preço de uma opção e por que ela pode valer zero na data final.",
+     "nivel": 2,
+     "temas": [
+      "opções",
+      "call",
+      "put",
+      "strike",
+      "prêmio",
+      "vencimento",
+      "gregas",
+      "volatilidade implícita",
+      "Black-Scholes"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "estrategias-com-opcoes",
+     "arquivo": "derivativos/estrategias-com-opcoes",
+     "titulo": "Estratégias com opções",
+     "resumo": "Venda coberta, put de proteção, travas e colar: o desenho de cada estrutura, o ganho e a perda máximos e quando cada uma faz sentido.",
+     "nivel": 3,
+     "temas": [
+      "venda coberta",
+      "put protetora",
+      "trava de alta",
+      "trava de baixa",
+      "colar",
+      "payoff",
+      "ponto de equilíbrio"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    }
+   ]
+  },
+  {
+   "id": "analise",
+   "nome": "Análise e estratégia",
+   "resumo": "Balanços, indicadores, impostos e a montagem de uma carteira.",
+   "descricao": "Como avaliar uma empresa pelos números que ela publica, quanto custa o imposto e como juntar tudo numa carteira coerente.",
+   "artigos": [
+    {
+     "slug": "demonstracoes-financeiras",
+     "arquivo": "analise/demonstracoes-financeiras",
+     "titulo": "Como ler as demonstrações financeiras",
+     "resumo": "Balanço, resultado e fluxo de caixa: o que cada um mostra, como se conectam e onde achar os documentos oficiais das empresas.",
+     "nivel": 2,
+     "temas": [
+      "balanço patrimonial",
+      "DRE",
+      "fluxo de caixa",
+      "DFP",
+      "ITR",
+      "EBITDA",
+      "capital de giro",
+      "CVM"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "indicadores-e-multiplos",
+     "arquivo": "analise/indicadores-e-multiplos",
+     "titulo": "Indicadores e múltiplos",
+     "resumo": "Margens, ROE, ROIC, endividamento, liquidez e os múltiplos de preço: o que cada um mede, como calcular e os erros mais comuns de leitura.",
+     "nivel": 2,
+     "temas": [
+      "ROE",
+      "ROIC",
+      "margem EBITDA",
+      "dívida líquida",
+      "P/L",
+      "P/VP",
+      "EV/EBITDA",
+      "valuation",
+      "dividend yield"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "tributacao-dos-investimentos",
+     "arquivo": "analise/tributacao-dos-investimentos",
+     "titulo": "Tributação dos investimentos",
+     "resumo": "Quanto de imposto cada investimento paga, quem recolhe, o que é isento e como declarar sem errar.",
+     "nivel": 2,
+     "temas": [
+      "imposto de renda",
+      "tabela regressiva",
+      "IOF",
+      "DARF",
+      "isenção",
+      "come-cotas",
+      "compensação de prejuízo",
+      "declaração"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    },
+    {
+     "slug": "montar-uma-carteira",
+     "arquivo": "analise/montar-uma-carteira",
+     "titulo": "Como montar e manter uma carteira",
+     "resumo": "Objetivos, perfil, alocação por classes, escolha dos ativos e rebalanceamento: um método simples para decidir quanto colocar em cada coisa.",
+     "nivel": 2,
+     "temas": [
+      "alocação de ativos",
+      "estratégia de investimento",
+      "rebalanceamento",
+      "perfil de investidor",
+      "aportes",
+      "compra e manutenção"
+     ],
+     "minutos": 3,
+     "atualizado": "2026-11-15"
+    }
+   ]
+  }
+ ]
+}

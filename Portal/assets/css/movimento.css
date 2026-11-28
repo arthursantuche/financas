@@ -1,0 +1,16 @@
+/* Movimento reduzido e entrada de página. O Portal Finanças não usa GSAP: as entradas de blocos
+   (data-subir) estão em financas.css e só valem com a classe .movimento, posta pelo app.js quando não
+   há prefers-reduced-motion. Este arquivo carrega por último (index.html) e vence os demais. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .carrossel__trilho { scroll-snap-type: none; }
+  .carrossel__pontos i, .carrossel__seta, .carrossel__seta > i, .carrossel__reproducao, .carrossel__reproducao > i { transition: none; }
+  .carrossel__legenda { transform: none !important; opacity: 1 !important; }
+dialog[open], dialog[open]::backdrop, details[open] > summary ~ * { transform: none; }
+.aviso { animation: none; }
+  .entrando, .carregamento::after, .grafico-preco__carregando i { animation: none !important; }
+a.card, a.escolha, .pill { transition: none; scale: none !important; transform: none !important; }
+}
+
+/* Troca de página: só o conteúdo entra por esmaecimento; o painel superior não participa. */
+.entrando { animation: surgir var(--dur-curta) var(--ease-entrada); }

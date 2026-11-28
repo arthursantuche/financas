@@ -1,0 +1,350 @@
+/* Portal Finanças. Base: tokens do Portal Escócia 2027, que são a
+   Identidade Visual - Apple — transcrição dos tokens de
+   x/Documentação/Identidade Visual - Apple/Identidade Visual - Apple.md (fonte da verdade).
+   Use somente estas variáveis no restante do CSS. */
+:root {
+  /* Cores */
+  --color-gallery-white: #ffffff;
+  --color-studio-mist: #f5f5f7;
+  --color-paper-frost: #fafafc;
+  --color-hairline-silver: #d2d2d7;
+  --color-control-gray: #e6e6e8;
+  --color-ink: #1d1d1f;
+  --color-slate: #6e6e73;
+  --color-steel: #86868b;
+  --color-apple-blue: #0066cc;
+  --color-pricing-blue: #0071e3;
+  --color-action-hover: #0076df;
+  --color-action-active: #006edb;
+  --color-button-ghost-hover: #f2f2f2;
+  --color-footer-text: rgba(0, 0, 0, 0.56);
+  --color-footer-link: rgba(0, 0, 0, 0.72);
+  --color-footer-line: rgba(0, 0, 0, 0.16);
+  --color-footer-separator: rgba(0, 0, 0, 0.48);
+  --color-nav-glass: rgba(245, 245, 247, 0.8);
+  --color-nav-item: rgba(0, 0, 0, 0.8);
+  --color-nav-item-hover: #000000;
+  --color-launch-orange: #b64400;
+
+  /* Famílias: SF Pro nativa onde existir (-apple-system); Inter e Helvetica Neue como reserva.
+     Display a partir de 19 px; Text até 17 px (Fundamentos, 2.1). */
+  --font-sf-pro-display: 'SF Pro Display', 'SF Pro Icons', -apple-system, BlinkMacSystemFont, Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-sf-pro-text: 'SF Pro Text', 'SF Pro Icons', -apple-system, BlinkMacSystemFont, Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Tracking ótico por tamanho de fonte, em px (Fundamentos, 2.3). */
+  --trk-96: -1.44px; --trk-80: -1.2px; --trk-64: -0.576px; --trk-56: -0.28px; --trk-48: -0.144px;
+  --trk-40: 0px; --trk-32: 0.128px; --trk-28: 0.196px; --trk-24: 0.216px; --trk-21: 0.231px;
+  --trk-19: 0.228px; --trk-17: -0.374px; --trk-14: -0.224px; --trk-12: -0.12px;
+
+  /* Escala tipográfica por papel: tamanho, entrelinha e tracking. Os papéis que mudam de degrau
+     (abertura, título, subtítulo, valor grande, apoio, lide, botão) são redefinidos nas faixas M e S,
+     mais abaixo. Nunca clamp() nem vw em fonte; entrelinha em px (Fundamentos, 2.2). */
+  --text-global-nav: 12px;
+  --leading-global-nav: 12px;
+  --tracking-global-nav: var(--trk-12);
+  --text-compact-control: 12px;
+  --leading-compact-control: 16px;
+  --tracking-compact-control: var(--trk-12);
+  --text-body-small: 14px;
+  --leading-body-small: 18px;
+  --tracking-body-small: var(--trk-14);
+  --text-body: 17px;
+  --leading-body: 25px;
+  --tracking-body: var(--trk-17);
+  --text-product-nav-title: 19px;
+  --leading-product-nav-title: 23px;
+  --tracking-product-nav-title: var(--trk-19);
+  --text-product-kicker: 21px;            /* eyebrow, estatística de 21 px */
+  --leading-product-kicker: 21px;
+  --leading-product-kicker-longo: 25px;   /* mesmo tamanho quando o texto quebra em mais de uma linha */
+  --tracking-product-kicker: var(--trk-21);
+  --text-stat-valor: 40px;                /* estatística de abertura (Duo): 40/48, nos três degraus */
+  --leading-stat-valor: 48px;
+  --tracking-stat-valor: var(--trk-40);
+  --text-hero-display: 80px;
+  --leading-hero-display: 84px;
+  --tracking-hero-display: var(--trk-80);
+  --text-section-title: 48px;
+  --leading-section-title: 52px;
+  --tracking-section-title: var(--trk-48);
+  --text-subtitle: 28px;
+  --leading-subtitle: 32px;
+  --tracking-subtitle: var(--trk-28);
+  --text-ativo-ticker: 32px;              /* cabeçalho do ativo (Stocks, seção 4): 32/36 nos três degraus */
+  --leading-ativo-ticker: 36px;
+  --tracking-ativo-ticker: var(--trk-32);
+  --text-big-value: 64px;
+  --leading-big-value: 68px;
+  --tracking-big-value: var(--trk-64);
+  --text-feature-copy: 17px;
+  --leading-feature-copy: 21px;
+  --tracking-feature-copy: var(--trk-17);
+  --text-lockup-copy: 21px;
+  --leading-lockup-copy: 29px;
+  --tracking-lockup-copy: var(--trk-21);
+  --text-button: 17px;
+  --leading-button: 20px;
+  --tracking-button: var(--trk-17);
+
+  /* Pesos */
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+
+  /* Espaço: escala em múltiplos de 4 (Fundamentos, 3.1). O 2 px é só ajuste ótico dentro de componente. */
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-44: 44px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-112: 112px;
+  --spacing-120: 120px;
+  --spacing-128: 128px;
+  --spacing-144: 144px;
+
+  /* Layout */
+  --card-padding: var(--spacing-28);
+  --element-gap: var(--spacing-20);   /* entre cartões, na coluna */
+  --gap-linha: var(--spacing-24);     /* entre cartões, na linha */
+  /* Padding vertical das seções por faixa (Fundamentos, 3.2): história (fundo da tela) e fundo alternado.
+     L ≥ 1069 px; M 735 a 1068; S ≤ 734 (abaixo). */
+  --secao-historia: var(--spacing-128);
+  --secao-alternada: var(--spacing-144);
+  /* Contêiner: 87,5% da largura, no máximo 1260 px; em S, no máximo 420 px e centrado. */
+  --conteiner-max: 1260px;
+  /* Espaçamento por relação (Implementação e validação - Identidade Visual - Apple, 3.3): cada papel aponta para um
+     degrau da escala. Escolha pelo que os dois elementos são um para o outro, não pelo número
+     (DESIGN.md, "Espaço e grade"). Do mais junto ao mais separado: */
+  --espaco-junto: var(--spacing-4);      /* linhas de uma mesma unidade: nome e detalhe, valor e variação */
+  --espaco-par: var(--spacing-8);        /* rótulo e campo; link de voltar e cabeçalho; rótulo e número */
+  --espaco-perto: var(--spacing-12);     /* um explica o outro: kicker e título, título e introdução; ações lado a lado */
+  --espaco-grupo: var(--spacing-16);     /* peças de um mesmo componente; subtítulo de bloco e conteúdo; itens de lista */
+  /* --element-gap (20px, acima): componentes irmãos, como cartões de uma grade e campos de um formulário */
+  --espaco-bloco: var(--spacing-32);     /* título de seção e conteúdo; um bloco e o seguinte dentro da seção */
+  --espaco-cabecalho: var(--spacing-40); /* cabeçalho de página e conteúdo; grupos de um formulário */
+  --espaco-secao: var(--secao-historia); /* seção e seção: o padding da tabela 3.2 de Fundamentos (cada .secao redefine) */
+  --card-padding-compacto: var(--spacing-24); /* cartões densos: cotação, escolha, aviso de lista vazia */
+  /* Medidas: coluna de conteúdo e largura máxima de leitura (66ch dá de 75 a 85 caracteres por linha). */
+  --largura-conteudo: 980px;         /* colunas estreitas de leitura (rodapé) */
+  --margem-rodape: 22px;
+  --medida-leitura: 66ch;
+
+  /* Raios (Fundamentos, 3.6) */
+  --radius-cards: 28px;       /* cartões, molduras de mídia */
+  --radius-pill: 980px;       /* botão azul e de contorno */
+  --radius-inputs: 980px;     /* campo e select em pílula */
+  --radius-buttons: 999px;    /* abas, indicador, pontos */
+  --radius-pills: 36px;       /* setas e cápsula do carrossel */
+  --gap-setas: 18px;          /* entre as duas setas do carrossel (Carrosséis, 7) */
+  --radius-navigation: 18px;  /* pílula local recolhida; caixas de contorno pequenas */
+  --radius-barra-botao: 120px; /* botões da barra local */
+  --radius-small: 8px;
+  --radius-variacao: 4px;     /* pílula de variação da lista de ativos (Stocks, seção 3) */
+  --radius-selecao: 10px;     /* seleção da lista de ativos */        /* selo de variação, blocos de carregamento, código */
+  --radius-images: 28px;
+  --radius-badges: 0px;
+
+  /* Contornos (o documento não usa sombras projetadas) */
+  --shadow-subtle: rgb(230, 230, 232) 0px 0px 0px 1px;
+  --shadow-subtle-2: rgb(134, 134, 139) 0px 0px 0px 1px;
+
+  /* Controle translúcido do carrossel (componente "Carousel Playback Control") */
+  --carousel-track: rgba(210, 210, 215, 0.64);
+  --carousel-glyph: rgba(0, 0, 0, 0.56);
+  /* Cursor e toque no controle, medidos em apple.com/iphone-18-pro em 16/11/2026 (Diretório, 10.1). */
+  --carousel-track-hover: rgba(223, 223, 227, 0.6976);
+  --carousel-track-active: rgba(193, 193, 198, 0.6544);
+  --carousel-glyph-hover: rgba(0, 0, 0, 0.64);
+
+  /* Movimento (Identidade Visual - Apple, "Animações e comportamento visual - Apple";
+     medido em apple.com em 28/10/2026). */
+  --ease-apple: cubic-bezier(0.4, 0, 0.6, 1);
+  --ease-entrada: cubic-bezier(0, 0, 0.2, 1);
+  /* Revelação temporal única (Animação e imagens, 3.1) e carrosséis (Carrosséis, 12.2). */
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --ease-reveal-move: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-seta: cubic-bezier(0.37, 0, 0.63, 1);
+  --dur-reveal: 850ms;
+  --delay-reveal-stagger: 150ms;
+  --reveal-y: 30px;
+  --caption-shift: 162px;
+  --dur-barra: 230ms;   /* pílula local: transform e opacity, ease (Interação e navegação, 4.4) */
+  --ease-barra: ease;
+  --dur-tile: 300ms;    /* cartão-link: escala de 1,015 */
+  --ease-tile: cubic-bezier(0, 0, 0.5, 1);
+  --escala-tile: 1.015;
+  --dur-aba-texto: 100ms; /* abas: texto em 100 ms, indicador em 320 ms (ease-out) */
+  --dur-aba-indicador: 320ms;
+  --dur-curta: 240ms;
+  --dur-link: 320ms;
+  /* Cursor nos controles do carrossel (apple.com, 16/11/2026): setas em 100 ms e pontos em 120 ms, lineares. */
+  --dur-seta: 100ms;
+  --dur-ponto: 120ms;
+  --dur-longa: 500ms;
+  /* Gota dos controles (medida em apple.com/iphone-18-pro em 02/11/2026): círculo que cresce,
+     cápsula que alarga, depois os pontos. */
+  --ease-gota: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-alarga: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-capsula: cubic-bezier(0.3, 1.28, 0.5, 1); /* menu ao virar cápsula: excesso bem menor que o da gota */
+
+  /* Tokens de papel (Identidade Visual - Apple, "Uso conjunto com o modo claro"). O restante
+     do CSS usa só estes; eles apontam para a paleta acima e mudam no tema escuro. */
+  --cor-veu: rgba(0, 0, 0, 0.45); /* sobre foto, nos dois temas */
+  --cor-sobre-veu: #ffffff;
+  --cor-papel: #ffffff; /* folha do voucher, nos dois temas */
+  --cor-fundo: var(--color-gallery-white);
+  --cor-faixa: var(--color-studio-mist);
+  --cor-cartao: var(--color-gallery-white);
+  --cor-campo: var(--color-gallery-white);
+  --cor-vidro: rgba(255, 255, 255, 0.8);         /* pílula flutuante e botão de contorno */
+  --cor-vidro-topo: var(--color-nav-glass);       /* barra no topo da página (barra global) */
+  --cor-elevada: var(--color-paper-frost);        /* painel aberto */
+  --cor-barra-item: var(--color-nav-item);
+  --cor-barra-item-hover: var(--color-nav-item-hover);
+  --cor-botao-contorno-hover: var(--color-button-ghost-hover);
+  --cor-foco: var(--color-pricing-blue);          /* anel de foco: azul de ação, fixo no claro */
+  --cor-rodape-texto: var(--color-footer-text);
+  --cor-rodape-link: var(--color-footer-link);
+  --cor-rodape-linha: var(--color-footer-line);
+  --cor-rodape-separador: var(--color-footer-separator);
+  --cor-texto: var(--color-ink);
+  --cor-texto-2: var(--color-slate);
+  --cor-link: var(--color-apple-blue);
+  --cor-acao: var(--color-pricing-blue);
+  --cor-acao-hover: var(--color-action-hover);
+  --cor-acao-ativo: var(--color-action-active);
+  --cor-sobre-acao: var(--color-gallery-white);
+  --cor-alerta: var(--color-launch-orange);
+  --cor-divisoria: var(--color-hairline-silver);
+  --cor-contorno: var(--color-steel);
+  --cor-contorno-suave: var(--color-control-gray);
+  --cor-trilho: var(--color-control-gray);
+  --cor-controle: var(--carousel-track);
+  --cor-glifo: var(--carousel-glyph);
+  --cor-controle-hover: var(--carousel-track-hover);
+  --cor-controle-ativo: var(--carousel-track-active);
+  --cor-glifo-hover: var(--carousel-glyph-hover);
+  /* Cápsula e pontos do carrossel (Carrosséis, 6.1 e 6.4). O ponto parado é .45 e não .42 (A2): .42 dá 2,98:1. */
+  --cor-capsula: rgba(232, 232, 237, 0.735);
+  --cor-ponto: rgba(0, 0, 0, 0.45);
+  --cor-ponto-hover: rgba(0, 0, 0, 0.54);
+  --cor-ponto-atual: #29292a;
+  --opacidade-seta-desativada: 0.42;
+  --cor-grafico-previsto: var(--color-steel);
+
+  /* Contornos de 1px (o documento não usa sombras projetadas) */
+  --contorno-sutil: var(--cor-contorno-suave) 0 0 0 1px;
+  --contorno-forte: var(--cor-contorno) 0 0 0 1px;
+
+  /* Portal Finanças [Derivado]: alta e baixa, a partir das cores de sistema da Apple usadas no app
+     Stocks (verde #34c759 e vermelho #ff3b30). No texto e no selo entram as variantes escurecidas,
+     que passam de 4,5:1 sobre a tela, a faixa e o cartão; o traço dos gráficos usa a cor de sistema. */
+  --color-system-green: #34c759;
+  --color-system-red: #ff3b30;
+  --cor-alta: #1c7430;
+  --cor-baixa: #d70015;
+  --cor-alta-traco: #248a3d; /* A2: o verde de sistema (#34c759) dá 2,2:1 sobre branco; este dá 4,2:1 (linha de gráfico: 3:1) */
+  --cor-baixa-traco: var(--color-system-red);
+  --cor-alta-area: rgba(52, 199, 89, 0.16);
+  --cor-baixa-area: rgba(255, 59, 48, 0.14);
+  --cor-neutro-area: rgba(134, 134, 139, 0.16);
+  --cor-sobre-variacao: #ffffff;
+  /* Séries de gráficos de composição (alocação): neutros e azuis, sem disputar com alta, baixa e alerta. */
+  --cor-serie-1: var(--color-ink);
+  --cor-serie-2: var(--color-pricing-blue);
+  --cor-serie-3: var(--color-steel);
+  --cor-serie-4: #5ac8fa;
+  --cor-serie-5: #c7c7cc;
+  --cor-serie-6: #5856d6;
+  --cor-serie-7: #a2845e;
+  --cor-serie-8: #30b0c7;
+}
+
+/* Degraus (Fundamentos, 5.1): S ≤ 734 px, M 735 a 1068 px, L ≥ 1069 px. O layout e a tipografia são
+   função só da largura: nenhuma regra de orientação nem de altura. */
+@media (max-width: 1068px) {
+  :root {
+    --secao-historia: var(--spacing-96);
+    --secao-alternada: var(--spacing-120);
+    --text-hero-display: 64px; --leading-hero-display: 68px; --tracking-hero-display: var(--trk-64);
+    --text-section-title: 40px; --leading-section-title: 44px; --tracking-section-title: var(--trk-40);
+    --text-subtitle: 24px; --leading-subtitle: 28px; --tracking-subtitle: var(--trk-24);
+    --text-big-value: 56px; --leading-big-value: 60px; --tracking-big-value: var(--trk-56);
+    --text-button: 14px; --leading-button: 18px; --tracking-button: var(--trk-14);
+  }
+}
+@media (max-width: 734px) {
+  :root {
+    --secao-historia: var(--spacing-80);
+    --secao-alternada: var(--spacing-112);
+    --conteiner-max: 420px;
+    --text-hero-display: 48px; --leading-hero-display: 52px; --tracking-hero-display: var(--trk-48);
+    --text-section-title: 32px; --leading-section-title: 36px; --tracking-section-title: var(--trk-32);
+    --text-subtitle: 21px; --leading-subtitle: 25px; --tracking-subtitle: var(--trk-21);
+    --text-big-value: 40px; --leading-big-value: 44px; --tracking-big-value: var(--trk-40);
+    --text-feature-copy: 14px; --leading-feature-copy: 18px; --tracking-feature-copy: var(--trk-14);
+    --text-lockup-copy: 19px; --leading-lockup-copy: 27px; --tracking-lockup-copy: var(--trk-19);
+  }
+}
+
+/* Modo escuro: valores da referência iPhone 18 Pro (tela Obsidian, painel Carbon, cartão
+   preto sobre o painel, links Electric Link). O laranja é derivado para passar de 4,5:1. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cor-fundo: #000000;
+    --cor-faixa: var(--color-ink);
+    --cor-cartao: #000000;
+    --cor-campo: rgba(255, 255, 255, 0.04);
+    --cor-vidro: rgba(18, 18, 18, 0.8);
+    --cor-vidro-topo: rgba(18, 18, 18, 0.8);
+    --cor-elevada: #161617;
+    --cor-barra-item: rgba(255, 255, 255, 0.8);
+    --cor-barra-item-hover: #ffffff;
+    --cor-botao-contorno-hover: #1d1d1f;
+    --cor-foco: #2997ff;
+    --cor-rodape-texto: rgba(255, 255, 255, 0.56);
+    --cor-rodape-link: rgba(255, 255, 255, 0.72);
+    --cor-rodape-linha: rgba(255, 255, 255, 0.16);
+    --cor-rodape-separador: rgba(255, 255, 255, 0.48);
+    --cor-texto: var(--color-studio-mist);
+    --cor-texto-2: var(--color-steel);
+    --cor-link: #2997ff;
+    --cor-alerta: #f56300;
+    --cor-divisoria: #333336;
+    --cor-contorno: #6e6e73;
+    --cor-contorno-suave: #282828;
+    --cor-trilho: #333336;
+    --cor-controle: rgba(66, 66, 69, 0.72);
+    --cor-glifo: rgba(255, 255, 255, 0.56);
+    --cor-controle-hover: rgba(73, 73, 76, 0.7256);
+    --cor-controle-ativo: rgba(57, 57, 60, 0.7424);
+    --cor-glifo-hover: #ffffff;
+    --cor-capsula: rgba(42, 42, 45, 0.733);
+    --cor-ponto: rgba(255, 255, 255, 0.36);
+    --cor-ponto-hover: rgba(255, 255, 255, 0.48);
+    --cor-ponto-atual: #f5f5f7;
+    --opacidade-seta-desativada: 0.36;
+    /* Alta e baixa no escuro: cores de sistema do modo escuro (#30d158 e #ff453a); o texto do selo fica preto. */
+    --cor-alta: #30d158;
+    --cor-baixa: #ff453a;
+    --cor-alta-traco: #30d158;
+    --cor-baixa-traco: #ff453a;
+    --cor-alta-area: rgba(48, 209, 88, 0.2);
+    --cor-baixa-area: rgba(255, 69, 58, 0.2);
+    --cor-neutro-area: rgba(134, 134, 139, 0.22);
+    --cor-sobre-variacao: #000000;
+    --cor-serie-1: var(--color-studio-mist);
+    --cor-serie-2: #2997ff;
+    --cor-serie-5: #48484a;
+    --cor-serie-6: #7d7aff;
+  }
+}
